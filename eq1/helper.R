@@ -81,3 +81,51 @@ getResampleInstances = function(tasks, resample_sets) {
   }
   return(resamplings)
 }
+
+getCboostMsrsTrace = function(lrn, tasks, score_measures, iters = NULL) {
+  mstop = lrn$param_set$values
+  mstop = unlist(mstop[grepl("mstop", names(mstop))])
+  lids = lrn$graph$ids()
+  lid = lids[grepl("cwb", lids)]
+
+  if (is.null(iters)) iters = seq_len(mstop)
+
+  out = list()
+  clog = lrn$model[lid][[1]]$model$cboost$getLoggerData()
+  if (! "oob_risk" %in% names(clog))
+    clog$oob_risk = NA
+
+  clog = cbind(clog, risk = lrn$model[lid][[1]]$model$cboost$getInbagRisk()[-1])
+  if ("cboost_restart" %in% names(lrn$model[lid][[1]]$model)) {
+    clog_restart = lrn$model[grepl("cwb", names(lrn$model))][[1]]$model$cboost_restart$getLoggerData()
+    clog_restart = cbind(clog_restart,
+      oob_risk = NA,
+      risk = lrn$model[lid][[1]]$model$cboost_restart$getInbagRisk()[-1])
+    clog_restart$time = clog_restart$time + max(clog$time)
+    cnames = c("_iterations", "risk", "oob_risk", "time")
+    clog = rbind(clog[, cnames], clog_restart[, cnames])
+  }
+  transition = lrn$graph$pipeops[lid][[1]]$learner$transition
+  for (i in seq_along(iters)) {
+    #lrn$model[grepl("cwb", names(lrn$model))][[1]]$model$cboost$train(iters[i])
+    if (transition < iters[i]) {
+      if ("cboost_restart" %in% names(lrn$model[lid][[1]]$model))
+        lrn$model[lid][[1]]$model$cboost_restart$train(iters[i] - transition)
+    } else {
+      lrn$model[lid][[1]]$model$cboost$train(iters[i])
+    }
+    lrn$graph$pipeops[lid][[1]]$learner$iter = iters[i]
+
+    tl = data.frame()
+    for (tn in names(tasks)) {
+      pred = lrn$predict(tasks[[tn]])
+      scrs = pred$score(msrs(score_measures))
+      scrs = do.call(data.frame, c(lapply(scrs, function(x) x), task = tasks[[tn]]$id,
+        learner = lid, iteration = iters[i], tset = tn, microseconds = clog$time[iters[i]],
+        risk_oob = clog$oob_risk[iters[i]], risk = clog$risk[iters[i]], transition = transition))
+      tl = rbind(tl, scrs)
+    }
+    out[[i]] = tl
+  }
+  return(do.call(rbind, out))
+}

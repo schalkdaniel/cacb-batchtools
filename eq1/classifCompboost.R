@@ -5,6 +5,9 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
   inherit = LearnerClassif,
   public = list(
 
+    transition = NULL,
+    iter = NULL,
+
     #' @description
     #' Create a `LearnerClassifCompboost` object.
     initialize = function() {
@@ -18,6 +21,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamInt$new(id = "ncores", default = 1L, lower = 1L, upper = parallel::detectCores()),
           ParamDbl$new(id = "momentum", default = 0.0005, lower = 0),
           ParamDbl$new(id = "oob_fraction", default = 0, lower = 0, upper = 0.9),
+          ParamDbl$new(id = "oob_fraction_restart", default = 0, lower = 0, upper = 0.9),
           ParamLgl$new(id = "use_stopper", default = FALSE),
           ParamInt$new(id = "patience", default = 5, lower = 1),
           ParamDbl$new(id = "eps_for_break", default = 0),
@@ -38,6 +42,19 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         param_set = ps,
         properties = c("twoclass")
       )
+    },
+    setToIteration = function(iter) {
+      if (is.null(self$transition)) {
+        stop("No trained model!")
+      } else {
+        if (self$transition < iter) {
+          if ("cboost_restart" %in% names(self$model))
+            self$model$cboost_restart$train(iter - self$transition)
+        } else {
+          self$model$cboost$train(iter)
+        }
+        self$iter = iter
+      }
     }
   ),
 
@@ -86,7 +103,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       if (self$param_set$values$use_stopper) {
         stop_args = list(patience = self$param_set$values$patience, eps_for_break = self$param_set$values$eps_for_break)
       } else {
-        stop_args = list()
+        stop_args = NULL
       }
 
       out = list()
@@ -94,8 +111,13 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       #seed = self$param_set$values$oob_seed
       #browser()
 
-      lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
+      #lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
 
+
+      if (self$param_set$values$oob_fraction == 0)
+        oobf = NULL
+      else
+        oobf = self$param_set$values$oob_fraction
 
       nuisance = capture.output({
       set.seed(seed)
@@ -107,7 +129,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         loss = compboost::LossBinomial$new(),
         df = self$param_set$values$df,
         learning_rate = self$param_set$values$learning_rate,
-        oob_fraction = self$param_set$values$oob_fraction,
+        oob_fraction = oobf,
         stop_args = stop_args,
         bin_root = self$param_set$values$bin_root,
         bin_method = self$param_set$values$bin_method,
@@ -116,6 +138,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
 
       out$cboost = cboost
       iters = length(cboost$getSelectedBaselearner())
+      self$transition = iters
 
       ### Restart:
       if ((self$param_set$values$optimizer == "nesterov") && self$param_set$values$restart) {
@@ -124,6 +147,14 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         if (iters_remaining > 0) {
           if (self$param_set$values$stop_both) {
             #browser()
+            if ((self$param_set$oob_fraction_restart > 0) && self$param_set$values$use_stopper)
+              stop_args = c(stop_args, list(oob_offset = cboost$response_oob$getPrediction()))
+
+            if (self$param_set$values$oob_fraction_restart == 0)
+              oobfr = NULL
+            else
+              oobfr = self$param_set$values$oob_fraction_restart
+
             nuisance = capture.output({
             set.seed(seed)
             cboost_restart = compboost::boostSplines(
@@ -133,8 +164,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
               optimizer = compboost::OptimizerCoordinateDescent$new(self$param_set$values$ncores),
               loss = compboost::LossBinomial$new(cboost$predict(), TRUE),
               df = self$param_set$values$df,
-              stop_args = c(stop_args, list(oob_offset = cboost$response_oob$getPrediction())),
-              oob_fraction = self$param_set$values$oob_fraction,
+              stop_args = stop_args,
+              oob_fraction = oobfr,
               learning_rate = self$param_set$values$learning_rate,
               bin_root = self$param_set$values$bin_root,
               bin_method = self$param_set$values$bin_method,
@@ -188,6 +219,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       if ("cboost_restart" %in% names(out)) {
         rhcwb = tail(out$cboost_restart$getInbagRisk(), 1)
         stop_hcwb = length(out$cboost_restart$getSelectedBaselearner())
+        self$iter = stop_hcwb + iters
         if (self$param_set$values$use_stopper) rhcwb_oob = tail(out$cboost_restart$getLoggerData()$oob_risk, 1)
       }
 
@@ -207,7 +239,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
 
       if (self$param_set$values$optimizer == "nesterov") {
         lin_pred = self$model$cboost$predict(newdata)
-        if ("cboost_restart" %in% names(self$model)) {
+        if (("cboost_restart" %in% names(self$model)) && (self$transition < self$iter)) {
           lin_pred = lin_pred + self$model$cboost_restart$predict(newdata)
         }
         probs = 1 / (1 + exp(-lin_pred))
