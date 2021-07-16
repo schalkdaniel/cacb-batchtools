@@ -42,6 +42,7 @@ if (dir.exists(batchtools_dir)) {
     reg$source = c("helper.R", "classifCompboost.R", "learner.R", "setup.R")
     seed   = 31415)
 
+  #reg = getDefaultRegistry()
   reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
     Worker$new("localhost", ncpus = 1L), # 192.168.9.131
     Worker$new("192.168.9.132", ncpus = 1L),
