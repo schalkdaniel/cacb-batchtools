@@ -1,0 +1,20 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-15] Loading new learner
+2021-07-15 15:33:13: (1/6) Process task spam
+2021-07-15 15:33:13: (2/6) Process task 7592
+2021-07-15 15:33:15: (3/6) Process task 168335
+2021-07-15 15:33:25: (4/6) Process task 189866
+2021-07-15 15:33:58: (5/6) Process task 359994
+2021-07-15 15:34:44: (6/6) Process task 9977
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=12]
+### [bt]: Generating problem instance for problem 'MiniBooNE-bin_cwb_nb-fold2' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'MiniBooNE-bin_cwb_nb-fold2' for job 12 (seed = 31427) ...
+INFO  [15:39:34.229] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [15:39:34.231] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.593540,'risk_cwb',0.216975,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [15:39:34.232] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+
+### [bt]: Job terminated successfully [batchtools job.id=12]
+### [bt]: Calculation finished!
