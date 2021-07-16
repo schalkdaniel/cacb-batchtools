@@ -39,7 +39,7 @@ if (dir.exists(batchtools_dir)) {
     file.dir = batchtools_dir,
     packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
       "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-    #source = paste0(bm_dir, c("helper.R", "classifCompboost.R", "learner.R", "setup.R")),
+    source = paste0(bm_dir, c("helper.R", "classifCompboost.R", "learner.R", "setup.R")),
     seed   = 31415)
 
   source(paste0(bm_dir, "add-problem-algorithm.R"))
@@ -56,9 +56,9 @@ if (dir.exists(batchtools_dir)) {
 #)
 
 #batchtools::makeClusterFunctionsSSH(workers = list(
-#  Worker$new("localhost", ncpus = 1L),
-#  Worker$new("", ncpus = 1L),
-#  Worker$new("", ncpus = 1L)))
+#  Worker$new("localhost", ncpus = 1L), # 192.168.9.131
+#  Worker$new("192.168.9.132", ncpus = 1L),
+#  Worker$new("192.168.9.133", ncpus = 1L)))
 
 
 #submitJobs(findNotDone())
