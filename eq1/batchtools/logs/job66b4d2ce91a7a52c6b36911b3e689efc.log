@@ -1,0 +1,14 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-16] Loading new learner
+2021-07-16 10:15:01: (1/6) Process task spam
+2021-07-16 10:15:01: (2/6) Process task 7592
+2021-07-16 10:15:03: (3/6) Process task 168335
+2021-07-16 10:15:13: (4/6) Process task 189866
+2021-07-16 10:15:43: (5/6) Process task 359994
+2021-07-16 10:16:15: (6/6) Process task 9977
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=21]
+### [bt]: Generating problem instance for problem 'sf-police-incidents-bin_cwb_nb-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'sf-police-incidents-bin_cwb_nb-fold1' for job 21 (seed = 31436) ...

@@ -15,3 +15,6 @@
 INFO  [07:32:00.403] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
 INFO  [07:32:00.405] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.693147,'risk_cwb',0.651675,'risk_acwb',NA,'risk_hcwb',NA 
 INFO  [07:32:00.406] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+
+### [bt]: Job terminated successfully [batchtools job.id=20]
+### [bt]: Calculation finished!

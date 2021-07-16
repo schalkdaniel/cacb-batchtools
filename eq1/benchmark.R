@@ -32,15 +32,22 @@ library(batchtools)
 
 if (FALSE) unlink(batchtools_dir, recursive = TRUE)
 if (dir.exists(batchtools_dir)) {
-  loadRegistry(batchtools_dir, writeable = TRUE)
+  loadRegistry(batchtools_dir, writeable = TRUE, work.dir = bm_dir)
   submitJobs(findNotDone())
 } else {
   reg = batchtools::makeExperimentRegistry(
     file.dir = batchtools_dir,
     packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
       "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-    source = paste0(bm_dir, c("helper.R", "classifCompboost.R", "learner.R", "setup.R")),
+    reg$source = c("helper.R", "classifCompboost.R", "learner.R", "setup.R")
     seed   = 31415)
+
+  reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
+    Worker$new("localhost", ncpus = 1L), # 192.168.9.131
+    Worker$new("192.168.9.132", ncpus = 1L),
+    Worker$new("192.168.9.133", ncpus = 1L)))
+
+  saveRegistry(reg)
 
   source(paste0(bm_dir, "add-problem-algorithm.R"))
   batchtools::addExperiments()
@@ -55,10 +62,6 @@ if (dir.exists(batchtools_dir)) {
 #  nodes = 1L
 #)
 
-#batchtools::makeClusterFunctionsSSH(workers = list(
-#  Worker$new("localhost", ncpus = 1L), # 192.168.9.131
-#  Worker$new("192.168.9.132", ncpus = 1L),
-#  Worker$new("192.168.9.133", ncpus = 1L)))
 
 
 #submitJobs(findNotDone())
