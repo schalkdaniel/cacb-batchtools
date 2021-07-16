@@ -22,11 +22,11 @@ robustify = po("removeconstants", id = "removeconstants_before") %>>%
 ## ===================================
 
 ### CWB - no tuning
-lrn_bin_cwb_nb = lrn("classif.compboost", id = "ps_cwb_nb", predict_type = "prob",
+lrn_bin_cwb_nb = lrn("classif.compboost", id = "bin_cwb_nb", predict_type = "prob",
   optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE)
 lrn_bin_cwb_nb$param_set$values = updatePars(lrn_bin_cwb_nb, cwb_pars)
 
-lrn_bin_cwb_b = lrn("classif.compboost", id = "ps_cwb_b", predict_type = "prob",
+lrn_bin_cwb_b = lrn("classif.compboost", id = "bin_cwb_b", predict_type = "prob",
   optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE, bin_root = 2L)
 lrn_bin_cwb_b$param_set$values = updatePars(lrn_bin_cwb_b, cwb_pars)
 
@@ -34,13 +34,13 @@ lrn_bin_cwb_b$param_set$values = updatePars(lrn_bin_cwb_b, cwb_pars)
 ## ===================================
 
 ### CWB - no tuning
-lrn_acc_cwb = lrn("classif.compboost", id = "ps_cwb_nb", predict_type = "prob",
+lrn_acc_cwb = lrn("classif.compboost", id = "acc_cwb", predict_type = "prob",
   optimizer = "cod", restart = FALSE, learning_rate = 0.01, df_autoselect = TRUE)
 lrn_acc_cwb$param_set$values = updatePars(lrn_acc_cwb, cwb_pars)
 
 
 ### ACWB - no tuning
-lrn_acc_acwb = lrn("classif.compboost", id = "ps_acc_acwb", predict_type = "prob",
+lrn_acc_acwb = lrn("classif.compboost", id = "acc_acwb", predict_type = "prob",
   optimizer = "nesterov", restart = FALSE, learning_rate = 0.01, momentum = 0.0034, df_autoselect = TRUE)
 lrn_acc_acwb$param_set$values = updatePars(lrn_acc_acwb, cwb_pars)
 

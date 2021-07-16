@@ -88,7 +88,7 @@ getCboostMsrsTrace = function(lrn, tasks, score_measures, iters = NULL) {
   lids = lrn$graph$ids()
   lid = lids[grepl("cwb", lids)]
 
-  if (is.null(iters)) iters = seq_len(mstop)
+  if (is.null(iters[1])) iters = seq_len(mstop)
 
   out = list()
   clog = lrn$model[lid][[1]]$model$cboost$getLoggerData()

@@ -9,79 +9,63 @@ suppressMessages(library(mlr3pipelines))
 suppressMessages(library(paradox))
 
 bm_dir = paste0(here::here(), "/eq1/")
-
-source(paste0(bm_dir, "classifCompboost.R"))
-source(paste0(bm_dir, "helper.R"))
-source(paste0(bm_dir, "setup.R"))
-source(paste0(bm_dir, "learner.R"))
-
-design = data.table(
-  task = rep(tasks, times = length(learners)),
-  resampling = rep(resamplings_outer, times = length(learners)),
-  learner = rep(learners, each = length(tasks))
-)
-design = design[1:4]
-
 batchtools_dir = paste0(bm_dir, "batchtools")
-unlink(batchtools_dir, recursive = TRUE)
-reg = batchtools::makeExperimentRegistry(
-  file.dir = batchtools_dir,
-  packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
-    "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-  source = paste0(bm_dir, c("helper.R", "classifCompboost.R", "learner.R", "setup.R")),
-  seed   = 31415)
 
-reg$default.resources = list(
-  #walltime = 3600L * 2,
-  #memory = 1024L * 16L,
-  max.concurrent.jobs = 1L,
-  ntasks = 1L,
-  ncpus = 1L,
-  nodes = 1L
-)
+if (! dir.exists(batchtools_dir)) {
+  source(paste0(bm_dir, "classifCompboost.R"))
+  source(paste0(bm_dir, "helper.R"))
+  source(paste0(bm_dir, "setup.R"))
+  source(paste0(bm_dir, "learner.R"))
 
-batchtools::makeClusterFunctionsSSH(workers = list(
-  Worker$new("localhost", ncpus = 1L),
-  Worker$new("", ncpus = 1L),
-  Worker$new("", ncpus = 1L)))
-
-## Add problems and algorithms based on the design
-## ===========================================================
-
-for (i in seq_len(nrow(design))) {
-  resampling = design$resampling[[i]]
-  for (k in seq_len(resampling$iters)) {
-    ts = design$task[[i]]$clone(deep = TRUE)
-    rcustom = rsmp("custom")
-    rcustom$instantiate(ts,
-      train = list(resampling$train_set(k)),
-      test  = list(resampling$test_set(k))
-    )
-    prob = list(
-      task       = ts$clone(deep = TRUE),
-      learner    = design$learner[[i]]$clone(deep = TRUE),
-      resampling = rcustom
-    )
-    id = paste0(design$task[[i]]$id, "-", tail(design$learner[[1]]$graph$ids(), 1), "-fold", k)
-    addProblem(name = id, data = prob) #, fun = function(job, data) return(data))
-  }
+  design = data.table(
+    task = rep(tasks, times = length(learners)),
+    resampling = rep(resamplings_outer, times = length(learners)),
+    learner = rep(learners, each = length(tasks))
+  )
 }
 
-addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance) {
-  instance = prob
 
-  task       = instance$task$clone(deep = TRUE)
-  learner    = instance$learner$clone(deep = TRUE)
-  resampling = instance$resampling$clone(deep = TRUE)
+## Batchtools
+## ===========================================================
 
-  task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-  task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
+library(batchtools)
 
-  learner$train(task_train)
-  auc_trace = getCboostMsrsTrace(learner, list(train = task_train, test = task_test), score_measures)
+if (FALSE) unlink(batchtools_dir, recursive = TRUE)
+if (dir.exists(batchtools_dir)) {
+  loadRegistry(batchtools_dir, writeable = TRUE)
+  submitJobs(findNotDone())
+} else {
+  reg = batchtools::makeExperimentRegistry(
+    file.dir = batchtools_dir,
+    packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
+      "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
+    #source = paste0(bm_dir, c("helper.R", "classifCompboost.R", "learner.R", "setup.R")),
+    seed   = 31415)
 
-  return(auc_trace)
-})
+  source(paste0(bm_dir, "add-problem-algorithm.R"))
+  batchtools::addExperiments()
+}
+
+#reg$default.resources = list(
+#  #walltime = 3600L * 2,
+#  #memory = 1024L * 16L,
+#  max.concurrent.jobs = 1L,
+#  ntasks = 1L,
+#  ncpus = 1L,
+#  nodes = 1L
+#)
+
+#batchtools::makeClusterFunctionsSSH(workers = list(
+#  Worker$new("localhost", ncpus = 1L),
+#  Worker$new("", ncpus = 1L),
+#  Worker$new("", ncpus = 1L)))
+
+
+#submitJobs(findNotDone())
+#getStatus()
+
+
+
 
 
 if (FALSE) {

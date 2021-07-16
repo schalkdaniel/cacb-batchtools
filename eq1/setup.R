@@ -47,19 +47,6 @@ tasks = getTasks(ids = tsks_setup$id, types = tsks_setup$type)
 tuning_measure = "classif.auc"
 score_measures = c("classif.acc", "classif.auc", "time_train")
 
-## Learners
-## ============================================
-
-#learner_names = c(
-  #"bm_bin_cwb_nb",
-  #"bm_bin_cwb_b",
-
-  #"bm_acc_cwb",
-  #"bm_acc_acwb",
-  #"bm_acc_hcwb"
-#)
-
-
 ## Evaluation
 ## ============================================
 
