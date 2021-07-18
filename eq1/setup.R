@@ -1,6 +1,4 @@
 ## Used packages
-## ============================================
-
 if (FALSE) {
   install.packages(c("processx", "callr", "mlr3", "mlr3tuning", "mlr3learners", "mlr3pipelines",
     "paradox", "xgboost", "ranger", "mboost", "mlr3oml", "reticulate", "mlrMBO",
@@ -13,14 +11,19 @@ if (FALSE) {
 
 
 ## Use debug mode
-## ============================================
-
 options("mlr3.debug" = TRUE)
 
-## Datasets
+## Rebuild tasks and resampling objects:
+REBUILD = FALSE
+
+## Base directory of the benchmark:
+BM_DIR = paste0(here::here(), "/eq1/")
+
+
+## Tasks/Datasets
 ## ============================================
 
-tsks_setup = rbind(
+TSKS_SETUP = rbind(
   data.frame(type = "mlr-task", id = "spam"),          # Spam
   data.frame(type = "oml-task", id = "7592"),          # Adult
   data.frame(type = "oml-task", id = "168335"),        # MiniBooNE
@@ -38,25 +41,36 @@ tsks_setup = rbind(
   #data.frame(type = "oml-task", id = "168908"),      # Christine (1637 feats, 5418 rows)
   #data.frame(type = "oml-task", id = "168896")       # gina (970 feats, 3153 rows)
 )
+message("[", as.character(Sys.time()), "] Loading tasks")
+if (! file.exists(paste0(BM_DIR, "meta/tasks.Rda")) || REBUILD) {
+  TASKS = constructTasks(TSKS_SETUP$id, TSKS_SETUP$type)
+  save(TASKS, file = paste0(BM_DIR, "meta/tasks.Rda"))
+} else {
+  ## LOAD TASKS:
+  load(paste0(BM_DIR, "meta/tasks.Rda"))
+}
 
-tasks = getTasks(ids = tsks_setup$id, types = tsks_setup$type)
+## Learners
+## ============================================
+
+LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_cwb", "acc_acwb", "acc_hcwb")
+
 
 ## Measures
 ## ============================================
 
-tuning_measure = "classif.auc"
-score_measures = c("classif.acc", "classif.auc", "time_train")
+TUNING_MEASURE = "classif.auc"
+SCORE_MEASURES = c("classif.acc", "classif.auc", "time_train")
+
 
 ## Evaluation
 ## ============================================
 
-bm_dir = paste0(here::here(), "/eq1/")
-
-#nfolds = 5L
-#resample_sets2 = createResampleSets(tasks, seed = 31415L, .key = "cv", folds = nfolds)
-#save(resample_sets, file = paste0(bm_dir, "meta/resample-sets.Rda"))
-
-load(paste0(bm_dir, "meta/resample-sets.Rda"))
-resamplings_outer = getResampleInstances(tasks, resample_sets)
-
-
+message("[", as.character(Sys.time()), "] Loading resampling")
+if (! file.exists(paste0(BM_DIR, "meta/resample-sets.Rda")) || REBUILD) {
+  RESAMPLE_SETS = createResampleSets(TASKS, seed = 31415L, .key = "cv", folds = 5L)
+  save(RESAMPLE_SETS, file = paste0(BM_DIR, "meta/resample-sets.Rda"))
+} else {
+  ## Load RESAMPLE_SETS:
+  load(paste0(BM_DIR, "meta/resample-sets.Rda"))
+}

@@ -31,7 +31,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamLgl$new(id = "restart", default = TRUE),
           ParamLgl$new(id = "stop_both", default = FALSE),
           ParamLgl$new(id = "df_autoselect", default = FALSE),
-          ParamInt$new(id = "oob_seed", default = sample(seq_len(1e6), 1), lower = 1L)
+          ParamInt$new(id = "oob_seed", default = sample(seq_len(1e6), 1), lower = 1L),
+          ParamLgl$new(id = "show_output", default = FALSE)
         )
       )
       super$initialize(
@@ -61,8 +62,15 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
   private = list(
     .train = function(task) {
 
+      ncores = self$param_set$values$ncores
+      if (ncores > length(task$feature_names)) {
+        warning("Number of cores ", ncores, " exceeds number of features ",
+          length(task$feature_names), ". The number of cores are set to ", length(task$feature_names), "!")
+        ncores = length(task$feature_names)
+      }
+
+
       lg = lgr::get_logger("mlr3")
-      #browser()
 
       pdefaults = self$param_set$default
       pars = self$param_set$values
@@ -89,14 +97,14 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       }
 
       if (self$param_set$values$optimizer == "cod") {
-        optimizer = compboost::OptimizerCoordinateDescent$new(self$param_set$values$ncores)
+        optimizer = compboost::OptimizerCoordinateDescent$new(ncores)
       }
       if (self$param_set$values$optimizer == "nesterov") {
-        optimizer = compboost::OptimizerAGBM$new(self$param_set$values$momentum, self$param_set$values$ncores)
+        optimizer = compboost::OptimizerAGBM$new(self$param_set$values$momentum, ncores)
       }
       if (self$param_set$values$optimizer == "cos-anneal") {
         optimizer = compboost::OptimizerCosineAnnealing$new(0.001, 0.3, 4, self$param_set$values$mstop,
-          self$param_set$values$ncores)
+          ncores)
       }
 
 
@@ -111,7 +119,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       #seed = self$param_set$values$oob_seed
       #browser()
 
-      #lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
+      lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
 
 
       if (self$param_set$values$oob_fraction == 0)
@@ -119,22 +127,40 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       else
         oobf = self$param_set$values$oob_fraction
 
-      nuisance = capture.output({
-      set.seed(seed)
-      cboost = compboost::boostSplines(
-        data = task$data(),
-        target = task$target_names,
-        iterations = self$param_set$values$mstop,
-        optimizer = optimizer,
-        loss = compboost::LossBinomial$new(),
-        df = self$param_set$values$df,
-        learning_rate = self$param_set$values$learning_rate,
-        oob_fraction = oobf,
-        stop_args = stop_args,
-        bin_root = self$param_set$values$bin_root,
-        bin_method = self$param_set$values$bin_method,
-        df_cat = self$param_set$values$df_cat)
-      })
+      if (self$param_set$values$show_output) {
+        set.seed(seed)
+        cboost = compboost::boostSplines(
+          data          = task$data(),
+          target        = task$target_names,
+          iterations    = self$param_set$values$mstop,
+          optimizer     = optimizer,
+          loss          = compboost::LossBinomial$new(),
+          df            = self$param_set$values$df,
+          learning_rate = self$param_set$values$learning_rate,
+          oob_fraction  = oobf,
+          stop_args     = stop_args,
+          bin_root      = self$param_set$values$bin_root,
+          bin_method    = self$param_set$values$bin_method,
+          df_cat        = self$param_set$values$df_cat)
+      } else {
+        nuisance = capture.output({
+          set.seed(seed)
+          cboost = compboost::boostSplines(
+            data          = task$data(),
+            target        = task$target_names,
+            iterations    = self$param_set$values$mstop,
+            optimizer     = optimizer,
+            loss          = compboost::LossBinomial$new(),
+            df            = self$param_set$values$df,
+            learning_rate = self$param_set$values$learning_rate,
+            oob_fraction  = oobf,
+            stop_args     = stop_args,
+            bin_root      = self$param_set$values$bin_root,
+            bin_method    = self$param_set$values$bin_method,
+            df_cat        = self$param_set$values$df_cat)
+        })
+      }
+
 
       out$cboost = cboost
       iters = length(cboost$getSelectedBaselearner())
@@ -155,37 +181,69 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
             else
               oobfr = self$param_set$values$oob_fraction_restart
 
-            nuisance = capture.output({
-            set.seed(seed)
-            cboost_restart = compboost::boostSplines(
-              data = task$data(),
-              target = task$target_names,
-              iterations = iters_remaining,
-              optimizer = compboost::OptimizerCoordinateDescent$new(self$param_set$values$ncores),
-              loss = compboost::LossBinomial$new(cboost$predict(), TRUE),
-              df = self$param_set$values$df,
-              stop_args = stop_args,
-              oob_fraction = oobfr,
-              learning_rate = self$param_set$values$learning_rate,
-              bin_root = self$param_set$values$bin_root,
-              bin_method = self$param_set$values$bin_method,
-              df_cat = self$param_set$values$df_cat)
-            })
+            if (self$param_set$values$show_output) {
+              set.seed(seed)
+              cboost_restart = compboost::boostSplines(
+                data          = task$data(),
+                target        = task$target_names,
+                iterations    = iters_remaining,
+                optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
+                loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
+                df            = self$param_set$values$df,
+                stop_args     = stop_args,
+                oob_fraction  = oobfr,
+                learning_rate = self$param_set$values$learning_rate,
+                bin_root      = self$param_set$values$bin_root,
+                bin_method    = self$param_set$values$bin_method,
+                df_cat        = self$param_set$values$df_cat)
+            } else {
+              nuisance = capture.output({
+                set.seed(seed)
+                cboost_restart = compboost::boostSplines(
+                  data          = task$data(),
+                  target        = task$target_names,
+                  iterations    = iters_remaining,
+                  optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
+                  loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
+                  df            = self$param_set$values$df,
+                  stop_args     = stop_args,
+                  oob_fraction  = oobfr,
+                  learning_rate = self$param_set$values$learning_rate,
+                  bin_root      = self$param_set$values$bin_root,
+                  bin_method    = self$param_set$values$bin_method,
+                  df_cat        = self$param_set$values$df_cat)
+              })
+            }
           } else {
-            nuisance = capture.output({
-            set.seed(seed)
-            cboost_restart = compboost::boostSplines(
-              data = task$data(),
-              target = task$target_names,
-              iterations = iters_remaining,
-              optimizer = compboost::OptimizerCoordinateDescent$new(self$param_set$values$ncores),
-              loss = compboost::LossBinomial$new(cboost$predict(task$data()), TRUE),
-              df = self$param_set$values$df,
-              learning_rate = self$param_set$values$learning_rate,
-              bin_root = self$param_set$values$bin_root,
-              bin_method = self$param_set$values$bin_method,
-              df_cat = self$param_set$values$df_cat)
-            })
+            if (self$param_set$values$show_output) {
+              set.seed(seed)
+              cboost_restart = compboost::boostSplines(
+                data          = task$data(),
+                target        = task$target_names,
+                iterations    = iters_remaining,
+                optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
+                loss          = compboost::LossBinomial$new(cboost$predict(task$data()), TRUE),
+                df            = self$param_set$values$df,
+                learning_rate = self$param_set$values$learning_rate,
+                bin_root      = self$param_set$values$bin_root,
+                bin_method    = self$param_set$values$bin_method,
+                df_cat        = self$param_set$values$df_cat)
+            } else {
+              nuisance = capture.output({
+                set.seed(seed)
+                cboost_restart = compboost::boostSplines(
+                  data          = task$data(),
+                  target        = task$target_names,
+                  iterations    = iters_remaining,
+                  optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
+                  loss          = compboost::LossBinomial$new(cboost$predict(task$data()), TRUE),
+                  df            = self$param_set$values$df,
+                  learning_rate = self$param_set$values$learning_rate,
+                  bin_root      = self$param_set$values$bin_root,
+                  bin_method    = self$param_set$values$bin_method,
+                  df_cat        = self$param_set$values$df_cat)
+              })
+            }
           }
           out$cboost_restart = cboost_restart
           lg$info("[LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer %s",

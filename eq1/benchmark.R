@@ -1,3 +1,71 @@
+BM_DIR         = paste0(here::here(), "/eq1/")
+BATCHTOOLS_DIR = paste0(BM_DIR, "batchtools")
+
+if (! dir.exists(BATCHTOOLS_DIR)) {
+  suppressMessages(library(data.table))
+  suppressMessages(library(R6))
+  suppressMessages(library(mlr3))
+  suppressMessages(library(mlr3tuning))
+  suppressMessages(library(mlrintermbo))
+  suppressMessages(library(mlr3learners))
+  suppressMessages(library(mlr3extralearners))
+  suppressMessages(library(mlr3pipelines))
+  suppressMessages(library(paradox))
+
+  source(paste0(BM_DIR, "classifCompboost.R"))
+  source(paste0(BM_DIR, "helper.R"))
+  source(paste0(BM_DIR, "setup.R"))
+}
+
+
+## Batchtools
+## ===========================================================
+
+library(batchtools)
+
+if (FALSE) unlink(BATCHTOOLS_DIR, recursive = TRUE)
+if (dir.exists(BATCHTOOLS_DIR)) {
+
+  loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
+  submitJobs(findNotDone())
+
+} else {
+
+  reg = batchtools::makeExperimentRegistry(
+    file.dir = BATCHTOOLS_DIR,
+    packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
+      "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
+    reg$source = c("helper.R", "classifCompboost.R", "setup.R")
+    seed       = 31415)
+
+  #reg = getDefaultRegistry()
+
+  reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
+    Worker$new("localhost", ncpus = 1L), # 192.168.9.131
+    #Worker$new("192.168.9.132", ncpus = 1L),
+    Worker$new("192.168.9.133", ncpus = 1L)))
+
+  reg$default.resources = list(
+    #walltime = 3600L * 2,
+    #memory = 1024L * 16L,
+    max.concurrent.jobs = 1L,
+    ntasks = 1L,
+    ncpus = 1L,
+    nodes = 1L
+  )
+
+  saveRegistry(reg)
+
+  source(paste0(BM_DIR, "add-experiments.R"))
+}
+
+
+### Code for testing:
+if (FALSE) {
+
+BM_DIR         = paste0(here::here(), "/eq1/")
+BATCHTOOLS_DIR = paste0(BM_DIR, "batchtools")
+
 suppressMessages(library(data.table))
 suppressMessages(library(R6))
 suppressMessages(library(mlr3))
@@ -8,84 +76,24 @@ suppressMessages(library(mlr3extralearners))
 suppressMessages(library(mlr3pipelines))
 suppressMessages(library(paradox))
 
-bm_dir = paste0(here::here(), "/eq1/")
-batchtools_dir = paste0(bm_dir, "batchtools")
+source(paste0(BM_DIR, "classifCompboost.R"))
+source(paste0(BM_DIR, "helper.R"))
+source(paste0(BM_DIR, "setup.R"))
 
-if (! dir.exists(batchtools_dir)) {
-  source(paste0(bm_dir, "classifCompboost.R"))
-  source(paste0(bm_dir, "helper.R"))
-  source(paste0(bm_dir, "setup.R"))
-  source(paste0(bm_dir, "learner.R"))
+tl = constructLearner("bin_cwb_nb", ncores = 30L, test_mode = TRUE, raw_learner = FALSE)
+tl$train(TASKS[[2]])
 
-  design = data.table(
-    task = rep(tasks, times = length(learners)),
-    resampling = rep(resamplings_outer, times = length(learners)),
-    learner = rep(learners, each = length(tasks))
-  )
-}
+tasks = list(train = TASKS[[2]], test = TASKS[[2]])
+cbt = getCboostMsrsTrace(tl, tasks, SCORE_MEASURES, iters = c(10, 20, 90, 100, 200))
 
+p1 = tl$predict(TASKS[[5]])
 
-## Batchtools
-## ===========================================================
+library(compboost)
+cboost = boostSplines(data = TASKS[[5]]$data(), target = TASKS[[5]]$target_names, 
+  loss = LossBinomial$new(), iterations = 100L)
 
-library(batchtools)
-
-if (FALSE) unlink(batchtools_dir, recursive = TRUE)
-if (dir.exists(batchtools_dir)) {
-  loadRegistry(batchtools_dir, writeable = TRUE, work.dir = bm_dir)
-  submitJobs(findNotDone())
-} else {
-  reg = batchtools::makeExperimentRegistry(
-    file.dir = batchtools_dir,
-    packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
-      "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-    reg$source = c("helper.R", "classifCompboost.R", "learner.R", "setup.R")
-    seed   = 31415)
-
-  #reg = getDefaultRegistry()
-  reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
-    Worker$new("localhost", ncpus = 1L), # 192.168.9.131
-    Worker$new("192.168.9.132", ncpus = 1L),
-    Worker$new("192.168.9.133", ncpus = 1L)))
-
-  saveRegistry(reg)
-
-  source(paste0(bm_dir, "add-problem-algorithm.R"))
-  batchtools::addExperiments()
-}
-
-#reg$default.resources = list(
-#  #walltime = 3600L * 2,
-#  #memory = 1024L * 16L,
-#  max.concurrent.jobs = 1L,
-#  ntasks = 1L,
-#  ncpus = 1L,
-#  nodes = 1L
-#)
-
-
-
-#submitJobs(findNotDone())
-#getStatus()
-
-
-
-
-
-if (FALSE) {
-library(ggplot2)
-
-ggplot(auc_trace, aes(x = microseconds, y = classif.auc, color = tset)) +
-  geom_line() +
-  geom_vline(xintercept = auc_trace$microseconds[auc_trace$iteration == auc_trace$transition[1]][1])
-
-
-#batchtools::submitJobs()
-#batchtools::getStatus()
-
-tl = lrn_acc_hcwb$clone(deep = TRUE)
-tl$train(design$task[[1]])
-p1 = tl$predict(design$task[[1]])
+lcboost = lrn("classif.compboost", mstop = 50L)
+lcboost$train(TASKS[[5]])
 
 tl$setToIteration(1)
 p2 = tl$predict(design$task[[1]])
@@ -95,4 +103,14 @@ p2$score(msr("classif.auc"))
 
 clog = tl$model$cboost$getLoggerData()
 tl$model$cboost_restart$getLoggerData()
+
+library(compboost)
+library(mlr3)
+library(mlr3oml)
+
+ts = tsk("oml", task_id = 359994)
+cboost = boostSplines(data = ts$data(), target = ts$target_names, loss = LossBinomial$new(), iterations = 125L)
+
+l = lrn("classif.compboost")
+l$train(ts)
 }
