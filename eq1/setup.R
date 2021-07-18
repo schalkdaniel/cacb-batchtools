@@ -9,10 +9,6 @@ if (FALSE) {
   remotes::install_github("schalkdaniel/compboost", ref = "agbm_optim")
 }
 
-
-## Use debug mode
-options("mlr3.debug" = TRUE)
-
 ## Rebuild tasks and resampling objects:
 REBUILD = FALSE
 

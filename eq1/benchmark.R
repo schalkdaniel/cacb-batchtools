@@ -40,10 +40,10 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
   #reg = getDefaultRegistry()
 
-  reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
-    Worker$new("localhost", ncpus = 1L), # 192.168.9.131
-    #Worker$new("192.168.9.132", ncpus = 1L),
-    Worker$new("192.168.9.133", ncpus = 1L)))
+  # reg$cluster.functions = makeClusterFunctionsSSH(workers = list(
+  #   Worker$new("localhost", ncpus = 1L), # 192.168.9.131
+  #   #Worker$new("192.168.9.132", ncpus = 1L),
+  #   Worker$new("192.168.9.133", ncpus = 1L)))
 
   reg$default.resources = list(
     #walltime = 3600L * 2,
