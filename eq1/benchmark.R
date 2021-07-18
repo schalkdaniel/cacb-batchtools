@@ -31,11 +31,11 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
 } else {
 
-  reg = batchtools::makeExperimentRegistry(
+  reg = makeExperimentRegistry(
     file.dir = BATCHTOOLS_DIR,
     packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
       "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-    reg$source = c("helper.R", "classifCompboost.R", "setup.R")
+    source = c("helper.R", "classifCompboost.R", "setup.R"),
     seed       = 31415)
 
   #reg = getDefaultRegistry()
@@ -57,6 +57,14 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   saveRegistry(reg)
 
   source(paste0(BM_DIR, "add-experiments.R"))
+}
+
+
+if (FALSE) {
+  # cpuserver3:
+  submitJobs(findNotDone()[1:75,])
+  # cpuserver5:
+  submitJobs(findNotDone()[76,150])
 }
 
 
