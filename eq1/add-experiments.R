@@ -37,7 +37,7 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 
   learner$train(task_train)
   auc_trace = getCboostMsrsTrace(learner, list(train = task_train, test = task_test), 
-    score_measures, iters = seq(4, 5000, by = 4))
+    SCORE_MEASURES, iters = seq(4, 5000, by = 4))
 
   return(auc_trace)
 })
