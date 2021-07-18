@@ -42,5 +42,5 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   return(auc_trace)
 })
 
-addExperiment(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
+addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
 
