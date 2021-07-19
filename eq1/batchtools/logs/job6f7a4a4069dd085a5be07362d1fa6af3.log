@@ -1,0 +1,78 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-18] Loading new learner
+[2021-07-18 15:23:09] Loading tasks
+[2021-07-18 15:23:12] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=22]
+### [bt]: Generating problem instance for problem 'spam-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold5' for job 22 (seed = 31437) ...
+DEBUG [15:23:12.610] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [15:23:12.613] [mlr3]  Calling train method of Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.bin_cwb_b' on task 'spam' with 3682 observations {learner: <GraphLearner/Learner/R6>}
+DEBUG [15:23:12.630] Running PipeOp 'removeconstants_before$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.667] Running PipeOp 'imputemedian_num$train()' {pipeop: <PipeOpImputeMedian/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.902] Running PipeOp 'imputemode_fct$train()' {pipeop: <PipeOpImputeMode/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.917] Running PipeOp 'collapsefactors$train()' {pipeop: <PipeOpCollapseFactors/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.931] Running PipeOp 'removeconstants_after$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.967] Running PipeOp 'bin_cwb_b$train()' {pipeop: <PipeOpLearner/PipeOp/R6>, input: <list>}
+DEBUG [15:23:12.974] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [15:23:12.976] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'spam' with 3682 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [15:23:12.985] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.64  time = 1   
+ 125/5000   risk = 0.25  time = 1047315   
+ 250/5000   risk = 0.21  time = 2285002   
+ 375/5000   risk = 0.2  time = 3347103   
+ 500/5000   risk = 0.19  time = 4395934   
+ 625/5000   risk = 0.18  time = 5434107   
+ 750/5000   risk = 0.17  time = 6595800   
+ 875/5000   risk = 0.17  time = 7743230   
+1000/5000   risk = 0.16  time = 8799655   
+1125/5000   risk = 0.16  time = 9836581   
+1250/5000   risk = 0.16  time = 10887975   
+1375/5000   risk = 0.16  time = 12001777   
+1500/5000   risk = 0.15  time = 13045732   
+1625/5000   risk = 0.15  time = 14243691   
+1750/5000   risk = 0.15  time = 15266350   
+1875/5000   risk = 0.15  time = 16366628   
+2000/5000   risk = 0.14  time = 17448945   
+2125/5000   risk = 0.14  time = 18444043   
+2250/5000   risk = 0.14  time = 19573155   
+2375/5000   risk = 0.14  time = 20668728   
+2500/5000   risk = 0.14  time = 21792671   
+2625/5000   risk = 0.14  time = 22886814   
+2750/5000   risk = 0.14  time = 24135633   
+2875/5000   risk = 0.14  time = 25217182   
+3000/5000   risk = 0.13  time = 26297461   
+3125/5000   risk = 0.13  time = 27407297   
+3250/5000   risk = 0.13  time = 28508757   
+3375/5000   risk = 0.13  time = 29650152   
+3500/5000   risk = 0.13  time = 30811722   
+3625/5000   risk = 0.13  time = 31923304   
+3750/5000   risk = 0.13  time = 33053017   
+3875/5000   risk = 0.13  time = 34162954   
+4000/5000   risk = 0.13  time = 35251513   
+4125/5000   risk = 0.13  time = 36304550   
+4250/5000   risk = 0.13  time = 37398714   
+4375/5000   risk = 0.13  time = 38520961   
+4500/5000   risk = 0.12  time = 39563130   
+4625/5000   risk = 0.12  time = 40711725   
+4750/5000   risk = 0.12  time = 41815057   
+4875/5000   risk = 0.12  time = 43026321   
+5000/5000   risk = 0.12  time = 44119601   
+
+
+Train 5000 iterations in 44 Seconds.
+Final risk based on the train set: 0.12
+
+INFO  [15:24:07.562] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [15:24:07.566] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.670538,'risk_cwb',0.122556,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [15:24:07.568] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [15:24:07.574] [mlr3]  Learner 'bin_cwb_b' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [15:24:07.588] [mlr3]  Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.bin_cwb_b' on task 'spam' succeeded to fit a model {learner: <GraphLearner/Learner/R6>, result: <list>, messages: }
+[2021-07-18 15:24:12] (1/1250) Processing iter 4
+Error in self$model$setToIteration(iteration, trace) : 
+  addition: incompatible matrix dimensions: 3682x1 and 60x1
+
+### [bt]: Job terminated with an exception [batchtools job.id=22]
+### [bt]: Calculation finished!
