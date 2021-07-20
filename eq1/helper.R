@@ -2,7 +2,7 @@
 #'
 #' The function takes vectors of ids and types of the same length and returns the
 #' task defined in ids[i] and loads it from types[i]. Ids should be a task id from OpenML or a
-#' task name from mlr3. The type should be `"mlr-task"` if id is the name of an mlr task called 
+#' task name from mlr3. The type should be `"mlr-task"` if id is the name of an mlr task called
 #' from `tsk(id)` or `"oml-task"` if id is the task id.
 #' @param ids [`character()`] Ids for the tasks.
 #' @param types [`character()`] Source type of the tasks specified in ids.
@@ -59,7 +59,7 @@ constructTasks = function(ids, types) {
 
 #' Create list of resample objects
 #'
-#' Generate a list of resample objects based on the task. The resample object is 
+#' Generate a list of resample objects based on the task. The resample object is
 #' defined by passing the `.key` and resample arguments via `...`. The resample
 #' object is initialized and instantiated for each task in `tasks`. The seed is
 #' set prior to the instantiation to ensure reproducible train-test splits.
@@ -83,20 +83,20 @@ createResampleSets = function(tasks, seed, ...) {
 #' Construct learner from learner id
 #'
 #' Constructing a learner from an learner id `lid`. The lid must be one of
-#' 'bin_cwb_nb', 'bin_cwb_b', 'acc_cwb', 'acc_acwb', or 'acc_hcwb'. The 
-#' learner is initialized with parameter and put at the end of a pipeline. 
-#' The pipeline looks as follows: 
-#' removeconstant %>>% imputemean %>>% imputemode %>>% 
+#' 'bin_cwb_nb', 'bin_cwb_b', 'acc_cwb', 'acc_acwb', or 'acc_hcwb'. The
+#' learner is initialized with parameter and put at the end of a pipeline.
+#' The pipeline looks as follows:
+#' removeconstant %>>% imputemean %>>% imputemode %>>%
 #'   collapsefactor %>>% removeconstants %>>% learner
 #' @param lid [`character(1L)`] Id of the returned learner.
-#' @param ncores [`integer(1L)`] Number of cores used for training. Default is `parallel::detectCores() - 2`. 
-#'   If `ncores` is bigger than the the number of features, a wanring is printed and `ncores` is set to the 
+#' @param ncores [`integer(1L)`] Number of cores used for training. Default is `parallel::detectCores() - 2`.
+#'   If `ncores` is bigger than the the number of features, a wanring is printed and `ncores` is set to the
 #'   number of features in the learner to avoid dumping the memory:
 #'   https://stackoverflow.com/questions/67131322/what-causes-increasing-memory-consumption-in-openmp-based-simulation
 #'   Additionally, `ncores` is set to 1 if `ncores < 1`.
 #' @param test_mode [`logical(1L)`] Mode for testing with 100 boosting iterations.
 #' @param raw_learner [`logical(1L)`] Return just raw learner without pipeline.
-#' @output [`mlr3pipelines::GraphLearner`] Pipeline with learner at last pipe operator 
+#' @output [`mlr3pipelines::GraphLearner`] Pipeline with learner at last pipe operator
 #'   (see above for details).
 constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode = FALSE, raw_learner = FALSE) {
   mstop = 5000L
@@ -138,7 +138,7 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     ## CWB binning
     bin_cwb_b = {
       l = lrn("classif.compboost", id = "bin_cwb_b", predict_type = "prob",
-        optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE, 
+        optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE,
         bin_root = 2L)
       l$param_set$values = updatePars(l, cwb_pars)
       l
@@ -153,7 +153,7 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     ## ACWB no binning
     acc_acwb = {
       l = lrn("classif.compboost", id = "acc_acwb", predict_type = "prob",
-        optimizer = "nesterov", restart = FALSE, learning_rate = 0.01, momentum = 0.0034, 
+        optimizer = "nesterov", restart = FALSE, learning_rate = 0.01, momentum = 0.0034,
         df_autoselect = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
@@ -162,12 +162,12 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     acc_hcwb = {
       l = lrn("classif.compboost", id = "acc_hcwb", predict_type = "prob",
         optimizer = "nesterov", restart = TRUE, learning_rate = 0.01, momentum = 0.03,
-        df_autoselect = TRUE, oob_fraction = 0.67, use_stopper = TRUE)
+        df_autoselect = TRUE, oob_fraction = 0.3, use_stopper = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     }
   )
-  if (is.null(lout)) 
+  if (is.null(lout))
     stop("'lid' is not valid, use one of 'bin_cwb_nb', 'bin_cwb_n', 'acc_cwb', 'acc_acwb', or 'acc_hcwb'!")
   if (raw_learner) {
     return(lout)
@@ -179,17 +179,17 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
 #' Get information about the fitting process
 #'
 #' This function extracts information about the fitting process for each iteration specified in
-#' `iters`. The information extracted are the measures specified in `score_measures` (default is 
-#' `"classif.auc"`), the microseconds the model needs to train until the specific iteration, the 
+#' `iters`. The information extracted are the measures specified in `score_measures` (default is
+#' `"classif.auc"`), the microseconds the model needs to train until the specific iteration, the
 #' train risk, and (if present) the validation risk.
-#' @param lrn [`mlr3pipelines::GraphLearner`] Trained graph learner returned from `constructLearner`. Note 
+#' @param lrn [`mlr3pipelines::GraphLearner`] Trained graph learner returned from `constructLearner`. Note
 #'   that just pipelines are valid with a learner at the end with an id containing `cwb`.
-#' @param tasks [`list(mlr3::Task)`] List of tasks, the measures are extracted for each task in the list. 
+#' @param tasks [`list(mlr3::Task)`] List of tasks, the measures are extracted for each task in the list.
 #'   This can be used, e.g., to pass a train and test task and get the performance measures for both.
 #' @param score_measures [`character()`] Measure passed to `msrs` on each element of `tasks`.
-#' @param iters [`integer()`] Vector containing the iteration for which the information are extracted. 
+#' @param iters [`integer()`] Vector containing the iteration for which the information are extracted.
 #' @output [`data.frame`] Data frame containing all information. The rows are the iterations and tasks per
-#'   iteration, so "nrow = length(iters) * length(tasks)". 
+#'   iteration, so "nrow = length(iters) * length(tasks)".
 getCboostMsrsTrace = function(lrn, tasks, score_measures = "classif.auc", iters = NULL) {
   mstop = lrn$param_set$values
   mstop = unlist(mstop[grepl("mstop", names(mstop))])
@@ -221,11 +221,15 @@ getCboostMsrsTrace = function(lrn, tasks, score_measures = "classif.auc", iters 
 
   ## Get transition from, e.g., CWB to ACWB
   transition = lrn$graph$pipeops[[lid]]$learner$transition
+  adjust_entered_restart = TRUE
   for (i in seq_along(iters)) {
     message("[", as.character(Sys.time()), "] (", i, "/", length(iters), ") Processing iter ", iters[i])
     ## Check if transition already took place. If so, we have to reset the iteration of the restarted model:
     if (transition < iters[i]) {
-      lrn$model[[lid]]$model$cboost$train(transition)
+      if (adjust_entered_restart) {
+        lrn$model[[lid]]$model$cboost$train(transition)
+        adjust_entered_restart = FALSE
+      }
       if ("cboost_restart" %in% names(lrn$model[[lid]]$model))
         lrn$model[[lid]]$model$cboost_restart$train(iters[i] - transition)
     } else {
