@@ -1,0 +1,49 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-20] Loading new learner
+[2021-07-20 22:17:04] Loading tasks
+[2021-07-20 22:17:07] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=5]
+### [bt]: Generating problem instance for problem 'spam-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold1' for job 5 (seed = 31420) ...
+DEBUG [22:17:08.699] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [22:17:08.751] [mlr3]  Calling train method of Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.acc_hcwb' on task 'spam' with 3680 observations {learner: <GraphLearner/Learner/R6>}
+DEBUG [22:17:08.777] Running PipeOp 'removeconstants_before$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [22:17:08.818] Running PipeOp 'imputemedian_num$train()' {pipeop: <PipeOpImputeMedian/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [22:17:08.982] Running PipeOp 'imputemode_fct$train()' {pipeop: <PipeOpImputeMode/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [22:17:08.997] Running PipeOp 'collapsefactors$train()' {pipeop: <PipeOpCollapseFactors/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [22:17:09.010] Running PipeOp 'removeconstants_after$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [22:17:09.047] Running PipeOp 'acc_hcwb$train()' {pipeop: <PipeOpLearner/PipeOp/R6>, input: <list>}
+DEBUG [22:17:09.053] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [22:17:09.056] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'spam' with 3680 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [22:17:09.065] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.67  oob_risk = 0.67   time = 3   
+
+
+Train 37 iterations in 0 Seconds.
+Final risk based on the train set: 0.6
+
+   1/4974   risk = 0.62  oob_risk = 0.69   time = 1   
+ 124/4974   risk = 0.43  oob_risk = 0.52   time = 1181319   
+ 248/4974   risk = 0.35  oob_risk = 0.45   time = 2317797   
+ 372/4974   risk = 0.31  oob_risk = 0.41   time = 3428064   
+ 496/4974   risk = 0.29  oob_risk = 0.4   time = 4523939   
+ 620/4974   risk = 0.27  oob_risk = 0.9   time = 5671503   
+ 744/4974   risk = 0.26  oob_risk = inf   time = 6753270   
+ 868/4974   risk = 0.25  oob_risk = inf   time = 7864889   
+ 992/4974   risk = 0.24  oob_risk = inf   time = 8968555   
+1116/4974   risk = 0.23  oob_risk = inf   time = 10051571   
+1240/4974   risk = 0.22  oob_risk = inf   time = 11179194   
+1364/4974   risk = 0.22  oob_risk = inf   time = 12283276   
+1488/4974   risk = 0.21  oob_risk = inf   time = 13457608   
+1612/4974   risk = 0.21  oob_risk = inf   time = 14544705   
+1736/4974   risk = 0.2  oob_risk = inf   time = 15652331   
+1860/4974   risk = 0.2  oob_risk = inf   time = 16810833   
+1984/4974   risk = 0.2  oob_risk = inf   time = 17915142   
+2108/4974   risk = 0.2  oob_risk = inf   time = 19044219   
+2232/4974   risk = 0.19  oob_risk = inf   time = 20099360   
+2356/4974   risk = 0.19  oob_risk = inf   time = 21137041   
+2480/4974   risk = 0.19  oob_risk = inf   time = 22264352   
+2604/4974   risk = 0.19  oob_risk = inf   time = 23563993   
