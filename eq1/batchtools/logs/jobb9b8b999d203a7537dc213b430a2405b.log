@@ -1,0 +1,13 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-19] Loading new learner
+[2021-07-19 14:03:39] Loading tasks
+2021-07-19 14:03:39: (1/6) Process task spam
+2021-07-19 14:03:39: (2/6) Process task 7592
+2021-07-19 14:03:40: (3/6) Process task 168335
+2021-07-19 14:03:48: (4/6) Process task 189866
+2021-07-19 14:04:19: (5/6) Process task 359994
+2021-07-19 14:04:51: (6/6) Process task 9977
+Warning in gzfile(file, "wb") :
+  cannot open compressed file '/home/user/repos/cacb-batchtools/eq1/meta/tasks.Rda', probable reason 'No such file or directory'
