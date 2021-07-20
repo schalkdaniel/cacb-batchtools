@@ -1,0 +1,26 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-20] Loading new learner
+[2021-07-20 00:35:55] Loading tasks
+[2021-07-20 00:35:59] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=90]
+### [bt]: Generating problem instance for problem '189866-fold3' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '189866-fold3' for job 90 (seed = 31505) ...
+DEBUG [00:36:03.931] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [00:36:03.934] [mlr3]  Calling train method of Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <GraphLearner/Learner/R6>}
+DEBUG [00:36:03.954] Running PipeOp 'removeconstants_before$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [00:36:05.424] Running PipeOp 'imputemedian_num$train()' {pipeop: <PipeOpImputeMedian/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [00:36:05.988] Running PipeOp 'imputemode_fct$train()' {pipeop: <PipeOpImputeMode/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [00:36:07.503] Running PipeOp 'collapsefactors$train()' {pipeop: <PipeOpCollapseFactors/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [00:36:10.019] Running PipeOp 'removeconstants_after$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [00:36:12.890] Running PipeOp 'acc_hcwb$train()' {pipeop: <PipeOpLearner/PipeOp/R6>, input: <list>}
+DEBUG [00:36:12.902] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [00:36:12.906] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:36:13.606] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 3.000000 
+Error in new_CppObject_xp(fields$.module, fields$.pointer, ...) : 
+  chol(): decomposition failed
+
+### [bt]: Job terminated with an exception [batchtools job.id=90]
+### [bt]: Calculation finished!
