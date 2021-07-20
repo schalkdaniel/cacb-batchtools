@@ -138,7 +138,8 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     ## CWB binning
     bin_cwb_b = {
       l = lrn("classif.compboost", id = "bin_cwb_b", predict_type = "prob",
-        optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE, bin_root = 2L)
+        optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE, 
+        bin_root = 2L)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
