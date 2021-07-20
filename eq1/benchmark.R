@@ -28,7 +28,14 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
   loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
   #loadRegistry(BATCHTOOLS_DIR, work.dir = BM_DIR)
-  submitJobs(setdiff(seq_len(75L), findDone()$job.id))
+
+  jt = getJobTable()
+  hcwb_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
+  hcwb_resubmit = setdiff(seq_len(75L), hcwb_resubmit)
+
+  not_done = setdiff(seq_len(75L), findDone()$job.id)
+  nod_done = unique(c(not_done, hcwb_resubmit))
+  submitJobs()
 } else {
 
   reg = makeExperimentRegistry(
@@ -97,7 +104,7 @@ cbt = getCboostMsrsTrace(tl, tasks, SCORE_MEASURES, iters = c(10, 20, 90, 100, 2
 p1 = tl$predict(TASKS[[5]])
 
 library(compboost)
-cboost = boostSplines(data = TASKS[[5]]$data(), target = TASKS[[5]]$target_names, 
+cboost = boostSplines(data = TASKS[[5]]$data(), target = TASKS[[5]]$target_names,
   loss = LossBinomial$new(), iterations = 100L)
 
 lcboost = lrn("classif.compboost", mstop = 50L)

@@ -21,7 +21,6 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamInt$new(id = "ncores", default = 1L, lower = 1L, upper = parallel::detectCores()),
           ParamDbl$new(id = "momentum", default = 0.0005, lower = 0),
           ParamDbl$new(id = "oob_fraction", default = 0, lower = 0, upper = 0.9),
-          ParamDbl$new(id = "oob_fraction_restart", default = 0, lower = 0, upper = 0.9),
           ParamLgl$new(id = "use_stopper", default = FALSE),
           ParamInt$new(id = "patience", default = 5, lower = 1),
           ParamDbl$new(id = "eps_for_break", default = 0),
@@ -164,6 +163,12 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
 
       out$cboost = cboost
       iters = length(cboost$getSelectedBaselearner())
+
+      ### Reset iterations if early stopping was used:
+      if ((iters < self$param_set$values$mstop) && (stop_args$patience > 0)) {
+        iters = iters - (stop_args$patience + 1)
+        cboost$train(iters)
+      }
       self$transition = iters
 
       ### Restart:
@@ -171,15 +176,15 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         iters_remaining = self$param_set$values$mstop - iters
 
         if (iters_remaining > 0) {
-          if (self$param_set$values$stop_both) {
+          if (self$param_set$values$use_stopper) {
             #browser()
-            if ((self$param_set$oob_fraction_restart > 0) && self$param_set$values$use_stopper)
+            if (self$param_set$values$stop_both) {
               stop_args = c(stop_args, list(oob_offset = cboost$response_oob$getPrediction()))
+            } else {
+              stop_args = list(patience = iters_remaining, eps_for_break = 0,
+                oob_offset = cboost$response_oob$getPrediction())
+            }
 
-            if (self$param_set$values$oob_fraction_restart == 0)
-              oobfr = NULL
-            else
-              oobfr = self$param_set$values$oob_fraction_restart
 
             if (self$param_set$values$show_output) {
               set.seed(seed)
@@ -191,7 +196,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
                 df            = self$param_set$values$df,
                 stop_args     = stop_args,
-                oob_fraction  = oobfr,
+                oob_fraction  = oobf,
                 learning_rate = self$param_set$values$learning_rate,
                 bin_root      = self$param_set$values$bin_root,
                 bin_method    = self$param_set$values$bin_method,
@@ -207,7 +212,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
                   df            = self$param_set$values$df,
                   stop_args     = stop_args,
-                  oob_fraction  = oobfr,
+                  oob_fraction  = oobf,
                   learning_rate = self$param_set$values$learning_rate,
                   bin_root      = self$param_set$values$bin_root,
                   bin_method    = self$param_set$values$bin_method,
@@ -246,6 +251,12 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
             }
           }
           out$cboost_restart = cboost_restart
+
+          check1 = all.equal(cboost$data, cboost_restart$data)
+          check2 = all.equal(cboost$data_oob, cboost_restart$data_oob)
+          if (check1 + check2 < 2)
+            stop("Data of restarted model is not equal the one of the first model!")
+
           lg$info("[LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer %s",
             self$param_set$values$optimizer)
         }
