@@ -1,0 +1,78 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-20] Loading new learner
+[2021-07-20 04:55:35] Loading tasks
+[2021-07-20 04:55:38] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=52]
+### [bt]: Generating problem instance for problem '168335-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold1' for job 52 (seed = 31467) ...
+DEBUG [04:55:40.047] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [04:55:40.050] [mlr3]  Calling train method of Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.bin_cwb_b' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <GraphLearner/Learner/R6>}
+DEBUG [04:55:40.070] Running PipeOp 'removeconstants_before$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [04:55:40.684] Running PipeOp 'imputemedian_num$train()' {pipeop: <PipeOpImputeMedian/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [04:55:41.215] Running PipeOp 'imputemode_fct$train()' {pipeop: <PipeOpImputeMode/PipeOpImpute/PipeOp/R6>, input: <list>}
+DEBUG [04:55:41.302] Running PipeOp 'collapsefactors$train()' {pipeop: <PipeOpCollapseFactors/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [04:55:41.393] Running PipeOp 'removeconstants_after$train()' {pipeop: <PipeOpRemoveConstants/PipeOpTaskPreprocSimple/PipeOpTaskPreproc/PipeOp/R6>, input: <list>}
+DEBUG [04:55:42.114] Running PipeOp 'bin_cwb_b$train()' {pipeop: <PipeOpLearner/PipeOp/R6>, input: <list>}
+DEBUG [04:55:42.123] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [04:55:42.127] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [04:55:42.136] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.56  time = 3   
+ 125/5000   risk = 0.26  time = 2378475   
+ 250/5000   risk = 0.24  time = 4844359   
+ 375/5000   risk = 0.23  time = 7195363   
+ 500/5000   risk = 0.23  time = 9604884   
+ 625/5000   risk = 0.22  time = 12095458   
+ 750/5000   risk = 0.22  time = 14504439   
+ 875/5000   risk = 0.22  time = 17017562   
+1000/5000   risk = 0.22  time = 19469579   
+1125/5000   risk = 0.22  time = 21887978   
+1250/5000   risk = 0.22  time = 24380280   
+1375/5000   risk = 0.22  time = 26819442   
+1500/5000   risk = 0.22  time = 29169850   
+1625/5000   risk = 0.22  time = 31630802   
+1750/5000   risk = 0.22  time = 34052845   
+1875/5000   risk = 0.22  time = 36436415   
+2000/5000   risk = 0.22  time = 38831983   
+2125/5000   risk = 0.22  time = 41184541   
+2250/5000   risk = 0.22  time = 43566888   
+2375/5000   risk = 0.22  time = 45994318   
+2500/5000   risk = 0.22  time = 48378744   
+2625/5000   risk = 0.22  time = 50832505   
+2750/5000   risk = 0.22  time = 53249354   
+2875/5000   risk = 0.22  time = 55613778   
+3000/5000   risk = 0.22  time = 57932828   
+3125/5000   risk = 0.22  time = 60369952   
+3250/5000   risk = 0.22  time = 62807805   
+3375/5000   risk = 0.22  time = 65228533   
+3500/5000   risk = 0.22  time = 67657555   
+3625/5000   risk = 0.22  time = 70123962   
+3750/5000   risk = 0.22  time = 72562001   
+3875/5000   risk = 0.22  time = 75040777   
+4000/5000   risk = 0.22  time = 77495983   
+4125/5000   risk = 0.22  time = 79951650   
+4250/5000   risk = 0.22  time = 82394779   
+4375/5000   risk = 0.22  time = 84848483   
+4500/5000   risk = 0.22  time = 87301816   
+4625/5000   risk = 0.22  time = 89831016   
+4750/5000   risk = 0.22  time = 92384220   
+4875/5000   risk = 0.22  time = 94828531   
+5000/5000   risk = 0.22  time = 97361263   
+
+
+Train 5000 iterations in 97 Seconds.
+Final risk based on the train set: 0.22
+
+INFO  [04:57:31.377] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [04:57:31.380] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.593540,'risk_cwb',0.217422,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [04:57:31.381] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [04:57:31.387] [mlr3]  Learner 'bin_cwb_b' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [04:57:31.525] [mlr3]  Learner 'removeconstants_before.imputemedian_num.imputemode_fct.collapsefactors.removeconstants_after.bin_cwb_b' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <GraphLearner/Learner/R6>, result: <list>, messages: }
+[2021-07-20 04:57:37] (1/1250) Processing iter 4
+Error in self$model$setToIteration(iteration, trace) : 
+  addition: incompatible matrix dimensions: 104051x1 and 322x1
+
+### [bt]: Job terminated with an exception [batchtools job.id=52]
+### [bt]: Calculation finished!
