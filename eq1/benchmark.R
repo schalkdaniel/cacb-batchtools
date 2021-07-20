@@ -27,8 +27,8 @@ if (FALSE) unlink(BATCHTOOLS_DIR, recursive = TRUE)
 if (dir.exists(BATCHTOOLS_DIR)) {
 
   loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
-  submitJobs(findNotDone())
-
+  #loadRegistry(BATCHTOOLS_DIR, work.dir = BM_DIR)
+  submitJobs(setdiff(seq_len(75L), findDone()$job.id))
 } else {
 
   reg = makeExperimentRegistry(
