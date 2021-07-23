@@ -201,6 +201,7 @@ getCboostMsrsTrace = function(lrn, tasks, score_measures = "classif.auc", iters 
     warning("Cannot use iters > trained iterations (", mstop, "). Remove all iters > trained iterations.")
     iters = iters[iters <= mstop]
   }
+  iters = sort(iters)
 
   out = list()
   clog = lrn$model[[lid]]$model$cboost$getLoggerData()

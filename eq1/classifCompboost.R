@@ -1,5 +1,5 @@
 
-cat("[", as.character(Sys.Date()),   "] Loading new learner\n", sep = "")
+cat("[", as.character(Sys.time()),   "] Loading new learner\n", sep = "")
 
 LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
   inherit = LearnerClassif,
@@ -68,7 +68,6 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         ncores = length(task$feature_names)
       }
 
-
       lg = lgr::get_logger("mlr3")
 
       pdefaults = self$param_set$default
@@ -115,8 +114,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
 
       out = list()
       seed = sample(seq_len(100000), 1)
-      #seed = self$param_set$values$oob_seed
-      #browser()
+      seed = self$param_set$values$oob_seed
 
       lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
 
@@ -159,32 +157,29 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
             df_cat        = self$param_set$values$df_cat)
         })
       }
-
-
-      out$cboost = cboost
+      #browser()
       iters = length(cboost$getSelectedBaselearner())
 
       ### Reset iterations if early stopping was used:
       if ((iters < self$param_set$values$mstop) && (stop_args$patience > 0)) {
-        iters = iters - (stop_args$patience + 1)
-        cboost$train(iters)
+        #iters = iters - (stop_args$patience + 1)
+        #cboost$train(iters)
       }
       self$transition = iters
+      out$cboost      = cboost
 
       ### Restart:
-      if ((self$param_set$values$optimizer == "nesterov") && self$param_set$values$restart) {
+      if (self$param_set$values$restart) {
         iters_remaining = self$param_set$values$mstop - iters
 
         if (iters_remaining > 0) {
           if (self$param_set$values$use_stopper) {
-            #browser()
             if (self$param_set$values$stop_both) {
-              stop_args = c(stop_args, list(oob_offset = cboost$response_oob$getPrediction()))
+              stop_args_restart = c(stop_args, list(oob_offset = cboost$predict(cboost$data_oob)))
             } else {
-              stop_args = list(patience = iters_remaining, eps_for_break = 0,
-                oob_offset = cboost$response_oob$getPrediction())
+              stop_args_restart = list(patience = iters_remaining, eps_for_break = 0,
+                oob_offset = cboost$predict(cboost$data_oob))
             }
-
 
             if (self$param_set$values$show_output) {
               set.seed(seed)
@@ -193,9 +188,9 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 target        = task$target_names,
                 iterations    = iters_remaining,
                 optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
-                loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
+                loss          = compboost::LossBinomial$new(cboost$predict(cboost$data), TRUE),
                 df            = self$param_set$values$df,
-                stop_args     = stop_args,
+                stop_args     = stop_args_restart,
                 oob_fraction  = oobf,
                 learning_rate = self$param_set$values$learning_rate,
                 bin_root      = self$param_set$values$bin_root,
@@ -211,7 +206,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   optimizer     = compboost::OptimizerCoordinateDescent$new(ncores),
                   loss          = compboost::LossBinomial$new(cboost$predict(), TRUE),
                   df            = self$param_set$values$df,
-                  stop_args     = stop_args,
+                  stop_args     = stop_args_restart,
                   oob_fraction  = oobf,
                   learning_rate = self$param_set$values$learning_rate,
                   bin_root      = self$param_set$values$bin_root,
