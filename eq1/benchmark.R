@@ -31,16 +31,16 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
   jt = getJobTable()
 
-  ids_resubmit = jt$job.id[unlist(jt$algo.pars) == "bin_cwb_b"]
-  ids_resubmit = intersect(ids_resubmit, jt$job.id[grepl("spam", jt$problem)])
-  ids_resubmit = c(ids_resubmit, 61)
+  ids_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
+  #ids_resubmit = intersect(ids_resubmit, jt$job.id[grepl("spam", jt$problem)])
+  #ids_resubmit = c(ids_resubmit, 61)
 
   #hcwb_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
   #hcwb_resubmit = intersect(seq_len(75L), hcwb_resubmit)
 
-  not_done = setdiff(seq_len(75L), findDone()$job.id)
+  not_done = setdiff(seq_len(100L), findDone()$job.id)
   not_done = unique(c(not_done, ids_resubmit))
-  submitJobs(116:150)
+  submitJobs(not_done)
 } else {
 
   reg = makeExperimentRegistry(
@@ -69,6 +69,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   saveRegistry(reg)
 
   source(paste0(BM_DIR, "add-experiments.R"))
+  submitJobs()
 }
 
 

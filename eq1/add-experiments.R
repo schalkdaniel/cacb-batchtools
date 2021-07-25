@@ -14,7 +14,7 @@ for (i in seq_along(TASKS)) {
   ## task - resampling combination is split into combinations
   ## task - reampling (iter 1), ..., task - resampling (iter K).
   for (k in seq_len(resampling$iters)) {
-    ts = robustiry$train(TASKS[[i]])[[1]]$clone(deep = TRUE)
+    ts = robustify$train(TASKS[[i]])[[1]]$clone(deep = TRUE)
 
     rcustom = rsmp("custom")
     rcustom$instantiate(ts,
@@ -41,7 +41,7 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   ## Learner is constructed two times, one for logging and one for the
   ## actual training with time tracking:
   learner    = constructLearner(lid, raw_learner = TRUE)
-  lerner0    = constructLearner(lid, raw_learner = TRUE)
+  learner0   = constructLearner(lid, raw_learner = TRUE)
 
   task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
   task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
@@ -50,7 +50,7 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   aucLoss = function(truth, response)
     return(mlr::measureAUC(response, truth, negative = -1, positive = 1) * length(truth))
   my_auc_loss = LossCustom$new(aucLoss, function(t, r) rep(0, length(t)), function(t) return(0))
-  learner$additional_risk_log = list(auc = list(data = task_test$data(), loss = my_auc_loss))
+  learner$param_set$values$additional_risk_log = list(auc = list(data = task_test$data(), loss = my_auc_loss))
 
   learner$train(task_train)
   learner0$train(task_train)
