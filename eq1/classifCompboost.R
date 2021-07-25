@@ -31,7 +31,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamLgl$new(id = "stop_both", default = FALSE),
           ParamLgl$new(id = "df_autoselect", default = FALSE),
           ParamInt$new(id = "oob_seed", default = sample(seq_len(1e6), 1), lower = 1L),
-          ParamLgl$new(id = "show_output", default = FALSE)
+          ParamLgl$new(id = "show_output", default = FALSE),
+          ParamUty$new(id = "additional_risk_log", default = list())
         )
       )
       super$initialize(
@@ -94,6 +95,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         }
       }
 
+      ## Define optimizer:
       if (self$param_set$values$optimizer == "cod") {
         optimizer = compboost::OptimizerCoordinateDescent$new(ncores)
       }
@@ -105,7 +107,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ncores)
       }
 
-
+      ## Define stop arguments passed to compboost:
       if (self$param_set$values$use_stopper) {
         stop_args = list(patience = self$param_set$values$patience, eps_for_break = self$param_set$values$eps_for_break)
       } else {
@@ -113,11 +115,11 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
       }
 
       out = list()
-      seed = sample(seq_len(100000), 1)
+      #seed = sample(seq_len(100000), 1)
       seed = self$param_set$values$oob_seed
 
-      lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f", self$param_set$values$df, self$param_set$values$df_cat)
-
+      lg$info("[LGCOMPBOOST] Running compboost with df %f and df_cat %f",
+        self$param_set$values$df, self$param_set$values$df_cat)
 
       if (self$param_set$values$oob_fraction == 0)
         oobf = NULL
@@ -138,7 +140,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           stop_args     = stop_args,
           bin_root      = self$param_set$values$bin_root,
           bin_method    = self$param_set$values$bin_method,
-          df_cat        = self$param_set$values$df_cat)
+          df_cat        = self$param_set$values$df_cat,
+          additional_risk_log = self$param_set$values$additional_risk_log)
       } else {
         nuisance = capture.output({
           set.seed(seed)
@@ -154,7 +157,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
             stop_args     = stop_args,
             bin_root      = self$param_set$values$bin_root,
             bin_method    = self$param_set$values$bin_method,
-            df_cat        = self$param_set$values$df_cat)
+            df_cat        = self$param_set$values$df_cat,
+            additional_risk_log = self$param_set$values$additional_risk_log)
         })
       }
       #browser()
@@ -195,7 +199,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 learning_rate = self$param_set$values$learning_rate,
                 bin_root      = self$param_set$values$bin_root,
                 bin_method    = self$param_set$values$bin_method,
-                df_cat        = self$param_set$values$df_cat)
+                df_cat        = self$param_set$values$df_cat,
+                additional_risk_log = self$param_set$values$additional_risk_log)
             } else {
               nuisance = capture.output({
                 set.seed(seed)
@@ -211,7 +216,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   learning_rate = self$param_set$values$learning_rate,
                   bin_root      = self$param_set$values$bin_root,
                   bin_method    = self$param_set$values$bin_method,
-                  df_cat        = self$param_set$values$df_cat)
+                  df_cat        = self$param_set$values$df_cat,
+                  additional_risk_log = self$param_set$values$additional_risk_log)
               })
             }
           } else {
@@ -227,7 +233,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 learning_rate = self$param_set$values$learning_rate,
                 bin_root      = self$param_set$values$bin_root,
                 bin_method    = self$param_set$values$bin_method,
-                df_cat        = self$param_set$values$df_cat)
+                df_cat        = self$param_set$values$df_cat,
+                additional_risk_log = self$param_set$values$additional_risk_log)
             } else {
               nuisance = capture.output({
                 set.seed(seed)
@@ -241,7 +248,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   learning_rate = self$param_set$values$learning_rate,
                   bin_root      = self$param_set$values$bin_root,
                   bin_method    = self$param_set$values$bin_method,
-                  df_cat        = self$param_set$values$df_cat)
+                  df_cat        = self$param_set$values$df_cat,
+                  additional_risk_log = self$param_set$values$additional_risk_log)
               })
             }
           }
@@ -303,9 +311,9 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
 
       if (self$param_set$values$optimizer == "nesterov") {
         lin_pred = self$model$cboost$predict(newdata)
-        if (("cboost_restart" %in% names(self$model)) && (self$transition < self$iter)) {
+        if (("cboost_restart" %in% names(self$model)) && (self$transition < self$iter))
           lin_pred = lin_pred + self$model$cboost_restart$predict(newdata)
-        }
+
         probs = 1 / (1 + exp(-lin_pred))
       } else {
         probs = self$model$cboost$predict(newdata, as_response = TRUE)

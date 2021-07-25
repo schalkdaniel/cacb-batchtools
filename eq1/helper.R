@@ -251,3 +251,28 @@ getCboostMsrsTrace = function(lrn, tasks, score_measures = "classif.auc", iters 
   }
   return(do.call(rbind, out))
 }
+
+
+getCboostLog = function(lrn) {
+  mn = names(lrn$model)
+  evalCboostFun = function(m, fn)
+    eval(parse(text = paste0("lrn$model$", m, "$", fn, "()")))
+
+  out = lapply(mn, function(m) {
+    log = evalCboostFun(m, "getLoggerData")
+    log = cbind(log,
+      blearner = evalCboostFun(m, "getSelectedBaselearner"),
+      risk     = evalCboostFun(m, "getInbagRisk")[-1],
+      model    = m)
+
+    if (! "oob_risk" %in% names(log))
+      log$risk_oob = NA
+
+    return(log)
+  })
+  lnames = names(out[[1]])
+  df_out = do.call(rbind, lapply(out, function(ot) ot[, lnames]))
+  df_out$transition = lrn$transition
+
+  return(df_out)
+}

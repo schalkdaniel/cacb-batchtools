@@ -75,8 +75,10 @@ gg_bmr = ggplot(data = df_res %>% filter(tset == "test"), mapping = aes(x = micr
 a = df_res %>%
   filter(grepl("albert", task), learner == "acc_hcwb", tset == "test")
 
-ggplot(a, aes(x = microseconds, y = risk, color = as.character(fold))) +
-  geom_line()
+#ggplot(a, aes(x = microseconds, y = classif.auc, color = as.character(fold))) +
+ggplot(a, aes(x = iteration, y = risk, color = as.character(fold))) +
+  geom_line() +
+  geom_vline(xintercept = unique(a$transition))
 
 plot(x, 1 - (1 - x^50)^(1/60), type = "l")
 
@@ -171,19 +173,21 @@ l$param_set$values = updatePars(l, cwb_pars)
 l$train(task$filter(which(complete.cases(task$data()))[1:30000]))
 
 
-library(mlr3pipelines)
-source("helper.R")
-source("classifCompboost.R")
-load("meta/tasks.Rda")
 
-tint = 4
+## INDIVIDUAL INSPECTION
+## ------------------------------------------
 
 ## HCWB:
 tl1 = constructLearner("acc_hcwb", ncores = 4L, test_mode = FALSE, raw_learner = FALSE)
 
-rr = RESAMPLE_SETS$`168335`
-ttrain = TASKS[[tint]]$clone(deep = TRUE)$filter(rr$train_set(4))
-ttest = TASKS[[tint]]$clone(deep = TRUE)$filter(rr$train_set(4))
+tname = "189866"
+
+rr = RESAMPLE_SETS[[tname]]
+ttrain = TASKS[[tname]]$clone(deep = TRUE)$filter(rr$train_set(4))
+ttest  = TASKS[[tname]]$clone(deep = TRUE)$filter(rr$train_set(4))
+
+tl1$param_set$values$acc_hcwb.momentum = 0.01
+
 tl1$train(ttrain)
 
 r1 = tl1$model$acc_hcwb$model$cboost$getInbagRisk()
@@ -193,16 +197,21 @@ r = c(r1, r2)
 plot(seq_along(r), r, type = "l")
 
 
- tl1$graph$pipeops$acc_hcwb$learner$transition
+tl1$graph$pipeops$acc_hcwb$learner$transition
 l1 = getCboostMsrsTrace(tl1, list(test = ttest, train = ttrain),
-  iters = c(1, seq(16, 160, by = 16), seq(164, 256, by = 4), seq(260, 500, by = 16)))
+  iters = c(1, seq(16, 160, by = 16), seq(164, 286, by = 4), seq(290, 500, by = 16)))
 
 library(ggplot2)
 library(dplyr)
-gg_task = ggplot() +
-  geom_line(data = l1 %>% filter(tset == "test"), aes(x = microseconds, y = classif.auc, color = "Test AUC", linetype = "hCWB")) +
-  geom_line(data = l1 %>% filter(tset == "test"), aes(x = microseconds, y = risk_oob, color = "OOB Risk", linetype = "hCWB")) +
-  geom_line(data = l1 %>% filter(tset == "test"), aes(x = microseconds, y = risk, color = "Inbag Risk", linetype = "hCWB"))
+ggplot() +
+  geom_line(data = l1 %>% filter(tset == "test"), aes(x = iteration, y = classif.auc, color = "Test AUC", linetype = "hCWB")) +
+  geom_line(data = l1 %>% filter(tset == "test"), aes(x = iteration, y = risk_oob, color = "OOB Risk", linetype = "hCWB")) +
+  geom_line(data = l1 %>% filter(tset == "test"), aes(x = iteration, y = risk, color = "Inbag Risk", linetype = "hCWB")) +
+  geom_vline(xintercept = unique(l1$transition))
+
+
+
+
 
 
 
@@ -257,5 +266,99 @@ mean(lossBin(cboost$response$getResponse(), cboost$predict(cboost$data)))
 ri = cboost$getInbagRisk()
 
 rr = cboost_restart$getInbagRisk()
+
+
+
+task = tsk("spam")
+
+data          = task$data()
+target        = task$target_names
+optimizer     = OptimizerCoordinateDescent$new(4L)
+loss          = LossBinomial$new()
+learning_rate = 0.01
+oob_fraction  = 0.3
+stop_args     = list()
+stop_time     = "microseconds"
+
+iterations = 1000
+trace = -1
+degree = 3
+n_knots = 20L
+penalty = 2
+df = 0
+differences = 2
+data_source = InMemoryData
+bin_root = 0
+bin_method = "linear"
+cache_type = "inverse"
+df_cat = 1
+
+model = Compboost$new(data = data, target = target, optimizer = optimizer, loss = loss,
+  learning_rate = learning_rate, oob_fraction = oob_fraction, stop_args)
+
+features = setdiff(colnames(data), model$response$getTargetName())
+
+checkmate::assertChoice(stop_time, choices = c("minutes", "seconds", "microseconds"), null.ok = TRUE)
+
+# This loop could be replaced with foreach???
+# Issue:
+for(feat in features) {
+  if (is.numeric(data[[feat]])) {
+    model$addBaselearner(feat, "spline", BaselearnerPSpline, data_source,
+      degree = degree, n_knots = n_knots, penalty = penalty, df = df,  differences = differences,
+      bin_root = bin_root, bin_method = bin_method, cache_type = cache_type)
+  } else {
+    checkmate::assertNumeric(df_cat, len = 1L, lower = 1)
+    if (length(unique(feat)) > df_cat) stop("Categorical degree of freedom must be smaller than the number of classes (here <", length(unique(feat)), ")")
+    model$addBaselearner(feat, "ridge", BaselearnerCategoricalRidge, data_source,
+      df = df_cat)
+  }
+}
+if (! is.null(stop_time)) {
+  model$addLogger(LoggerTime, FALSE, "time", 0, stop_time)
+}
+
+aucLoss = function(truth, response) return(mlr::measureAUC(response, truth, negative = -1, positive = 1) * length(truth))
+aucGrad = function(truth, response) return(rep(0, length(truth)))
+aucInit = function(truth)           return(0)
+my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
+
+
+model$addLogger(logger = LoggerOobRisk, use_as_stopper = FALSE, logger_id = "test_auc",
+  used_loss = my_auc_loss, eps_for_break = 0, patience = 1, oob_data = model$prepareData(data),
+  oob_response = model$prepareResponse(data[[target]]))
+
+model$train(iterations, trace)
+
+
+
+
+
+devtools::load_all("~/repos/compboost")
+
+library(R6)
+library(mlr3)
+library(mlr3pipelines)
+library(mlr3tuning)
+
+source("classifCompboost.R")
+source("helper.R")
+source("meta/resample-sets.Rda")
+
+task = tsk("spam")
+
+robustify = po("removeconstants", id = "removeconstants_before") %>>%
+    po("imputemedian", id = "imputemedian_num", affect_columns = selector_type(c("integer", "numeric"))) %>>%
+    po("imputemode", id = "imputemode_fct", affect_columns = selector_type(c("character", "factor", "ordered"))) %>>%
+    po("collapsefactors", target_level_count = 10) %>>%
+    po("removeconstants", id = "removeconstants_after")
+
+task_new = robustify$train(task)[[1]]
+
+l = constructLearner("acc_hcwb", raw_learner = TRUE)
+l$param_set$values$additional_risk_log = additional_risk_log
+
+l$train(task_new)
+
 
 
