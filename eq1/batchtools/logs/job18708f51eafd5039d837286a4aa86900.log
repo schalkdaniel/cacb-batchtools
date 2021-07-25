@@ -1,0 +1,119 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-25 21:23:02] Loading new learner
+[2021-07-25 21:23:02] Loading tasks
+[2021-07-25 21:23:05] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=51]
+### [bt]: Generating problem instance for problem '168335-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold1' for job 51 (seed = 31466) ...
+DEBUG [21:23:08.252] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [21:23:08.255] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [21:23:08.265] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.56  riskauc = 0.84   time = 2   
+ 125/5000   risk = 0.26  riskauc = 0.95   time = 10186098   
+ 250/5000   risk = 0.24  riskauc = 0.96   time = 19884847   
+ 375/5000   risk = 0.23  riskauc = 0.96   time = 29157130   
+ 500/5000   risk = 0.23  riskauc = 0.97   time = 38383798   
+ 625/5000   risk = 0.22  riskauc = 0.97   time = 47855601   
+ 750/5000   risk = 0.22  riskauc = 0.97   time = 56799770   
+ 875/5000   risk = 0.22  riskauc = 0.97   time = 65789882   
+1000/5000   risk = 0.22  riskauc = 0.97   time = 74926160   
+1125/5000   risk = 0.22  riskauc = 0.97   time = 83833915   
+1250/5000   risk = 0.22  riskauc = 0.97   time = 92697354   
+1375/5000   risk = 0.22  riskauc = 0.97   time = 101751008   
+1500/5000   risk = 0.22  riskauc = 0.97   time = 110339068   
+1625/5000   risk = 0.22  riskauc = 0.97   time = 118894283   
+1750/5000   risk = 0.22  riskauc = 0.97   time = 127290164   
+1875/5000   risk = 0.22  riskauc = 0.97   time = 135811564   
+2000/5000   risk = 0.22  riskauc = 0.97   time = 144246813   
+2125/5000   risk = 0.22  riskauc = 0.97   time = 152399345   
+2250/5000   risk = 0.22  riskauc = 0.97   time = 160842899   
+2375/5000   risk = 0.22  riskauc = 0.97   time = 169114739   
+2500/5000   risk = 0.22  riskauc = 0.97   time = 177371063   
+2625/5000   risk = 0.22  riskauc = 0.97   time = 185684705   
+2750/5000   risk = 0.22  riskauc = 0.97   time = 194106352   
+2875/5000   risk = 0.22  riskauc = 0.97   time = 202329978   
+3000/5000   risk = 0.22  riskauc = 0.97   time = 210435226   
+3125/5000   risk = 0.22  riskauc = 0.97   time = 218956522   
+3250/5000   risk = 0.22  riskauc = 0.97   time = 227178284   
+3375/5000   risk = 0.22  riskauc = 0.97   time = 235349430   
+3500/5000   risk = 0.22  riskauc = 0.97   time = 243736194   
+3625/5000   risk = 0.22  riskauc = 0.97   time = 252009809   
+3750/5000   risk = 0.22  riskauc = 0.97   time = 260544276   
+3875/5000   risk = 0.22  riskauc = 0.97   time = 268659377   
+4000/5000   risk = 0.22  riskauc = 0.97   time = 277117581   
+4125/5000   risk = 0.22  riskauc = 0.97   time = 285536776   
+4250/5000   risk = 0.22  riskauc = 0.97   time = 293623410   
+4375/5000   risk = 0.22  riskauc = 0.97   time = 302076262   
+4500/5000   risk = 0.22  riskauc = 0.97   time = 310407522   
+4625/5000   risk = 0.22  riskauc = 0.97   time = 318553889   
+4750/5000   risk = 0.22  riskauc = 0.97   time = 326652888   
+4875/5000   risk = 0.22  riskauc = 0.97   time = 335042092   
+5000/5000   risk = 0.22  riskauc = 0.97   time = 343316722   
+
+
+Train 5000 iterations in 343 Seconds.
+Final risk based on the train set: 0.22
+
+INFO  [21:29:04.108] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [21:29:04.116] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.593540,'risk_cwb',0.216591,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [21:29:04.118] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [21:29:04.123] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [21:29:04.134] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [21:29:04.137] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [21:29:04.148] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.56  time = 3   
+ 125/5000   risk = 0.26  time = 7690067   
+ 250/5000   risk = 0.24  time = 15261969   
+ 375/5000   risk = 0.23  time = 22675348   
+ 500/5000   risk = 0.23  time = 30074219   
+ 625/5000   risk = 0.22  time = 37753204   
+ 750/5000   risk = 0.22  time = 45693726   
+ 875/5000   risk = 0.22  time = 53751802   
+1000/5000   risk = 0.22  time = 61739979   
+1125/5000   risk = 0.22  time = 69511665   
+1250/5000   risk = 0.22  time = 77269460   
+1375/5000   risk = 0.22  time = 84998576   
+1500/5000   risk = 0.22  time = 92651324   
+1625/5000   risk = 0.22  time = 100425976   
+1750/5000   risk = 0.22  time = 108309486   
+1875/5000   risk = 0.22  time = 116391248   
+2000/5000   risk = 0.22  time = 124605535   
+2125/5000   risk = 0.22  time = 132775722   
+2250/5000   risk = 0.22  time = 141039816   
+2375/5000   risk = 0.22  time = 149323685   
+2500/5000   risk = 0.22  time = 157709864   
+2625/5000   risk = 0.22  time = 166063381   
+2750/5000   risk = 0.22  time = 174353001   
+2875/5000   risk = 0.22  time = 182671877   
+3000/5000   risk = 0.22  time = 190905723   
+3125/5000   risk = 0.22  time = 199242819   
+3250/5000   risk = 0.22  time = 207505862   
+3375/5000   risk = 0.22  time = 215873619   
+3500/5000   risk = 0.22  time = 224033169   
+3625/5000   risk = 0.22  time = 232176285   
+3750/5000   risk = 0.22  time = 240334426   
+3875/5000   risk = 0.22  time = 248474272   
+4000/5000   risk = 0.22  time = 256370201   
+4125/5000   risk = 0.22  time = 264384148   
+4250/5000   risk = 0.22  time = 272246373   
+4375/5000   risk = 0.22  time = 280314922   
+4500/5000   risk = 0.22  time = 288190433   
+4625/5000   risk = 0.22  time = 296263023   
+4750/5000   risk = 0.22  time = 304508792   
+4875/5000   risk = 0.22  time = 312685051   
+5000/5000   risk = 0.22  time = 320804900   
+
+
+Train 5000 iterations in 320 Seconds.
+Final risk based on the train set: 0.22
+
+INFO  [21:34:36.474] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [21:34:36.477] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.593540,'risk_cwb',0.216591,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [21:34:36.480] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [21:34:36.486] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=51]
+### [bt]: Calculation finished!
