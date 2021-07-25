@@ -5,8 +5,12 @@ base_dir = here::here()
 bm_dir   = paste0(base_dir, "/eq1/batchtools/")
 
 loadRegistry(file.dir = bm_dir, work.dir = paste0(base_dir, "/eq1"))
-res = reduceResultsList(setdiff(findDone()$job.id, 76))
-#res = reduceResultsList()
+
+jids = findDone()
+jt   = getJobTable(jids)
+res = reduceResultsList(jt$job.id)
+
+#res = reduceResultsList(setdiff(findDone()$job.id, 76))
 getStatus()
 
 
@@ -15,20 +19,32 @@ library(dplyr)
 library(tidyr)
 
 for (i in seq_along(res)) {
-  res[[i]] = cbind(res[[i]], fold = i)
+  res[[i]] = cbind(res[[i]],
+    fold = as.numeric(gsub("\\D", "", jt$problem[i])),
+    task = sub("\\-.*", "", jt$problem[i]),
+    learner = jt$algo.pars[[i]]$lid)
+  #res[[i]] = cbind(res[[i]], fold = i)
 }
-df_res = do.call(rbind, res)
+df_res = do.call(rbind, lapply(res, function(r) {
+  lnames = c("_iterations", "riskauc", "time", "blearner", "risk", "model", "transition", "fold", "task", "learner")
+  r[, lnames]
+}))
+df_res[["iteration"]]    = df_res[["_iterations"]]
+df_res[["_iterations"]]  = NULL
+df_res[["classif.auc"]]  = df_res[["riskauc"]]
+df_res[["riskauc"]]      = NULL
+df_res[["microseconds"]] = df_res[["time"]]
 
 
 ## SUMMARY VALUES:
 ## =============================================
 
 df_smry = df_res %>%
-  group_by(task, learner, iteration, tset) %>%
+  group_by(task, learner, iteration) %>%
   summarize(classif.auc = mean(classif.auc),
     microseconds = mean(microseconds),
     transition = transition[1]) %>%
-  group_by(task, learner, tset) %>%
+  group_by(task, learner) %>%
   summarize(
     auc_start  = min(classif.auc),
     iter_best  = iteration[which.max(classif.auc)],
@@ -37,17 +53,16 @@ df_smry = df_res %>%
     transition = transition[1],
     auc_expl   = (max(classif.auc) - min(classif.auc)) / min(classif.auc)
   ) %>%
-  group_by(task, tset) %>%
+  group_by(task) %>%
   mutate(auc_start = min(auc_start)) %>%
-  group_by(task, tset) %>%
-  mutate(auc_diff_to_cwb = auc_best[learner == "bin_cwb_nb"] - auc_best) %>%
-  filter(tset == "test")
+  group_by(task) %>%
+  mutate(auc_diff_to_cwb = auc_best[learner == "bin_cwb_nb"] - auc_best)
 
 ## FITTING TRACES:
 ## =============================================
 
 df_aggr = df_res %>%
-  group_by(task, learner, iteration, tset) %>%
+  group_by(task, learner, iteration) %>%
   summarize(classif.auc = mean(classif.auc), microseconds = mean(microseconds))
 
 sf  = function(x, p = 10) 1 - (1 - (0.2 * x)^p)^(1/p)
@@ -60,9 +75,9 @@ sfb = function(x, p = 10) {
 stretch_trans = function() scales::trans_new("stretch", sf, sfi, sfb, )
 formatFun = function(x) sprintf("%.3f", x)
 
-gg_bmr = ggplot(data = df_res %>% filter(tset == "test"), mapping = aes(x = microseconds / 1e6, y = classif.auc, color = learner)) +
+gg_bmr = ggplot(data = df_res, mapping = aes(x = microseconds / 1e6, y = classif.auc, color = learner)) +
   geom_line(aes(group = paste0(learner, fold)), alpha = 0.2, size = 0.6) +
-  geom_line(data = df_aggr %>% filter(tset == "test"), size = 1.2) +
+  geom_line(data = df_aggr, size = 1.2) +
   geom_point(data = df_smry, mapping = aes(x = 0, y = auc_best)) +
   geom_point(data = df_smry, mapping = aes(x = ms_best / 1e6, y = auc_start)) +
   scale_y_continuous(trans = "stretch", labels = formatFun) +
@@ -318,34 +333,8 @@ if (! is.null(stop_time)) {
   model$addLogger(LoggerTime, FALSE, "time", 0, stop_time)
 }
 
-aucLoss = function(truth, response) return(mlr::measureAUC(response, truth, negative = -1, positive = 1) * length(truth))
-aucGrad = function(truth, response) return(rep(0, length(truth)))
-aucInit = function(truth)           return(0)
-my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
 
 
-model$addLogger(logger = LoggerOobRisk, use_as_stopper = FALSE, logger_id = "test_auc",
-  used_loss = my_auc_loss, eps_for_break = 0, patience = 1, oob_data = model$prepareData(data),
-  oob_response = model$prepareResponse(data[[target]]))
-
-model$train(iterations, trace)
-
-
-
-
-
-devtools::load_all("~/repos/compboost")
-
-library(R6)
-library(mlr3)
-library(mlr3pipelines)
-library(mlr3tuning)
-
-source("classifCompboost.R")
-source("helper.R")
-source("meta/resample-sets.Rda")
-
-task = tsk("spam")
 
 robustify = po("removeconstants", id = "removeconstants_before") %>>%
     po("imputemedian", id = "imputemedian_num", affect_columns = selector_type(c("integer", "numeric"))) %>>%
@@ -353,12 +342,17 @@ robustify = po("removeconstants", id = "removeconstants_before") %>>%
     po("collapsefactors", target_level_count = 10) %>>%
     po("removeconstants", id = "removeconstants_after")
 
+task = TASKS[[1]]
 task_new = robustify$train(task)[[1]]
 
 l = constructLearner("acc_hcwb", raw_learner = TRUE)
-l$param_set$values$additional_risk_log = additional_risk_log
+l$param_set$values$task_extra_log = task_new
+l$param_set$values$log_auc = TRUE
+l$param_set$values$mstop = 200
 
 l$train(task_new)
 
+tail(l$model$cboost_restart$getLoggerData(), 1)
+mlr::measureAUC(l$model$cboost$predict(task_new$data()) + l$model$cboost_restart$predict(task_new$data()), task_new$data()[["type"]], positive = "spam")
 
 

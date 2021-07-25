@@ -32,7 +32,8 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamLgl$new(id = "df_autoselect", default = FALSE),
           ParamInt$new(id = "oob_seed", default = sample(seq_len(1e6), 1), lower = 1L),
           ParamLgl$new(id = "show_output", default = FALSE),
-          ParamUty$new(id = "additional_risk_log", default = list())
+          ParamLgl$new(id = "log_auc", default = FALSE),
+          ParamUty$new(id = "task_extra_log")
         )
       )
       super$initialize(
@@ -95,6 +96,20 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         }
       }
 
+      ## Create AUC loss:
+      if (self$param_set$values$log_auc) {
+        aucLoss = function(truth, response) return(mlr::measureAUC(response, truth, negative = -1, positive = 1) * length(truth))
+        aucGrad = function(truth, response) return(rep(0, length(truth)))
+        aucInit = function(truth) {
+          p = mean(truth == 1)
+          return(0.5 * p / (1 - p))
+        }
+        my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
+        additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss))
+      } else {
+        additional_risk_log = list()
+      }
+
       ## Define optimizer:
       if (self$param_set$values$optimizer == "cod") {
         optimizer = compboost::OptimizerCoordinateDescent$new(ncores)
@@ -141,7 +156,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           bin_root      = self$param_set$values$bin_root,
           bin_method    = self$param_set$values$bin_method,
           df_cat        = self$param_set$values$df_cat,
-          additional_risk_log = self$param_set$values$additional_risk_log)
+          additional_risk_log = additional_risk_log)
       } else {
         nuisance = capture.output({
           set.seed(seed)
@@ -158,7 +173,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
             bin_root      = self$param_set$values$bin_root,
             bin_method    = self$param_set$values$bin_method,
             df_cat        = self$param_set$values$df_cat,
-            additional_risk_log = self$param_set$values$additional_risk_log)
+            additional_risk_log = additional_risk_log)
         })
       }
       #browser()
@@ -185,6 +200,20 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 oob_offset = cboost$predict(cboost$data_oob))
             }
 
+            ## Create AUC loss:
+            if (self$param_set$values$log_auc) {
+              aucLoss = function(truth, response) return(mlr::measureAUC(response, truth, negative = -1, positive = 1) * length(truth))
+              aucGrad = function(truth, response) return(rep(0, length(truth)))
+              cinit = cboost$predict(self$param_set$values$task_extra_log$data())
+              aucInit = function(truth) cbind(cinit)
+
+              my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
+              additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss))
+            } else {
+              additional_risk_log = list()
+            }
+
+
             if (self$param_set$values$show_output) {
               set.seed(seed)
               cboost_restart = compboost::boostSplines(
@@ -200,7 +229,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 bin_root      = self$param_set$values$bin_root,
                 bin_method    = self$param_set$values$bin_method,
                 df_cat        = self$param_set$values$df_cat,
-                additional_risk_log = self$param_set$values$additional_risk_log)
+                additional_risk_log = additional_risk_log)
             } else {
               nuisance = capture.output({
                 set.seed(seed)
@@ -217,7 +246,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   bin_root      = self$param_set$values$bin_root,
                   bin_method    = self$param_set$values$bin_method,
                   df_cat        = self$param_set$values$df_cat,
-                  additional_risk_log = self$param_set$values$additional_risk_log)
+                  additional_risk_log = additional_risk_log)
               })
             }
           } else {
@@ -234,7 +263,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                 bin_root      = self$param_set$values$bin_root,
                 bin_method    = self$param_set$values$bin_method,
                 df_cat        = self$param_set$values$df_cat,
-                additional_risk_log = self$param_set$values$additional_risk_log)
+                additional_risk_log = additional_risk_log)
             } else {
               nuisance = capture.output({
                 set.seed(seed)
@@ -249,7 +278,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
                   bin_root      = self$param_set$values$bin_root,
                   bin_method    = self$param_set$values$bin_method,
                   df_cat        = self$param_set$values$df_cat,
-                  additional_risk_log = self$param_set$values$additional_risk_log)
+                  additional_risk_log = additional_risk_log)
               })
             }
           }
