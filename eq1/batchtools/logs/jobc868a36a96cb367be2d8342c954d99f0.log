@@ -1,0 +1,84 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-27 00:35:50] Loading new learner
+[2021-07-27 00:35:50] Loading tasks
+[2021-07-27 00:35:53] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=100]
+### [bt]: Generating problem instance for problem '189866-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '189866-fold5' for job 100 (seed = 31515) ...
+DEBUG [00:35:59.072] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [00:35:59.154] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:35:59.893] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 3.000000 
+   1/5000   risk = 0.69  oob_risk = 0.69   riskauc = 0.64   time = 3   
+ 125/5000   risk = 0.63  oob_risk = 0.63   riskauc = 0.72   time = 42935962   
+
+
+Train 211 iterations in 72 Seconds.
+Final risk based on the train set: 0.61
+
+   1/4789   risk = 0.61  oob_risk = 0.61   riskauc = 0.73   time = 3   
+ 120/4789   risk = 0.61  oob_risk = 0.61   riskauc = 0.73   time = 23284206   
+ 240/4789   risk = 0.61  oob_risk = 0.62   riskauc = 0.73   time = 46125008   
+ 360/4789   risk = 0.61  oob_risk = 0.62   riskauc = 0.73   time = 69032344   
+ 480/4789   risk = 0.61  oob_risk = 0.62   riskauc = 0.73   time = 91256000   
+ 600/4789   risk = 0.62  oob_risk = 0.62   riskauc = 0.73   time = 113871100   
+ 720/4789   risk = 0.62  oob_risk = 0.62   riskauc = 0.73   time = 136529523   
+ 840/4789   risk = 0.62  oob_risk = 0.62   riskauc = 0.73   time = 159479872   
+ 960/4789   risk = 0.62  oob_risk = 0.63   riskauc = 0.73   time = 181093348   
+1080/4789   risk = 0.62  oob_risk = 0.63   riskauc = 0.73   time = 202402107   
+1200/4789   risk = 0.62  oob_risk = 0.63   riskauc = 0.73   time = 224529312   
+1320/4789   risk = 0.62  oob_risk = 0.63   riskauc = 0.73   time = 247080762   
+1440/4789   risk = 0.62  oob_risk = 0.63   riskauc = 0.73   time = 269523811   
+1560/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 291102251   
+1680/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 312339449   
+1800/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 333723551   
+1920/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 355179522   
+2040/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 377037536   
+2160/4789   risk = 0.63  oob_risk = 0.63   riskauc = 0.73   time = 399579191   
+2280/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 421287415   
+2400/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 442536338   
+2520/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 464257225   
+2640/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 485934835   
+2760/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 509531719   
+2880/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 531662234   
+3000/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 553572790   
+3120/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 574954835   
+3240/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 597093270   
+3360/4789   risk = 0.63  oob_risk = 0.64   riskauc = 0.73   time = 618909265   
+3480/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 640012709   
+3600/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 662685155   
+3720/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 684091508   
+3840/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 706170760   
+3960/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 727898846   
+4080/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 749036298   
+4200/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 770828674   
+4320/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 792343423   
+4440/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 814405839   
+4560/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 836896977   
+4680/4789   risk = 0.64  oob_risk = 0.64   riskauc = 0.73   time = 860134520   
+
+
+Train 4789 iterations in 880 Seconds.
+Final risk based on the train set: 0.64
+
+INFO  [00:52:15.003] [mlr3]  [LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer nesterov 
+INFO  [00:52:18.881] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',211,'stop_hcwb',4789 
+INFO  [00:52:18.883] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.693145,'risk_cwb',NA,'risk_acwb',0.606447,'risk_hcwb',0.639059 
+INFO  [00:52:18.885] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',0.692649,'risk_cwb_oob',NA,'risk_acwb_oob',0.610223,'risk_hcwb_oob',0.644660 
+DEBUG [00:52:18.890] [mlr3]  Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [00:52:18.905] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [00:52:18.908] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:52:19.490] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 3.000000 
+   1/5000   risk = 0.69  oob_risk = 0.69   time = 3   
+ 125/5000   risk = 0.63  oob_risk = 0.63   time = 35641744   
+
+
+Train 211 iterations in 62 Seconds.
+Final risk based on the train set: 0.61
+
+   1/4789   risk = 0.61  oob_risk = 0.61   time = 3   
+ 120/4789   risk = 0.61  oob_risk = 0.61   time = 20649154   
+ 240/4789   risk = 0.61  oob_risk = 0.62   time = 38476786   
+ 360/4789   risk = 0.61  oob_risk = 0.62   time = 56906038   

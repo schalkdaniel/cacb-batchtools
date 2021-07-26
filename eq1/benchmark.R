@@ -40,7 +40,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
   not_done = setdiff(seq_len(100L), findDone()$job.id)
   not_done = unique(c(not_done, ids_resubmit))
-  submitJobs(not_done)
+  submitJobs(findNotDone())
 } else {
 
   reg = makeExperimentRegistry(

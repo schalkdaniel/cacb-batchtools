@@ -1,0 +1,20 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-26 23:40:48] Loading new learner
+[2021-07-26 23:40:48] Loading tasks
+[2021-07-26 23:40:51] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=100]
+### [bt]: Generating problem instance for problem '189866-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '189866-fold5' for job 100 (seed = 31515) ...
+DEBUG [23:40:56.582] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [23:40:56.600] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [23:40:57.462] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 3.000000 
+   1/5000   risk = 0.69  oob_risk = 0.69   riskauc = 0.64   time = 4   
+ 125/5000   risk = 0.63  oob_risk = 0.63   riskauc = 0.72   time = 39149427   
+
+
+Train 211 iterations in 66 Seconds.
+Final risk based on the train set: 0.61
+
