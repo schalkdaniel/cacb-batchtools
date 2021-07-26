@@ -1,0 +1,133 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-26 00:40:15] Loading new learner
+[2021-07-26 00:40:15] Loading tasks
+[2021-07-26 00:40:18] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=25]
+### [bt]: Generating problem instance for problem 'spam-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold5' for job 25 (seed = 31440) ...
+DEBUG [00:40:18.740] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [00:40:18.743] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'spam' with 3682 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:40:18.753] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.67  oob_risk = 0.66   riskauc = 0.78   time = 2   
+
+
+Train 33 iterations in 0 Seconds.
+Final risk based on the train set: 0.61
+
+   1/4967   risk = 0.61  oob_risk = 0.64   riskauc = 0.94   time = 2   
+ 124/4967   risk = 0.42  oob_risk = 0.45   riskauc = 0.93   time = 1103517   
+ 248/4967   risk = 0.34  oob_risk = 0.45   riskauc = 0.94   time = 2211928   
+ 372/4967   risk = 0.31  oob_risk = 0.51   riskauc = 0.94   time = 3376625   
+ 496/4967   risk = 0.28  oob_risk = 0.59   riskauc = 0.95   time = 4978221   
+ 620/4967   risk = 0.27  oob_risk = 0.66   riskauc = 0.95   time = 6091234   
+ 744/4967   risk = 0.25  oob_risk = 0.73   riskauc = 0.95   time = 7268478   
+ 868/4967   risk = 0.25  oob_risk = 0.79   riskauc = 0.96   time = 8477057   
+ 992/4967   risk = 0.24  oob_risk = 0.9   riskauc = 0.96   time = 9603563   
+1116/4967   risk = 0.23  oob_risk = 1   riskauc = 0.96   time = 10717817   
+1240/4967   risk = 0.23  oob_risk = 1.2   riskauc = 0.96   time = 11840851   
+1364/4967   risk = 0.22  oob_risk = 1.3   riskauc = 0.96   time = 12932552   
+1488/4967   risk = 0.22  oob_risk = 1.4   riskauc = 0.96   time = 13990279   
+1612/4967   risk = 0.21  oob_risk = 1.5   riskauc = 0.96   time = 14984673   
+1736/4967   risk = 0.21  oob_risk = 1.6   riskauc = 0.96   time = 16040964   
+1860/4967   risk = 0.21  oob_risk = inf   riskauc = 0.96   time = 17328922   
+1984/4967   risk = 0.2  oob_risk = inf   riskauc = 0.96   time = 18551257   
+2108/4967   risk = 0.2  oob_risk = inf   riskauc = 0.96   time = 19834151   
+2232/4967   risk = 0.2  oob_risk = inf   riskauc = 0.96   time = 20985363   
+2356/4967   risk = 0.2  oob_risk = inf   riskauc = 0.96   time = 22118606   
+2480/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 23181700   
+2604/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 24248911   
+2728/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 25375979   
+2852/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 26526477   
+2976/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 27703912   
+3100/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 28797028   
+3224/4967   risk = 0.19  oob_risk = inf   riskauc = 0.96   time = 29977777   
+3348/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 31153838   
+3472/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 32223955   
+3596/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 33343171   
+3720/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 34465166   
+3844/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 35591258   
+3968/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 36899307   
+4092/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 38298017   
+4216/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 39467466   
+4340/4967   risk = 0.18  oob_risk = inf   riskauc = 0.96   time = 40591071   
+4464/4967   risk = 0.17  oob_risk = inf   riskauc = 0.96   time = 41763471   
+4588/4967   risk = 0.17  oob_risk = inf   riskauc = 0.96   time = 43034503   
+4712/4967   risk = 0.17  oob_risk = inf   riskauc = 0.96   time = 44249792   
+4836/4967   risk = 0.17  oob_risk = inf   riskauc = 0.96   time = 45421619   
+4960/4967   risk = 0.17  oob_risk = inf   riskauc = 0.96   time = 46520590   
+
+
+Train 4967 iterations in 46 Seconds.
+Final risk based on the train set: 0.17
+
+INFO  [00:41:06.429] [mlr3]  [LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer nesterov 
+INFO  [00:41:13.117] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',33,'stop_hcwb',4967 
+INFO  [00:41:13.120] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.672664,'risk_cwb',NA,'risk_acwb',0.612895,'risk_hcwb',0.171167 
+INFO  [00:41:13.122] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',0.661911,'risk_cwb_oob',NA,'risk_acwb_oob',0.641812,'risk_hcwb_oob',Inf 
+DEBUG [00:41:13.127] [mlr3]  Learner 'acc_hcwb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [00:41:13.139] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [00:41:13.142] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'spam' with 3682 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:41:13.154] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.67  oob_risk = 0.66   time = 3   
+
+
+Train 33 iterations in 0 Seconds.
+Final risk based on the train set: 0.61
+
+   1/4967   risk = 0.61  oob_risk = 0.64   time = 2   
+ 124/4967   risk = 0.42  oob_risk = 0.45   time = 1008849   
+ 248/4967   risk = 0.34  oob_risk = 0.45   time = 2214158   
+ 372/4967   risk = 0.31  oob_risk = 0.51   time = 3240455   
+ 496/4967   risk = 0.28  oob_risk = 0.59   time = 4284459   
+ 620/4967   risk = 0.27  oob_risk = 0.66   time = 5314039   
+ 744/4967   risk = 0.25  oob_risk = 0.73   time = 6348057   
+ 868/4967   risk = 0.25  oob_risk = 0.79   time = 7388906   
+ 992/4967   risk = 0.24  oob_risk = 0.9   time = 8451090   
+1116/4967   risk = 0.23  oob_risk = 1   time = 9585033   
+1240/4967   risk = 0.23  oob_risk = 1.2   time = 10608442   
+1364/4967   risk = 0.22  oob_risk = 1.3   time = 11672126   
+1488/4967   risk = 0.22  oob_risk = 1.4   time = 12736096   
+1612/4967   risk = 0.21  oob_risk = 1.5   time = 13741416   
+1736/4967   risk = 0.21  oob_risk = 1.6   time = 14823869   
+1860/4967   risk = 0.21  oob_risk = inf   time = 15991718   
+1984/4967   risk = 0.2  oob_risk = inf   time = 17074668   
+2108/4967   risk = 0.2  oob_risk = inf   time = 18166947   
+2232/4967   risk = 0.2  oob_risk = inf   time = 19307186   
+2356/4967   risk = 0.2  oob_risk = inf   time = 20500512   
+2480/4967   risk = 0.19  oob_risk = inf   time = 21673483   
+2604/4967   risk = 0.19  oob_risk = inf   time = 22724078   
+2728/4967   risk = 0.19  oob_risk = inf   time = 23766544   
+2852/4967   risk = 0.19  oob_risk = inf   time = 24856221   
+2976/4967   risk = 0.19  oob_risk = inf   time = 25921893   
+3100/4967   risk = 0.19  oob_risk = inf   time = 26966937   
+3224/4967   risk = 0.19  oob_risk = inf   time = 28065429   
+3348/4967   risk = 0.18  oob_risk = inf   time = 29189452   
+3472/4967   risk = 0.18  oob_risk = inf   time = 30462041   
+3596/4967   risk = 0.18  oob_risk = inf   time = 31536541   
+3720/4967   risk = 0.18  oob_risk = inf   time = 32614964   
+3844/4967   risk = 0.18  oob_risk = inf   time = 33687475   
+3968/4967   risk = 0.18  oob_risk = inf   time = 34769043   
+4092/4967   risk = 0.18  oob_risk = inf   time = 35878163   
+4216/4967   risk = 0.18  oob_risk = inf   time = 37092816   
+4340/4967   risk = 0.18  oob_risk = inf   time = 38343220   
+4464/4967   risk = 0.17  oob_risk = inf   time = 39493651   
+4588/4967   risk = 0.17  oob_risk = inf   time = 40594144   
+4712/4967   risk = 0.17  oob_risk = inf   time = 41707304   
+4836/4967   risk = 0.17  oob_risk = inf   time = 42802801   
+4960/4967   risk = 0.17  oob_risk = inf   time = 43927554   
+
+
+Train 4967 iterations in 44 Seconds.
+Final risk based on the train set: 0.17
+
+INFO  [00:41:57.936] [mlr3]  [LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer nesterov 
+INFO  [00:42:05.188] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',33,'stop_hcwb',4967 
+INFO  [00:42:05.191] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.672664,'risk_cwb',NA,'risk_acwb',0.612895,'risk_hcwb',0.171167 
+INFO  [00:42:05.192] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',0.661911,'risk_cwb_oob',NA,'risk_acwb_oob',0.641812,'risk_hcwb_oob',Inf 
+DEBUG [00:42:05.197] [mlr3]  Learner 'acc_hcwb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=25]
+### [bt]: Calculation finished!

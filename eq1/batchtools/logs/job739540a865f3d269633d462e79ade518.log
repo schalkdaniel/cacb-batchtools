@@ -1,0 +1,123 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-26 01:07:31] Loading new learner
+[2021-07-26 01:07:31] Loading tasks
+[2021-07-26 01:07:35] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=37]
+### [bt]: Generating problem instance for problem '7592-fold3' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '7592-fold3' for job 37 (seed = 31452) ...
+DEBUG [01:07:35.835] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [01:07:35.838] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 7592: adult (Supervised Classification)' with 39074 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+Warning in get_private(learner)$.train(task) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+INFO  [01:07:35.942] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 2.000000 
+   1/5000   risk = 0.54  riskauc = 0.78   time = 3   
+ 125/5000   risk = 0.35  riskauc = 0.9   time = 1740993   
+ 250/5000   risk = 0.34  riskauc = 0.91   time = 2825187   
+ 375/5000   risk = 0.34  riskauc = 0.91   time = 3882006   
+ 500/5000   risk = 0.35  riskauc = 0.91   time = 4828740   
+ 625/5000   risk = 0.35  riskauc = 0.91   time = 5772559   
+ 750/5000   risk = 0.35  riskauc = 0.91   time = 6687930   
+ 875/5000   risk = 0.35  riskauc = 0.91   time = 7633189   
+1000/5000   risk = 0.35  riskauc = 0.91   time = 8528272   
+1125/5000   risk = 0.35  riskauc = 0.91   time = 9407253   
+1250/5000   risk = 0.35  riskauc = 0.91   time = 10295780   
+1375/5000   risk = 0.35  riskauc = 0.91   time = 11231296   
+1500/5000   risk = 0.36  riskauc = 0.91   time = 12150235   
+1625/5000   risk = 0.36  riskauc = 0.91   time = 13194955   
+1750/5000   risk = 0.36  riskauc = 0.91   time = 14160613   
+1875/5000   risk = 0.36  riskauc = 0.91   time = 15087133   
+2000/5000   risk = 0.36  riskauc = 0.91   time = 16052818   
+2125/5000   risk = 0.36  riskauc = 0.91   time = 16991437   
+2250/5000   risk = 0.36  riskauc = 0.91   time = 18004593   
+2375/5000   risk = 0.36  riskauc = 0.91   time = 18945321   
+2500/5000   risk = 0.36  riskauc = 0.91   time = 19857008   
+2625/5000   risk = 0.36  riskauc = 0.91   time = 20754766   
+2750/5000   risk = 0.36  riskauc = 0.91   time = 21647498   
+2875/5000   risk = 0.36  riskauc = 0.91   time = 22527240   
+3000/5000   risk = 0.36  riskauc = 0.91   time = 23619023   
+3125/5000   risk = 0.36  riskauc = 0.91   time = 24583458   
+3250/5000   risk = 0.36  riskauc = 0.91   time = 25565268   
+3375/5000   risk = 0.36  riskauc = 0.91   time = 26522745   
+3500/5000   risk = 0.36  riskauc = 0.91   time = 27478058   
+3625/5000   risk = 0.36  riskauc = 0.91   time = 28429922   
+3750/5000   risk = 0.36  riskauc = 0.91   time = 29513961   
+3875/5000   risk = 0.36  riskauc = 0.91   time = 30538946   
+4000/5000   risk = 0.36  riskauc = 0.91   time = 31509055   
+4125/5000   risk = 0.36  riskauc = 0.91   time = 32405175   
+4250/5000   risk = 0.36  riskauc = 0.91   time = 33303682   
+4375/5000   risk = 0.36  riskauc = 0.91   time = 34202992   
+4500/5000   risk = 0.36  riskauc = 0.91   time = 35159548   
+4625/5000   risk = 0.36  riskauc = 0.91   time = 36103866   
+4750/5000   risk = 0.36  riskauc = 0.91   time = 37054415   
+4875/5000   risk = 0.36  riskauc = 0.91   time = 38137099   
+5000/5000   risk = 0.36  riskauc = 0.92   time = 39238261   
+
+
+Train 5000 iterations in 39 Seconds.
+Final risk based on the train set: 0.36
+
+INFO  [01:08:22.618] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [01:08:22.622] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.550260,'risk_cwb',0.358155,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [01:08:22.623] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [01:08:22.629] [mlr3]  Learner 'bin_cwb_b' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [01:08:22.642] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [01:08:22.645] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 7592: adult (Supervised Classification)' with 39074 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+Warning in get_private(learner)$.train(task) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+INFO  [01:08:22.722] [mlr3]  [LGCOMPBOOST] Running compboost with df 5.000000 and df_cat 2.000000 
+   1/5000   risk = 0.54  time = 2   
+ 125/5000   risk = 0.35  time = 401408   
+ 250/5000   risk = 0.34  time = 744858   
+ 375/5000   risk = 0.34  time = 1078318   
+ 500/5000   risk = 0.35  time = 1412823   
+ 625/5000   risk = 0.35  time = 1761784   
+ 750/5000   risk = 0.35  time = 2106737   
+ 875/5000   risk = 0.35  time = 2457057   
+1000/5000   risk = 0.35  time = 2818071   
+1125/5000   risk = 0.35  time = 3196953   
+1250/5000   risk = 0.35  time = 3561696   
+1375/5000   risk = 0.35  time = 3934893   
+1500/5000   risk = 0.36  time = 4310472   
+1625/5000   risk = 0.36  time = 4694969   
+1750/5000   risk = 0.36  time = 5063845   
+1875/5000   risk = 0.36  time = 5437186   
+2000/5000   risk = 0.36  time = 5808551   
+2125/5000   risk = 0.36  time = 6195223   
+2250/5000   risk = 0.36  time = 6657024   
+2375/5000   risk = 0.36  time = 7189614   
+2500/5000   risk = 0.36  time = 7700020   
+2625/5000   risk = 0.36  time = 8164619   
+2750/5000   risk = 0.36  time = 8534163   
+2875/5000   risk = 0.36  time = 8906366   
+3000/5000   risk = 0.36  time = 9302106   
+3125/5000   risk = 0.36  time = 9684119   
+3250/5000   risk = 0.36  time = 10064485   
+3375/5000   risk = 0.36  time = 10441220   
+3500/5000   risk = 0.36  time = 10836173   
+3625/5000   risk = 0.36  time = 11226979   
+3750/5000   risk = 0.36  time = 11617498   
+3875/5000   risk = 0.36  time = 12006386   
+4000/5000   risk = 0.36  time = 12498709   
+4125/5000   risk = 0.36  time = 13001518   
+4250/5000   risk = 0.36  time = 13530968   
+4375/5000   risk = 0.36  time = 14052918   
+4500/5000   risk = 0.36  time = 14572238   
+4625/5000   risk = 0.36  time = 15101769   
+4750/5000   risk = 0.36  time = 15644580   
+4875/5000   risk = 0.36  time = 16190058   
+5000/5000   risk = 0.36  time = 16716308   
+
+
+Train 5000 iterations in 16 Seconds.
+Final risk based on the train set: 0.36
+
+INFO  [01:08:46.206] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',5000,'stop_acwb',NA,'stop_hcwb',NA 
+INFO  [01:08:46.210] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.550260,'risk_cwb',0.358155,'risk_acwb',NA,'risk_hcwb',NA 
+INFO  [01:08:46.212] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',NA,'risk_cwb_oob',NA,'risk_acwb_oob',NA,'risk_hcwb_oob',NA 
+DEBUG [01:08:46.219] [mlr3]  Learner 'bin_cwb_b' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=37]
+### [bt]: Calculation finished!

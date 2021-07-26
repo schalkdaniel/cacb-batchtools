@@ -1,0 +1,119 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-26 00:17:32] Loading new learner
+[2021-07-26 00:17:32] Loading tasks
+[2021-07-26 00:17:35] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=15]
+### [bt]: Generating problem instance for problem 'spam-fold3' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold3' for job 15 (seed = 31430) ...
+DEBUG [00:17:35.756] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [00:17:35.760] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'spam' with 3680 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:17:35.770] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.67  oob_risk = inf   riskauc = 0.81   time = 2   
+ 125/5000   risk = 0.34  oob_risk = inf   riskauc = 0.94   time = 1377300   
+ 250/5000   risk = 0.14  oob_risk = inf   riskauc = 0.94   time = 2718514   
+ 375/5000   risk = 0.091  oob_risk = inf   riskauc = 0.94   time = 3998773   
+ 500/5000   risk = 0.078  oob_risk = inf   riskauc = 0.93   time = 5386308   
+ 625/5000   risk = 0.071  oob_risk = inf   riskauc = 0.91   time = 6569887   
+ 750/5000   risk = 0.066  oob_risk = inf   riskauc = 0.91   time = 7953223   
+ 875/5000   risk = 0.061  oob_risk = inf   riskauc = 0.9   time = 9251919   
+1000/5000   risk = 0.057  oob_risk = inf   riskauc = 0.9   time = 10500798   
+1125/5000   risk = 0.054  oob_risk = inf   riskauc = 0.89   time = 11841253   
+1250/5000   risk = 0.051  oob_risk = inf   riskauc = 0.89   time = 13142905   
+1375/5000   risk = 0.049  oob_risk = inf   riskauc = 0.88   time = 14516978   
+1500/5000   risk = 0.047  oob_risk = inf   riskauc = 0.88   time = 16550604   
+1625/5000   risk = 0.045  oob_risk = inf   riskauc = 0.88   time = 17840658   
+1750/5000   risk = 0.044  oob_risk = inf   riskauc = 0.88   time = 19371684   
+1875/5000   risk = 0.042  oob_risk = inf   riskauc = 0.88   time = 20824054   
+2000/5000   risk = 0.04  oob_risk = inf   riskauc = 0.87   time = 22174021   
+2125/5000   risk = 0.039  oob_risk = inf   riskauc = 0.87   time = 23573985   
+2250/5000   risk = 0.038  oob_risk = inf   riskauc = 0.87   time = 25002827   
+2375/5000   risk = 0.037  oob_risk = inf   riskauc = 0.87   time = 26454524   
+2500/5000   risk = 0.036  oob_risk = inf   riskauc = 0.87   time = 28072474   
+2625/5000   risk = 0.035  oob_risk = inf   riskauc = 0.87   time = 29550000   
+2750/5000   risk = 0.034  oob_risk = inf   riskauc = 0.87   time = 31151454   
+2875/5000   risk = 0.033  oob_risk = inf   riskauc = 0.87   time = 32599874   
+3000/5000   risk = 0.032  oob_risk = inf   riskauc = 0.87   time = 34184165   
+3125/5000   risk = 0.032  oob_risk = inf   riskauc = 0.87   time = 35871553   
+3250/5000   risk = 0.03  oob_risk = inf   riskauc = 0.87   time = 37353809   
+3375/5000   risk = 0.029  oob_risk = inf   riskauc = 0.87   time = 38857791   
+3500/5000   risk = 0.029  oob_risk = inf   riskauc = 0.87   time = 40530645   
+3625/5000   risk = 0.029  oob_risk = inf   riskauc = 0.87   time = 42217676   
+3750/5000   risk = 0.028  oob_risk = inf   riskauc = 0.86   time = 43803036   
+3875/5000   risk = 0.027  oob_risk = inf   riskauc = 0.86   time = 45352938   
+4000/5000   risk = 0.026  oob_risk = inf   riskauc = 0.86   time = 46887894   
+4125/5000   risk = 0.026  oob_risk = inf   riskauc = 0.86   time = 48594627   
+4250/5000   risk = 0.026  oob_risk = inf   riskauc = 0.86   time = 50354661   
+4375/5000   risk = 0.025  oob_risk = inf   riskauc = 0.86   time = 52018950   
+4500/5000   risk = 0.025  oob_risk = inf   riskauc = 0.86   time = 53799695   
+4625/5000   risk = 0.025  oob_risk = inf   riskauc = 0.86   time = 55459630   
+4750/5000   risk = 0.025  oob_risk = inf   riskauc = 0.86   time = 57308705   
+4875/5000   risk = 0.025  oob_risk = inf   riskauc = 0.86   time = 59032919   
+5000/5000   risk = 0.023  oob_risk = inf   riskauc = 0.86   time = 60778006   
+
+
+Train 5000 iterations in 60 Seconds.
+Final risk based on the train set: 0.023
+
+INFO  [00:18:51.220] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',5000,'stop_hcwb',NA 
+INFO  [00:18:51.223] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.672473,'risk_cwb',NA,'risk_acwb',0.023113,'risk_hcwb',NA 
+INFO  [00:18:51.225] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',Inf,'risk_cwb_oob',NA,'risk_acwb_oob',Inf,'risk_hcwb_oob',NA 
+DEBUG [00:18:51.230] [mlr3]  Learner 'acc_hcwb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [00:18:51.242] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [00:18:51.245] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'spam' with 3680 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+INFO  [00:18:51.256] [mlr3]  [LGCOMPBOOST] Running compboost with df 20.000000 and df_cat 1.000000 
+   1/5000   risk = 0.67  oob_risk = inf   time = 2   
+ 125/5000   risk = 0.34  oob_risk = inf   time = 1331224   
+ 250/5000   risk = 0.14  oob_risk = inf   time = 2740178   
+ 375/5000   risk = 0.091  oob_risk = inf   time = 3983447   
+ 500/5000   risk = 0.078  oob_risk = inf   time = 5363640   
+ 625/5000   risk = 0.071  oob_risk = inf   time = 6721369   
+ 750/5000   risk = 0.066  oob_risk = inf   time = 7971952   
+ 875/5000   risk = 0.061  oob_risk = inf   time = 9219644   
+1000/5000   risk = 0.057  oob_risk = inf   time = 10661553   
+1125/5000   risk = 0.054  oob_risk = inf   time = 12029610   
+1250/5000   risk = 0.051  oob_risk = inf   time = 13208699   
+1375/5000   risk = 0.049  oob_risk = inf   time = 14472069   
+1500/5000   risk = 0.047  oob_risk = inf   time = 15865430   
+1625/5000   risk = 0.045  oob_risk = inf   time = 17178258   
+1750/5000   risk = 0.044  oob_risk = inf   time = 18420217   
+1875/5000   risk = 0.042  oob_risk = inf   time = 19676751   
+2000/5000   risk = 0.04  oob_risk = inf   time = 20952092   
+2125/5000   risk = 0.039  oob_risk = inf   time = 22217521   
+2250/5000   risk = 0.038  oob_risk = inf   time = 23483820   
+2375/5000   risk = 0.037  oob_risk = inf   time = 24831849   
+2500/5000   risk = 0.036  oob_risk = inf   time = 26080047   
+2625/5000   risk = 0.035  oob_risk = inf   time = 27389751   
+2750/5000   risk = 0.034  oob_risk = inf   time = 28732169   
+2875/5000   risk = 0.033  oob_risk = inf   time = 30157772   
+3000/5000   risk = 0.032  oob_risk = inf   time = 31515785   
+3125/5000   risk = 0.032  oob_risk = inf   time = 32972211   
+3250/5000   risk = 0.03  oob_risk = inf   time = 34305272   
+3375/5000   risk = 0.029  oob_risk = inf   time = 35552229   
+3500/5000   risk = 0.029  oob_risk = inf   time = 36845265   
+3625/5000   risk = 0.029  oob_risk = inf   time = 38257885   
+3750/5000   risk = 0.028  oob_risk = inf   time = 39603507   
+3875/5000   risk = 0.027  oob_risk = inf   time = 41094446   
+4000/5000   risk = 0.026  oob_risk = inf   time = 42534730   
+4125/5000   risk = 0.026  oob_risk = inf   time = 44030773   
+4250/5000   risk = 0.026  oob_risk = inf   time = 45557084   
+4375/5000   risk = 0.025  oob_risk = inf   time = 47031263   
+4500/5000   risk = 0.025  oob_risk = inf   time = 48523312   
+4625/5000   risk = 0.025  oob_risk = inf   time = 50086784   
+4750/5000   risk = 0.025  oob_risk = inf   time = 51618321   
+4875/5000   risk = 0.025  oob_risk = inf   time = 53255748   
+5000/5000   risk = 0.023  oob_risk = inf   time = 54775647   
+
+
+Train 5000 iterations in 54 Seconds.
+Final risk based on the train set: 0.023
+
+INFO  [00:20:00.619] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',5000,'stop_hcwb',NA 
+INFO  [00:20:00.622] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.672473,'risk_cwb',NA,'risk_acwb',0.023113,'risk_hcwb',NA 
+INFO  [00:20:00.623] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',Inf,'risk_cwb_oob',NA,'risk_acwb_oob',Inf,'risk_hcwb_oob',NA 
+DEBUG [00:20:00.629] [mlr3]  Learner 'acc_hcwb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=15]
+### [bt]: Calculation finished!
