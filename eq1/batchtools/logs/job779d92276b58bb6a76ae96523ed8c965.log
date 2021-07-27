@@ -1,0 +1,111 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-27 20:41:04] Loading new learner
+[2021-07-27 20:41:04] Loading tasks
+[2021-07-27 20:41:07] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=41]
+### [bt]: Generating problem instance for problem '168335-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold1' for job 41 (seed = 31456) ...
+DEBUG [20:41:09.263] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [20:41:09.266] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  riskauc = 0.84   time = 3   
+ 125/5000   risk = 0.26  riskauc = 0.95   time = 10473918   
+ 250/5000   risk = 0.24  riskauc = 0.96   time = 20196868   
+ 375/5000   risk = 0.23  riskauc = 0.96   time = 29519449   
+ 500/5000   risk = 0.23  riskauc = 0.97   time = 38717256   
+ 625/5000   risk = 0.22  riskauc = 0.97   time = 47568786   
+ 750/5000   risk = 0.22  riskauc = 0.97   time = 56026335   
+ 875/5000   risk = 0.22  riskauc = 0.97   time = 64726491   
+1000/5000   risk = 0.22  riskauc = 0.97   time = 73389067   
+1125/5000   risk = 0.22  riskauc = 0.97   time = 82005893   
+1250/5000   risk = 0.22  riskauc = 0.97   time = 90619370   
+1375/5000   risk = 0.22  riskauc = 0.97   time = 99141334   
+1500/5000   risk = 0.22  riskauc = 0.97   time = 107518944   
+1625/5000   risk = 0.22  riskauc = 0.97   time = 116071489   
+1750/5000   risk = 0.22  riskauc = 0.97   time = 124656309   
+1875/5000   risk = 0.22  riskauc = 0.97   time = 133108134   
+2000/5000   risk = 0.22  riskauc = 0.97   time = 141489796   
+2125/5000   risk = 0.22  riskauc = 0.97   time = 150046268   
+2250/5000   risk = 0.22  riskauc = 0.97   time = 158387988   
+2375/5000   risk = 0.22  riskauc = 0.97   time = 166968235   
+2500/5000   risk = 0.22  riskauc = 0.97   time = 175615526   
+2625/5000   risk = 0.22  riskauc = 0.97   time = 184002806   
+2750/5000   risk = 0.22  riskauc = 0.97   time = 192312885   
+2875/5000   risk = 0.22  riskauc = 0.97   time = 200833214   
+3000/5000   risk = 0.22  riskauc = 0.97   time = 209401182   
+3125/5000   risk = 0.22  riskauc = 0.97   time = 217761102   
+3250/5000   risk = 0.22  riskauc = 0.97   time = 226374367   
+3375/5000   risk = 0.22  riskauc = 0.97   time = 234643208   
+3500/5000   risk = 0.22  riskauc = 0.97   time = 243114656   
+3625/5000   risk = 0.22  riskauc = 0.97   time = 251708863   
+3750/5000   risk = 0.22  riskauc = 0.97   time = 259975733   
+3875/5000   risk = 0.22  riskauc = 0.97   time = 268338364   
+4000/5000   risk = 0.22  riskauc = 0.97   time = 276692299   
+4125/5000   risk = 0.22  riskauc = 0.97   time = 284898766   
+4250/5000   risk = 0.22  riskauc = 0.97   time = 293166353   
+4375/5000   risk = 0.22  riskauc = 0.97   time = 301581697   
+4500/5000   risk = 0.22  riskauc = 0.97   time = 310100269   
+4625/5000   risk = 0.22  riskauc = 0.97   time = 318301997   
+4750/5000   risk = 0.22  riskauc = 0.97   time = 327043428   
+4875/5000   risk = 0.22  riskauc = 0.97   time = 335353040   
+5000/5000   risk = 0.22  riskauc = 0.97   time = 343521173   
+
+
+Train 5000 iterations in 343 Seconds.
+Final risk based on the train set: 0.22
+
+DEBUG [20:46:59.567] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [20:46:59.582] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [20:46:59.586] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  time = 4   
+ 125/5000   risk = 0.26  time = 7928979   
+ 250/5000   risk = 0.24  time = 15765496   
+ 375/5000   risk = 0.23  time = 23375815   
+ 500/5000   risk = 0.23  time = 31079535   
+ 625/5000   risk = 0.22  time = 38861041   
+ 750/5000   risk = 0.22  time = 46790416   
+ 875/5000   risk = 0.22  time = 54852412   
+1000/5000   risk = 0.22  time = 63054478   
+1125/5000   risk = 0.22  time = 71166752   
+1250/5000   risk = 0.22  time = 79373863   
+1375/5000   risk = 0.22  time = 87663438   
+1500/5000   risk = 0.22  time = 95933254   
+1625/5000   risk = 0.22  time = 104190071   
+1750/5000   risk = 0.22  time = 112505166   
+1875/5000   risk = 0.22  time = 120857432   
+2000/5000   risk = 0.22  time = 129098373   
+2125/5000   risk = 0.22  time = 137383574   
+2250/5000   risk = 0.22  time = 145869211   
+2375/5000   risk = 0.22  time = 154256161   
+2500/5000   risk = 0.22  time = 162639315   
+2625/5000   risk = 0.22  time = 171035827   
+2750/5000   risk = 0.22  time = 179375490   
+2875/5000   risk = 0.22  time = 187780535   
+3000/5000   risk = 0.22  time = 196148522   
+3125/5000   risk = 0.22  time = 204645151   
+3250/5000   risk = 0.22  time = 213026330   
+3375/5000   risk = 0.22  time = 221406747   
+3500/5000   risk = 0.22  time = 229673844   
+3625/5000   risk = 0.22  time = 237933270   
+3750/5000   risk = 0.22  time = 246249993   
+3875/5000   risk = 0.22  time = 254572379   
+4000/5000   risk = 0.22  time = 262939753   
+4125/5000   risk = 0.22  time = 271395170   
+4250/5000   risk = 0.22  time = 279806769   
+4375/5000   risk = 0.22  time = 288397402   
+4500/5000   risk = 0.22  time = 296777390   
+4625/5000   risk = 0.22  time = 305157758   
+4750/5000   risk = 0.22  time = 313786996   
+4875/5000   risk = 0.22  time = 322719542   
+5000/5000   risk = 0.22  time = 331481640   
+
+
+Train 5000 iterations in 331 Seconds.
+Final risk based on the train set: 0.22
+
+DEBUG [20:52:37.727] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=41]
+### [bt]: Calculation finished!
