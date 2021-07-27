@@ -146,14 +146,14 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     ## CWB v2 no binning
     acc_cwb = {
       l = lrn("classif.compboost", id = "acc_cwb", predict_type = "prob",
-        optimizer = "cod", restart = FALSE, learning_rate = 0.01, df_autoselect = TRUE)
+        optimizer = "cod", restart = FALSE, learning_rate = 0.1, df_autoselect = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     ## ACWB no binning
     acc_acwb = {
       l = lrn("classif.compboost", id = "acc_acwb", predict_type = "prob",
-        optimizer = "nesterov", restart = FALSE, learning_rate = 0.01, momentum = 0.0034,
+        optimizer = "nesterov", restart = FALSE, learning_rate = 0.1, momentum = 0.0034,
         df_autoselect = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
@@ -161,7 +161,7 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
     ## HCWB no binning
     acc_hcwb = {
       l = lrn("classif.compboost", id = "acc_hcwb", predict_type = "prob",
-        optimizer = "nesterov", restart = TRUE, learning_rate = 0.01, momentum = 0.03,
+        optimizer = "nesterov", restart = TRUE, learning_rate = 0.1, momentum = 0.03,
         df_autoselect = TRUE, oob_fraction = 0.3, use_stopper = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
@@ -271,6 +271,12 @@ getCboostLog = function(lrn) {
     return(log)
   })
   lnames = names(out[[1]])
+  if (length(out) > 1) {
+    for (i in seq_along(out)[-1]) {
+      tmax = tail(out[[i-1]]$time, 1)
+      out[[i]]$time = out[[i]]$time + tmax
+    }
+  }
   df_out = do.call(rbind, lapply(out, function(ot) ot[, lnames]))
   df_out$transition = lrn$transition
 

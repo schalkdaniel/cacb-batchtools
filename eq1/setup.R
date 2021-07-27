@@ -24,17 +24,17 @@ TSKS_SETUP = rbind(
   data.frame(type = "oml-task", id = "7592"),          # Adult
   data.frame(type = "oml-task", id = "168335"),        # MiniBooNE
   data.frame(type = "oml-task", id = "189866"),        # Albert
-  data.frame(type = "oml-task", id = "359994"),        # SF Police Incidents
+  data.frame(type = "oml-task", id = "168908"),        # Christine (1637 feats, 5418 rows)
   data.frame(type = "oml-task", id = "9977")           # namao (119 feats, 34465 rows)
 
   # Additional tasks:
 
+  #data.frame(type = "oml-task", id = "359994"),      # SF Police Incidents
   #data.frame(type = "oml-task", id = "54"),          # Hepatitis
   #data.frame(type = "oml-task", id = "37"),          # Diabetes
   #data.frame(type = "oml-task", id = "4534"),        # Analcat Halloffame
   #data.frame(type = "oml-task", id = "168337"),      # Guillermo
   #data.frame(type = "oml-task", id = "3945"),        # KDDCup09_appetency (231 feats, 50' feats)
-  #data.frame(type = "oml-task", id = "168908"),      # Christine (1637 feats, 5418 rows)
   #data.frame(type = "oml-task", id = "168896")       # gina (970 feats, 3153 rows)
 )
 message("[", as.character(Sys.time()), "] Loading tasks")
@@ -49,7 +49,8 @@ if (! file.exists(paste0(BM_DIR, "meta/tasks.Rda")) || REBUILD) {
 ## Learners
 ## ============================================
 
-LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_cwb", "acc_acwb", "acc_hcwb")
+LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_acwb", "acc_hcwb")
+#LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_cwb", "acc_acwb", "acc_hcwb")
 
 
 ## Measures
