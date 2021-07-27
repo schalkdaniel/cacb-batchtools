@@ -82,3 +82,52 @@ Final risk based on the train set: 0.61
  120/4789   risk = 0.61  oob_risk = 0.61   time = 20649154   
  240/4789   risk = 0.61  oob_risk = 0.62   time = 38476786   
  360/4789   risk = 0.61  oob_risk = 0.62   time = 56906038   
+ 480/4789   risk = 0.61  oob_risk = 0.62   time = 76880848   
+ 600/4789   risk = 0.62  oob_risk = 0.62   time = 97238597   
+ 720/4789   risk = 0.62  oob_risk = 0.62   time = 117167983   
+ 840/4789   risk = 0.62  oob_risk = 0.62   time = 137466518   
+ 960/4789   risk = 0.62  oob_risk = 0.63   time = 158264737   
+1080/4789   risk = 0.62  oob_risk = 0.63   time = 179090740   
+1200/4789   risk = 0.62  oob_risk = 0.63   time = 198270855   
+1320/4789   risk = 0.62  oob_risk = 0.63   time = 217484195   
+1440/4789   risk = 0.62  oob_risk = 0.63   time = 236565076   
+1560/4789   risk = 0.63  oob_risk = 0.63   time = 256462625   
+1680/4789   risk = 0.63  oob_risk = 0.63   time = 275808329   
+1800/4789   risk = 0.63  oob_risk = 0.63   time = 294617092   
+1920/4789   risk = 0.63  oob_risk = 0.63   time = 313058757   
+2040/4789   risk = 0.63  oob_risk = 0.63   time = 331067979   
+2160/4789   risk = 0.63  oob_risk = 0.63   time = 348651082   
+2280/4789   risk = 0.63  oob_risk = 0.64   time = 366437277   
+2400/4789   risk = 0.63  oob_risk = 0.64   time = 383753569   
+2520/4789   risk = 0.63  oob_risk = 0.64   time = 401402589   
+2640/4789   risk = 0.63  oob_risk = 0.64   time = 418799463   
+2760/4789   risk = 0.63  oob_risk = 0.64   time = 436921270   
+2880/4789   risk = 0.63  oob_risk = 0.64   time = 455126842   
+3000/4789   risk = 0.63  oob_risk = 0.64   time = 471984905   
+3120/4789   risk = 0.63  oob_risk = 0.64   time = 488687405   
+3240/4789   risk = 0.63  oob_risk = 0.64   time = 506331888   
+3360/4789   risk = 0.63  oob_risk = 0.64   time = 524311422   
+3480/4789   risk = 0.64  oob_risk = 0.64   time = 542386832   
+3600/4789   risk = 0.64  oob_risk = 0.64   time = 560194961   
+3720/4789   risk = 0.64  oob_risk = 0.64   time = 577490480   
+3840/4789   risk = 0.64  oob_risk = 0.64   time = 595061051   
+3960/4789   risk = 0.64  oob_risk = 0.64   time = 613383217   
+4080/4789   risk = 0.64  oob_risk = 0.64   time = 633484046   
+4200/4789   risk = 0.64  oob_risk = 0.64   time = 652346745   
+4320/4789   risk = 0.64  oob_risk = 0.64   time = 670389406   
+4440/4789   risk = 0.64  oob_risk = 0.64   time = 688469087   
+4560/4789   risk = 0.64  oob_risk = 0.64   time = 706245476   
+4680/4789   risk = 0.64  oob_risk = 0.64   time = 724660271   
+
+
+Train 4789 iterations in 742 Seconds.
+Final risk based on the train set: 0.64
+
+INFO  [01:06:03.859] [mlr3]  [LGCOMPBOOST] Completed fitting of restarted compboost model with optimizer nesterov 
+INFO  [01:06:07.692] [mlr3]  [LGCOMPBOOST] iterations:'stop_cwb',NA,'stop_acwb',211,'stop_hcwb',4789 
+INFO  [01:06:07.695] [mlr3]  [LGCOMPBOOST] risk_inbag:'risk_intercept',0.693145,'risk_cwb',NA,'risk_acwb',0.606447,'risk_hcwb',0.639059 
+INFO  [01:06:07.696] [mlr3]  [LGCOMPBOOST] risk_oob:'risk_intercept_oob',0.692649,'risk_cwb_oob',NA,'risk_acwb_oob',0.610223,'risk_hcwb_oob',0.644660 
+DEBUG [01:06:07.701] [mlr3]  Learner 'acc_hcwb' on task 'Task 189866: albert (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=100]
+### [bt]: Calculation finished!
