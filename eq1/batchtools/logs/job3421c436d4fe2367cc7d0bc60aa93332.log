@@ -1,0 +1,111 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-28 11:32:25] Loading new learner
+[2021-07-28 11:32:25] Loading tasks
+[2021-07-28 11:32:27] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=65]
+### [bt]: Generating problem instance for problem '189866-fold2' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '189866-fold2' for job 65 (seed = 31480) ...
+DEBUG [11:32:32.648] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [11:32:32.651] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.69  riskauc = 0.64   time = 2   
+ 125/5000   risk = 0.63  riskauc = 0.71   time = 25820068   
+ 250/5000   risk = 0.63  riskauc = 0.72   time = 51803813   
+ 375/5000   risk = 0.63  riskauc = 0.72   time = 78005371   
+ 500/5000   risk = 0.64  riskauc = 0.72   time = 103941577   
+ 625/5000   risk = 0.64  riskauc = 0.73   time = 129498660   
+ 750/5000   risk = 0.64  riskauc = 0.73   time = 154814378   
+ 875/5000   risk = 0.64  riskauc = 0.73   time = 180278482   
+1000/5000   risk = 0.64  riskauc = 0.73   time = 206380997   
+1125/5000   risk = 0.64  riskauc = 0.73   time = 232274324   
+1250/5000   risk = 0.65  riskauc = 0.73   time = 258006748   
+1375/5000   risk = 0.65  riskauc = 0.73   time = 284076813   
+1500/5000   risk = 0.65  riskauc = 0.73   time = 309826187   
+1625/5000   risk = 0.65  riskauc = 0.73   time = 335632168   
+1750/5000   risk = 0.65  riskauc = 0.73   time = 361176651   
+1875/5000   risk = 0.65  riskauc = 0.73   time = 386960133   
+2000/5000   risk = 0.65  riskauc = 0.73   time = 412394839   
+2125/5000   risk = 0.65  riskauc = 0.73   time = 438053376   
+2250/5000   risk = 0.65  riskauc = 0.73   time = 463866624   
+2375/5000   risk = 0.65  riskauc = 0.73   time = 489387311   
+2500/5000   risk = 0.65  riskauc = 0.73   time = 515289271   
+2625/5000   risk = 0.65  riskauc = 0.73   time = 541219567   
+2750/5000   risk = 0.65  riskauc = 0.73   time = 566919058   
+2875/5000   risk = 0.65  riskauc = 0.73   time = 592404356   
+3000/5000   risk = 0.65  riskauc = 0.73   time = 618282339   
+3125/5000   risk = 0.65  riskauc = 0.73   time = 643990239   
+3250/5000   risk = 0.65  riskauc = 0.73   time = 670101110   
+3375/5000   risk = 0.65  riskauc = 0.73   time = 695981247   
+3500/5000   risk = 0.65  riskauc = 0.73   time = 721922300   
+3625/5000   risk = 0.65  riskauc = 0.73   time = 747959343   
+3750/5000   risk = 0.65  riskauc = 0.73   time = 773589622   
+3875/5000   risk = 0.65  riskauc = 0.73   time = 799139678   
+4000/5000   risk = 0.65  riskauc = 0.73   time = 824799461   
+4125/5000   risk = 0.65  riskauc = 0.73   time = 850491787   
+4250/5000   risk = 0.65  riskauc = 0.73   time = 876636133   
+4375/5000   risk = 0.65  riskauc = 0.73   time = 902653153   
+4500/5000   risk = 0.65  riskauc = 0.73   time = 928610714   
+4625/5000   risk = 0.65  riskauc = 0.73   time = 954734099   
+4750/5000   risk = 0.65  riskauc = 0.73   time = 980889967   
+4875/5000   risk = 0.65  riskauc = 0.73   time = 1007093969   
+5000/5000   risk = 0.65  riskauc = 0.73   time = 1033292903   
+
+
+Train 5000 iterations in 1033 Seconds.
+Final risk based on the train set: 0.65
+
+DEBUG [11:50:00.610] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 189866: albert (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [11:50:00.628] [mlr3]  Skip subsetting of task 'Task 189866: albert (Supervised Classification)' 
+DEBUG [11:50:00.632] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'Task 189866: albert (Supervised Classification)' with 340192 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.69  time = 3   
+ 125/5000   risk = 0.63  time = 23223957   
+ 250/5000   risk = 0.63  time = 45903884   
+ 375/5000   risk = 0.63  time = 68686960   
+ 500/5000   risk = 0.64  time = 91144412   
+ 625/5000   risk = 0.64  time = 114183393   
+ 750/5000   risk = 0.64  time = 137702669   
+ 875/5000   risk = 0.64  time = 161328830   
+1000/5000   risk = 0.64  time = 184876324   
+1125/5000   risk = 0.64  time = 208872718   
+1250/5000   risk = 0.65  time = 232932168   
+1375/5000   risk = 0.65  time = 256918364   
+1500/5000   risk = 0.65  time = 280558954   
+1625/5000   risk = 0.65  time = 304236273   
+1750/5000   risk = 0.65  time = 328126578   
+1875/5000   risk = 0.65  time = 352636283   
+2000/5000   risk = 0.65  time = 377462092   
+2125/5000   risk = 0.65  time = 401861299   
+2250/5000   risk = 0.65  time = 426742143   
+2375/5000   risk = 0.65  time = 452121368   
+2500/5000   risk = 0.65  time = 477641101   
+2625/5000   risk = 0.65  time = 502921458   
+2750/5000   risk = 0.65  time = 527666607   
+2875/5000   risk = 0.65  time = 552422488   
+3000/5000   risk = 0.65  time = 577415191   
+3125/5000   risk = 0.65  time = 602194673   
+3250/5000   risk = 0.65  time = 626878708   
+3375/5000   risk = 0.65  time = 651478367   
+3500/5000   risk = 0.65  time = 675850621   
+3625/5000   risk = 0.65  time = 700242636   
+3750/5000   risk = 0.65  time = 724646426   
+3875/5000   risk = 0.65  time = 749071501   
+4000/5000   risk = 0.65  time = 773582992   
+4125/5000   risk = 0.65  time = 797323574   
+4250/5000   risk = 0.65  time = 820065229   
+4375/5000   risk = 0.65  time = 843565880   
+4500/5000   risk = 0.65  time = 867498262   
+4625/5000   risk = 0.65  time = 890910341   
+4750/5000   risk = 0.65  time = 914907796   
+4875/5000   risk = 0.65  time = 939474806   
+5000/5000   risk = 0.65  time = 963782922   
+
+
+Train 5000 iterations in 963 Seconds.
+Final risk based on the train set: 0.65
+
+DEBUG [12:06:17.959] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 189866: albert (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=65]
+### [bt]: Calculation finished!
