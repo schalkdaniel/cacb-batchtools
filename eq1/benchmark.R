@@ -29,17 +29,18 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
   #loadRegistry(BATCHTOOLS_DIR, work.dir = BM_DIR)
 
-  jt = getJobTable()
+  #jt = getJobTable()
 
-  ids_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
+  #ids_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
   #ids_resubmit = intersect(ids_resubmit, jt$job.id[grepl("spam", jt$problem)])
   #ids_resubmit = c(ids_resubmit, 61)
 
   #hcwb_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
   #hcwb_resubmit = intersect(seq_len(75L), hcwb_resubmit)
 
-  not_done = setdiff(seq_len(100L), findDone()$job.id)
-  not_done = unique(c(not_done, ids_resubmit))
+  #not_done = setdiff(seq_len(100L), findDone()$job.id)
+  #not_done = unique(c(not_done, ids_resubmit))
+
   submitJobs(findNotDone())
 } else {
 

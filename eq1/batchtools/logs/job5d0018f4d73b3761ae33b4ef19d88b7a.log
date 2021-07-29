@@ -1,0 +1,123 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-29 23:27:56] Loading new learner
+[2021-07-29 23:27:56] Loading tasks
+[2021-07-29 23:27:59] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=141]
+### [bt]: Generating problem instance for problem '168908-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168908-fold1' for job 141 (seed = 31556) ...
+DEBUG [23:28:00.263] [mlr3]  Skip subsetting of task 'Task 168908: christine (Supervised Classification)' 
+DEBUG [23:28:00.267] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168908: christine (Supervised Classification)' with 4334 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.68  oob_risk = 0.68   riskauc = 0.74   time = 2   
+ 125/5000   risk = 0.52  oob_risk = 0.56   riskauc = 0.8   time = 5117529   
+
+
+Train 179 iterations in 7 Seconds.
+Final risk based on the train set: 0.46
+
+   1/4832   risk = 0.47  oob_risk = 0.56   riskauc = 0.81   time = 2   
+ 121/4832   risk = 0.47  oob_risk = 0.58   riskauc = 0.81   time = 2965477   
+ 242/4832   risk = 0.47  oob_risk = 0.6   riskauc = 0.81   time = 6101753   
+ 363/4832   risk = 0.46  oob_risk = 0.61   riskauc = 0.81   time = 9309606   
+ 484/4832   risk = 0.45  oob_risk = 0.61   riskauc = 0.81   time = 12565197   
+ 605/4832   risk = 0.44  oob_risk = 0.62   riskauc = 0.81   time = 15756268   
+ 726/4832   risk = 0.43  oob_risk = 0.63   riskauc = 0.81   time = 18984694   
+ 847/4832   risk = 0.42  oob_risk = 0.64   riskauc = 0.81   time = 22206546   
+ 968/4832   risk = 0.42  oob_risk = 0.64   riskauc = 0.81   time = 25528649   
+1089/4832   risk = 0.41  oob_risk = 0.65   riskauc = 0.8   time = 28910976   
+1210/4832   risk = 0.4  oob_risk = 0.65   riskauc = 0.8   time = 32108816   
+1331/4832   risk = 0.39  oob_risk = 0.66   riskauc = 0.8   time = 35205886   
+1452/4832   risk = 0.39  oob_risk = 0.67   riskauc = 0.8   time = 38453910   
+1573/4832   risk = 0.38  oob_risk = 0.67   riskauc = 0.8   time = 41715826   
+1694/4832   risk = 0.37  oob_risk = 0.68   riskauc = 0.8   time = 45059563   
+1815/4832   risk = 0.37  oob_risk = 0.68   riskauc = 0.8   time = 48323243   
+1936/4832   risk = 0.36  oob_risk = 0.69   riskauc = 0.8   time = 51485307   
+2057/4832   risk = 0.36  oob_risk = 0.69   riskauc = 0.8   time = 54575250   
+2178/4832   risk = 0.35  oob_risk = 0.69   riskauc = 0.8   time = 57783056   
+2299/4832   risk = 0.34  oob_risk = 0.7   riskauc = 0.8   time = 60972055   
+2420/4832   risk = 0.34  oob_risk = 0.7   riskauc = 0.8   time = 64142860   
+2541/4832   risk = 0.33  oob_risk = 0.7   riskauc = 0.8   time = 67314322   
+2662/4832   risk = 0.33  oob_risk = 0.71   riskauc = 0.8   time = 70530805   
+2783/4832   risk = 0.33  oob_risk = 0.71   riskauc = 0.8   time = 73776313   
+2904/4832   risk = 0.32  oob_risk = 0.72   riskauc = 0.8   time = 76953623   
+3025/4832   risk = 0.32  oob_risk = 0.72   riskauc = 0.8   time = 80142805   
+3146/4832   risk = 0.31  oob_risk = 0.72   riskauc = 0.8   time = 83341178   
+3267/4832   risk = 0.31  oob_risk = 0.72   riskauc = 0.8   time = 86680799   
+3388/4832   risk = 0.3  oob_risk = 0.73   riskauc = 0.8   time = 90007428   
+3509/4832   risk = 0.3  oob_risk = 0.73   riskauc = 0.8   time = 93280189   
+3630/4832   risk = 0.3  oob_risk = 0.73   riskauc = 0.8   time = 96437583   
+3751/4832   risk = 0.29  oob_risk = 0.74   riskauc = 0.8   time = 99522086   
+3872/4832   risk = 0.29  oob_risk = 0.74   riskauc = 0.8   time = 102724158   
+3993/4832   risk = 0.28  oob_risk = 0.74   riskauc = 0.79   time = 106039248   
+4114/4832   risk = 0.28  oob_risk = 0.75   riskauc = 0.79   time = 109245598   
+4235/4832   risk = 0.28  oob_risk = 0.75   riskauc = 0.79   time = 112487116   
+4356/4832   risk = 0.27  oob_risk = 0.75   riskauc = 0.79   time = 115755490   
+4477/4832   risk = 0.27  oob_risk = 0.76   riskauc = 0.79   time = 119079777   
+4598/4832   risk = 0.27  oob_risk = 0.76   riskauc = 0.79   time = 122256766   
+4719/4832   risk = 0.26  oob_risk = 0.76   riskauc = 0.79   time = 125248332   
+
+
+Train 4832 iterations in 128 Seconds.
+Final risk based on the train set: 0.26
+
+DEBUG [23:30:34.342] [mlr3]  Learner 'acc_hcwb' on task 'Task 168908: christine (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [23:30:34.358] [mlr3]  Skip subsetting of task 'Task 168908: christine (Supervised Classification)' 
+DEBUG [23:30:34.362] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168908: christine (Supervised Classification)' with 4334 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.68  oob_risk = 0.68   time = 3   
+ 125/5000   risk = 0.52  oob_risk = 0.56   time = 5498626   
+
+
+Train 179 iterations in 7 Seconds.
+Final risk based on the train set: 0.46
+
+   1/4832   risk = 0.47  oob_risk = 0.56   time = 2   
+ 121/4832   risk = 0.47  oob_risk = 0.58   time = 2969481   
+ 242/4832   risk = 0.47  oob_risk = 0.6   time = 5903843   
+ 363/4832   risk = 0.46  oob_risk = 0.61   time = 8866648   
+ 484/4832   risk = 0.45  oob_risk = 0.61   time = 11928790   
+ 605/4832   risk = 0.44  oob_risk = 0.62   time = 14970589   
+ 726/4832   risk = 0.43  oob_risk = 0.63   time = 17993241   
+ 847/4832   risk = 0.42  oob_risk = 0.64   time = 21003205   
+ 968/4832   risk = 0.42  oob_risk = 0.64   time = 23924800   
+1089/4832   risk = 0.41  oob_risk = 0.65   time = 26860959   
+1210/4832   risk = 0.4  oob_risk = 0.65   time = 29905046   
+1331/4832   risk = 0.39  oob_risk = 0.66   time = 32825044   
+1452/4832   risk = 0.39  oob_risk = 0.67   time = 35878332   
+1573/4832   risk = 0.38  oob_risk = 0.67   time = 38774409   
+1694/4832   risk = 0.37  oob_risk = 0.68   time = 41530018   
+1815/4832   risk = 0.37  oob_risk = 0.68   time = 44269630   
+1936/4832   risk = 0.36  oob_risk = 0.69   time = 47215196   
+2057/4832   risk = 0.36  oob_risk = 0.69   time = 50155169   
+2178/4832   risk = 0.35  oob_risk = 0.69   time = 52989349   
+2299/4832   risk = 0.34  oob_risk = 0.7   time = 55770656   
+2420/4832   risk = 0.34  oob_risk = 0.7   time = 58708821   
+2541/4832   risk = 0.33  oob_risk = 0.7   time = 61695984   
+2662/4832   risk = 0.33  oob_risk = 0.71   time = 64572024   
+2783/4832   risk = 0.33  oob_risk = 0.71   time = 67510341   
+2904/4832   risk = 0.32  oob_risk = 0.72   time = 70372961   
+3025/4832   risk = 0.32  oob_risk = 0.72   time = 73266787   
+3146/4832   risk = 0.31  oob_risk = 0.72   time = 76128317   
+3267/4832   risk = 0.31  oob_risk = 0.72   time = 79046709   
+3388/4832   risk = 0.3  oob_risk = 0.73   time = 81975765   
+3509/4832   risk = 0.3  oob_risk = 0.73   time = 84943219   
+3630/4832   risk = 0.3  oob_risk = 0.73   time = 87800843   
+3751/4832   risk = 0.29  oob_risk = 0.74   time = 90791645   
+3872/4832   risk = 0.29  oob_risk = 0.74   time = 93807224   
+3993/4832   risk = 0.28  oob_risk = 0.74   time = 96835022   
+4114/4832   risk = 0.28  oob_risk = 0.75   time = 99844819   
+4235/4832   risk = 0.28  oob_risk = 0.75   time = 102845018   
+4356/4832   risk = 0.27  oob_risk = 0.75   time = 105737597   
+4477/4832   risk = 0.27  oob_risk = 0.76   time = 108804285   
+4598/4832   risk = 0.27  oob_risk = 0.76   time = 111758059   
+4719/4832   risk = 0.26  oob_risk = 0.76   time = 114792677   
+
+
+Train 4832 iterations in 117 Seconds.
+Final risk based on the train set: 0.26
+
+DEBUG [23:32:55.446] [mlr3]  Learner 'acc_hcwb' on task 'Task 168908: christine (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=141]
+### [bt]: Calculation finished!

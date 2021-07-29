@@ -165,10 +165,17 @@ constructLearner = function(lid, ncores = parallel::detectCores() - 2, test_mode
         df_autoselect = TRUE, oob_fraction = 0.3, use_stopper = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
+    },
+    acc_hcwb2 = {
+      l = lrn("classif.compboost", id = "acc_hcwb", predict_type = "prob",
+        optimizer = "nesterov", restart = TRUE, learning_rate = 0.1, momentum = 0.003,
+        df_autoselect = TRUE, oob_fraction = 0.3, use_stopper = TRUE)
+      l$param_set$values = updatePars(l, cwb_pars)
+      l
     }
   )
   if (is.null(lout))
-    stop("'lid' is not valid, use one of 'bin_cwb_nb', 'bin_cwb_n', 'acc_cwb', 'acc_acwb', or 'acc_hcwb'!")
+    stop("'lid' is not valid, use one of 'bin_cwb_nb', 'bin_cwb_n', 'acc_cwb', 'acc_acwb', 'acc_hcwb', or 'acc_hcwb2'!")
   if (raw_learner) {
     return(lout)
   } else {

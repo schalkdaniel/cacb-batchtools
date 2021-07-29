@@ -64,4 +64,5 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 })
 
 addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
+addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
 

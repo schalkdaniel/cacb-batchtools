@@ -1,0 +1,129 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-29 17:14:43] Loading new learner
+[2021-07-29 17:14:43] Loading tasks
+[2021-07-29 17:14:45] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=134]
+### [bt]: Generating problem instance for problem '168335-fold4' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold4' for job 134 (seed = 31549) ...
+DEBUG [17:14:48.065] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [17:14:48.068] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  oob_risk = 0.57   riskauc = 0.84   time = 2   
+ 125/5000   risk = 0.26  oob_risk = 0.26   riskauc = 0.96   time = 13830460   
+ 250/5000   risk = 0.2  oob_risk = 0.21   riskauc = 0.97   time = 27959033   
+ 375/5000   risk = 0.19  oob_risk = 0.2   riskauc = 0.97   time = 41322165   
+
+
+Train 409 iterations in 44 Seconds.
+Final risk based on the train set: 0.19
+
+   1/4602   risk = 0.19  oob_risk = 0.2   riskauc = 0.97   time = 2   
+ 115/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 6866137   
+ 230/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 13683267   
+ 345/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 20428533   
+ 460/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 27043401   
+ 575/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 33777724   
+ 690/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 40600845   
+ 805/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 47347451   
+ 920/4602   risk = 0.2  oob_risk = 0.22   riskauc = 0.97   time = 53887568   
+1035/4602   risk = 0.21  oob_risk = 0.22   riskauc = 0.97   time = 60503372   
+1150/4602   risk = 0.21  oob_risk = 0.22   riskauc = 0.97   time = 67078172   
+1265/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 73522670   
+1380/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 79925972   
+1495/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 86258160   
+1610/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 92644815   
+1725/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 99245191   
+1840/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 105542421   
+1955/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 111803375   
+2070/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 118148190   
+2185/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 124792806   
+2300/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 131250324   
+2415/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 137638696   
+2530/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 144075635   
+2645/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 150550315   
+2760/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 157177207   
+2875/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 163716902   
+2990/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 169976091   
+3105/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 176242197   
+3220/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 182830211   
+3335/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 189175225   
+3450/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 195540852   
+3565/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 201857908   
+3680/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 208228244   
+3795/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 214539966   
+3910/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 220793388   
+4025/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 227165332   
+4140/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 233453463   
+4255/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 239891904   
+4370/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 246213446   
+4485/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 252655775   
+4600/4602   risk = 0.21  oob_risk = 0.23   riskauc = 0.97   time = 258940697   
+
+
+Train 4602 iterations in 259 Seconds.
+Final risk based on the train set: 0.21
+
+DEBUG [17:19:59.197] [mlr3]  Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [17:19:59.211] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [17:19:59.215] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  oob_risk = 0.57   time = 3   
+ 125/5000   risk = 0.26  oob_risk = 0.26   time = 11272246   
+ 250/5000   risk = 0.2  oob_risk = 0.21   time = 22516725   
+ 375/5000   risk = 0.19  oob_risk = 0.2   time = 33826266   
+
+
+Train 409 iterations in 36 Seconds.
+Final risk based on the train set: 0.19
+
+   1/4602   risk = 0.19  oob_risk = 0.2   time = 2   
+ 115/4602   risk = 0.2  oob_risk = 0.22   time = 5757082   
+ 230/4602   risk = 0.2  oob_risk = 0.22   time = 11626134   
+ 345/4602   risk = 0.2  oob_risk = 0.22   time = 17453790   
+ 460/4602   risk = 0.2  oob_risk = 0.22   time = 23123644   
+ 575/4602   risk = 0.2  oob_risk = 0.22   time = 28674807   
+ 690/4602   risk = 0.2  oob_risk = 0.22   time = 34240120   
+ 805/4602   risk = 0.2  oob_risk = 0.22   time = 39944275   
+ 920/4602   risk = 0.2  oob_risk = 0.22   time = 45553306   
+1035/4602   risk = 0.21  oob_risk = 0.22   time = 50994293   
+1150/4602   risk = 0.21  oob_risk = 0.22   time = 56549910   
+1265/4602   risk = 0.21  oob_risk = 0.23   time = 62190246   
+1380/4602   risk = 0.21  oob_risk = 0.23   time = 67825007   
+1495/4602   risk = 0.21  oob_risk = 0.23   time = 73522391   
+1610/4602   risk = 0.21  oob_risk = 0.23   time = 79309034   
+1725/4602   risk = 0.21  oob_risk = 0.23   time = 85227275   
+1840/4602   risk = 0.21  oob_risk = 0.23   time = 91183034   
+1955/4602   risk = 0.21  oob_risk = 0.23   time = 97025437   
+2070/4602   risk = 0.21  oob_risk = 0.23   time = 102967116   
+2185/4602   risk = 0.21  oob_risk = 0.23   time = 108851539   
+2300/4602   risk = 0.21  oob_risk = 0.23   time = 114685790   
+2415/4602   risk = 0.21  oob_risk = 0.23   time = 120525020   
+2530/4602   risk = 0.21  oob_risk = 0.23   time = 126501489   
+2645/4602   risk = 0.21  oob_risk = 0.23   time = 132300361   
+2760/4602   risk = 0.21  oob_risk = 0.23   time = 137968742   
+2875/4602   risk = 0.21  oob_risk = 0.23   time = 143656614   
+2990/4602   risk = 0.21  oob_risk = 0.23   time = 149389671   
+3105/4602   risk = 0.21  oob_risk = 0.23   time = 155121470   
+3220/4602   risk = 0.21  oob_risk = 0.23   time = 160838137   
+3335/4602   risk = 0.21  oob_risk = 0.23   time = 166492091   
+3450/4602   risk = 0.21  oob_risk = 0.23   time = 172195866   
+3565/4602   risk = 0.21  oob_risk = 0.23   time = 178004703   
+3680/4602   risk = 0.21  oob_risk = 0.23   time = 183759490   
+3795/4602   risk = 0.21  oob_risk = 0.23   time = 189431235   
+3910/4602   risk = 0.21  oob_risk = 0.23   time = 195174754   
+4025/4602   risk = 0.21  oob_risk = 0.23   time = 200780016   
+4140/4602   risk = 0.21  oob_risk = 0.23   time = 206470096   
+4255/4602   risk = 0.21  oob_risk = 0.23   time = 212186174   
+4370/4602   risk = 0.21  oob_risk = 0.23   time = 217809780   
+4485/4602   risk = 0.21  oob_risk = 0.23   time = 223385242   
+4600/4602   risk = 0.21  oob_risk = 0.23   time = 229029287   
+
+
+Train 4602 iterations in 229 Seconds.
+Final risk based on the train set: 0.21
+
+DEBUG [17:24:31.879] [mlr3]  Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=134]
+### [bt]: Calculation finished!

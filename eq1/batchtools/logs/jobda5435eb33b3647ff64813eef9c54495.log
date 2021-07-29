@@ -1,0 +1,131 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-29 16:34:39] Loading new learner
+[2021-07-29 16:34:39] Loading tasks
+[2021-07-29 16:34:42] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=126]
+### [bt]: Generating problem instance for problem '7592-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '7592-fold1' for job 126 (seed = 31541) ...
+DEBUG [16:34:43.314] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [16:34:43.317] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' with 39073 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+Warning in get_private(learner)$.train(task) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  oob_risk = 0.54   riskauc = 0.79   time = 2   
+ 125/5000   risk = 0.36  oob_risk = 0.36   riskauc = 0.9   time = 2371796   
+ 250/5000   risk = 0.33  oob_risk = 0.32   riskauc = 0.91   time = 5188091   
+
+
+Train 362 iterations in 7 Seconds.
+Final risk based on the train set: 0.33
+
+   1/4649   risk = 0.33  oob_risk = 0.32   riskauc = 0.91   time = 2   
+ 116/4649   risk = 0.34  oob_risk = 0.33   riskauc = 0.91   time = 1467266   
+ 232/4649   risk = 0.34  oob_risk = 0.34   riskauc = 0.91   time = 3025069   
+ 348/4649   risk = 0.35  oob_risk = 0.34   riskauc = 0.91   time = 4359504   
+ 464/4649   risk = 0.35  oob_risk = 0.34   riskauc = 0.91   time = 5617009   
+ 580/4649   risk = 0.35  oob_risk = 0.35   riskauc = 0.91   time = 7003067   
+ 696/4649   risk = 0.35  oob_risk = 0.35   riskauc = 0.91   time = 8322985   
+ 812/4649   risk = 0.35  oob_risk = 0.35   riskauc = 0.91   time = 9617301   
+ 928/4649   risk = 0.35  oob_risk = 0.35   riskauc = 0.91   time = 11020815   
+1044/4649   risk = 0.35  oob_risk = 0.35   riskauc = 0.91   time = 12387962   
+1160/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 13702911   
+1276/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 15165286   
+1392/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 16489297   
+1508/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 17757987   
+1624/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 19007862   
+1740/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 20347194   
+1856/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 21594354   
+1972/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 22856694   
+2088/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 24195756   
+2204/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 25557692   
+2320/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 26876389   
+2436/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 28217142   
+2552/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 29454873   
+2668/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 30616915   
+2784/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 31773329   
+2900/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 33034631   
+3016/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 34312242   
+3132/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 35614578   
+3248/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 37165455   
+3364/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 38475727   
+3480/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 39748085   
+3596/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 40978969   
+3712/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 42466999   
+3828/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 43949833   
+3944/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 45295986   
+4060/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 46723384   
+4176/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 48197839   
+4292/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 49641312   
+4408/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 51178082   
+4524/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 52557263   
+4640/4649   risk = 0.36  oob_risk = 0.35   riskauc = 0.91   time = 53978910   
+
+
+Train 4649 iterations in 54 Seconds.
+Final risk based on the train set: 0.36
+
+DEBUG [16:35:46.150] [mlr3]  Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [16:35:46.167] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [16:35:46.171] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' with 39073 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+Warning in get_private(learner)$.train(task) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  oob_risk = 0.54   time = 2   
+ 125/5000   risk = 0.36  oob_risk = 0.36   time = 1782257   
+ 250/5000   risk = 0.33  oob_risk = 0.32   time = 3622207   
+
+
+Train 362 iterations in 5 Seconds.
+Final risk based on the train set: 0.33
+
+   1/4649   risk = 0.33  oob_risk = 0.32   time = 2   
+ 116/4649   risk = 0.34  oob_risk = 0.33   time = 861199   
+ 232/4649   risk = 0.34  oob_risk = 0.34   time = 1721891   
+ 348/4649   risk = 0.35  oob_risk = 0.34   time = 2571938   
+ 464/4649   risk = 0.35  oob_risk = 0.34   time = 3430680   
+ 580/4649   risk = 0.35  oob_risk = 0.35   time = 4289752   
+ 696/4649   risk = 0.35  oob_risk = 0.35   time = 5147001   
+ 812/4649   risk = 0.35  oob_risk = 0.35   time = 6008210   
+ 928/4649   risk = 0.35  oob_risk = 0.35   time = 6881153   
+1044/4649   risk = 0.35  oob_risk = 0.35   time = 7760896   
+1160/4649   risk = 0.36  oob_risk = 0.35   time = 8607964   
+1276/4649   risk = 0.36  oob_risk = 0.35   time = 9439312   
+1392/4649   risk = 0.36  oob_risk = 0.35   time = 10278379   
+1508/4649   risk = 0.36  oob_risk = 0.35   time = 11127754   
+1624/4649   risk = 0.36  oob_risk = 0.35   time = 11994258   
+1740/4649   risk = 0.36  oob_risk = 0.35   time = 12863316   
+1856/4649   risk = 0.36  oob_risk = 0.35   time = 13723500   
+1972/4649   risk = 0.36  oob_risk = 0.35   time = 14572261   
+2088/4649   risk = 0.36  oob_risk = 0.35   time = 15425393   
+2204/4649   risk = 0.36  oob_risk = 0.35   time = 16281395   
+2320/4649   risk = 0.36  oob_risk = 0.35   time = 17149750   
+2436/4649   risk = 0.36  oob_risk = 0.35   time = 18039344   
+2552/4649   risk = 0.36  oob_risk = 0.35   time = 18904356   
+2668/4649   risk = 0.36  oob_risk = 0.35   time = 19689560   
+2784/4649   risk = 0.36  oob_risk = 0.35   time = 20493558   
+2900/4649   risk = 0.36  oob_risk = 0.35   time = 21381457   
+3016/4649   risk = 0.36  oob_risk = 0.35   time = 22271321   
+3132/4649   risk = 0.36  oob_risk = 0.35   time = 23188700   
+3248/4649   risk = 0.36  oob_risk = 0.35   time = 24107106   
+3364/4649   risk = 0.36  oob_risk = 0.35   time = 25008227   
+3480/4649   risk = 0.36  oob_risk = 0.35   time = 25909150   
+3596/4649   risk = 0.36  oob_risk = 0.35   time = 26803597   
+3712/4649   risk = 0.36  oob_risk = 0.35   time = 27674461   
+3828/4649   risk = 0.36  oob_risk = 0.35   time = 28550562   
+3944/4649   risk = 0.36  oob_risk = 0.35   time = 29456245   
+4060/4649   risk = 0.36  oob_risk = 0.35   time = 30361931   
+4176/4649   risk = 0.36  oob_risk = 0.35   time = 31191324   
+4292/4649   risk = 0.36  oob_risk = 0.35   time = 31969013   
+4408/4649   risk = 0.36  oob_risk = 0.35   time = 32751004   
+4524/4649   risk = 0.36  oob_risk = 0.35   time = 33540762   
+4640/4649   risk = 0.36  oob_risk = 0.35   time = 34336293   
+
+
+Train 4649 iterations in 34 Seconds.
+Final risk based on the train set: 0.36
+
+DEBUG [16:36:26.750] [mlr3]  Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=126]
+### [bt]: Calculation finished!
