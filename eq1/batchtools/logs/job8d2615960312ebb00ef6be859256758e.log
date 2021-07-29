@@ -1,0 +1,111 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-07-29 00:49:21] Loading new learner
+[2021-07-29 00:49:21] Loading tasks
+[2021-07-29 00:49:24] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=114]
+### [bt]: Generating problem instance for problem '9977-fold4' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '9977-fold4' for job 114 (seed = 31529) ...
+DEBUG [00:49:25.181] [mlr3]  Skip subsetting of task 'Task 9977: nomao (Supervised Classification)' 
+DEBUG [00:49:25.185] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 9977: nomao (Supervised Classification)' with 27572 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  riskauc = 0.89   time = 2   
+ 125/5000   risk = 0.17  riskauc = 0.98   time = 1831363   
+ 250/5000   risk = 0.16  riskauc = 0.98   time = 3684469   
+ 375/5000   risk = 0.15  riskauc = 0.98   time = 5527513   
+ 500/5000   risk = 0.15  riskauc = 0.98   time = 7380898   
+ 625/5000   risk = 0.15  riskauc = 0.98   time = 9117634   
+ 750/5000   risk = 0.15  riskauc = 0.98   time = 10977847   
+ 875/5000   risk = 0.15  riskauc = 0.98   time = 12895875   
+1000/5000   risk = 0.15  riskauc = 0.98   time = 14640146   
+1125/5000   risk = 0.15  riskauc = 0.99   time = 16456012   
+1250/5000   risk = 0.15  riskauc = 0.99   time = 18347056   
+1375/5000   risk = 0.14  riskauc = 0.99   time = 20080210   
+1500/5000   risk = 0.14  riskauc = 0.99   time = 21891667   
+1625/5000   risk = 0.14  riskauc = 0.99   time = 24381503   
+1750/5000   risk = 0.14  riskauc = 0.99   time = 26124750   
+1875/5000   risk = 0.14  riskauc = 0.99   time = 27957960   
+2000/5000   risk = 0.14  riskauc = 0.99   time = 29849584   
+2125/5000   risk = 0.14  riskauc = 0.99   time = 31683691   
+2250/5000   risk = 0.14  riskauc = 0.99   time = 33601112   
+2375/5000   risk = 0.14  riskauc = 0.99   time = 35448275   
+2500/5000   risk = 0.14  riskauc = 0.99   time = 37279176   
+2625/5000   risk = 0.14  riskauc = 0.99   time = 39128778   
+2750/5000   risk = 0.14  riskauc = 0.99   time = 41076944   
+2875/5000   risk = 0.14  riskauc = 0.99   time = 42990614   
+3000/5000   risk = 0.14  riskauc = 0.99   time = 44810091   
+3125/5000   risk = 0.14  riskauc = 0.99   time = 46616798   
+3250/5000   risk = 0.14  riskauc = 0.99   time = 48460552   
+3375/5000   risk = 0.14  riskauc = 0.99   time = 50291572   
+3500/5000   risk = 0.14  riskauc = 0.99   time = 52100308   
+3625/5000   risk = 0.14  riskauc = 0.99   time = 53892424   
+3750/5000   risk = 0.14  riskauc = 0.99   time = 55711485   
+3875/5000   risk = 0.14  riskauc = 0.99   time = 58038133   
+4000/5000   risk = 0.14  riskauc = 0.99   time = 59995298   
+4125/5000   risk = 0.14  riskauc = 0.99   time = 61861007   
+4250/5000   risk = 0.14  riskauc = 0.99   time = 63715714   
+4375/5000   risk = 0.14  riskauc = 0.99   time = 65701602   
+4500/5000   risk = 0.14  riskauc = 0.99   time = 67648208   
+4625/5000   risk = 0.14  riskauc = 0.99   time = 69623896   
+4750/5000   risk = 0.14  riskauc = 0.99   time = 71535872   
+4875/5000   risk = 0.14  riskauc = 0.99   time = 73512692   
+5000/5000   risk = 0.14  riskauc = 0.99   time = 75575822   
+
+
+Train 5000 iterations in 75 Seconds.
+Final risk based on the train set: 0.14
+
+DEBUG [00:50:44.013] [mlr3]  Learner 'bin_cwb_b' on task 'Task 9977: nomao (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [00:50:44.028] [mlr3]  Skip subsetting of task 'Task 9977: nomao (Supervised Classification)' 
+DEBUG [00:50:44.032] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 9977: nomao (Supervised Classification)' with 27572 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.56  time = 3   
+ 125/5000   risk = 0.17  time = 1346465   
+ 250/5000   risk = 0.16  time = 2806145   
+ 375/5000   risk = 0.15  time = 4136522   
+ 500/5000   risk = 0.15  time = 5459239   
+ 625/5000   risk = 0.15  time = 6762879   
+ 750/5000   risk = 0.15  time = 8072673   
+ 875/5000   risk = 0.15  time = 9419283   
+1000/5000   risk = 0.15  time = 10684725   
+1125/5000   risk = 0.15  time = 11988435   
+1250/5000   risk = 0.15  time = 13369428   
+1375/5000   risk = 0.14  time = 14701174   
+1500/5000   risk = 0.14  time = 15945064   
+1625/5000   risk = 0.14  time = 17351905   
+1750/5000   risk = 0.14  time = 18682279   
+1875/5000   risk = 0.14  time = 20064967   
+2000/5000   risk = 0.14  time = 21433057   
+2125/5000   risk = 0.14  time = 22911503   
+2250/5000   risk = 0.14  time = 24371154   
+2375/5000   risk = 0.14  time = 25639189   
+2500/5000   risk = 0.14  time = 26981604   
+2625/5000   risk = 0.14  time = 28460651   
+2750/5000   risk = 0.14  time = 29820174   
+2875/5000   risk = 0.14  time = 31224771   
+3000/5000   risk = 0.14  time = 32564972   
+3125/5000   risk = 0.14  time = 34087992   
+3250/5000   risk = 0.14  time = 35530018   
+3375/5000   risk = 0.14  time = 36947177   
+3500/5000   risk = 0.14  time = 38404465   
+3625/5000   risk = 0.14  time = 39915669   
+3750/5000   risk = 0.14  time = 41309145   
+3875/5000   risk = 0.14  time = 42757477   
+4000/5000   risk = 0.14  time = 44232206   
+4125/5000   risk = 0.14  time = 45690159   
+4250/5000   risk = 0.14  time = 47141713   
+4375/5000   risk = 0.14  time = 48679485   
+4500/5000   risk = 0.14  time = 50045043   
+4625/5000   risk = 0.14  time = 51518837   
+4750/5000   risk = 0.14  time = 53019314   
+4875/5000   risk = 0.14  time = 54485482   
+5000/5000   risk = 0.14  time = 55943548   
+
+
+Train 5000 iterations in 55 Seconds.
+Final risk based on the train set: 0.14
+
+DEBUG [00:51:42.790] [mlr3]  Learner 'bin_cwb_b' on task 'Task 9977: nomao (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=114]
+### [bt]: Calculation finished!
