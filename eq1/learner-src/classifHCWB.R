@@ -132,7 +132,7 @@ LearnerClassifHCWB = R6Class("LearnerClassifHCWB",
 
       if (self$param_set$values$use_stopper) {
         model$addLogger(logger = LoggerOobRisk,
-          use_as_stopper = self$param_set$values$use_stopper,
+          use_as_stopper = !self$param_set$values$just_log,
           logger_id      = "oob_risk",
           used_loss      = LossBinomial$new(),
           esp_for_break  = self$param_set$values$eps_for_break,

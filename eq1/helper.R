@@ -209,11 +209,16 @@ constructLearner2 = function(lid, ncores = parallel::detectCores() - 2, test_mod
   ## Set default hyper parameters (HPs) for all learners:
 
   cwb_pars = list(
-    patience      = 10L,
-    mstop         = mstop,
-    oob_seed      = 1618,
-    eps_for_break = 0.00001,
-    ncores        = max(ncores, 1))
+    patience        = 10L,
+    mstop           = mstop,
+    oob_seed        = 1618,
+    eps_for_break   = 0.00001,
+    use_stopper     = TRUE,
+    just_log        = TRUE,
+    use_stopper_auc = TRUE,
+    just_log_auc    = TRUE,
+    oob_fraction    = 0.3,
+    ncores          = max(ncores, 1))
 
   ## Helper to merge custom set HPs with default values:
   updatePars = function(lrn, pars) {
@@ -262,15 +267,13 @@ constructLearner2 = function(lid, ncores = parallel::detectCores() - 2, test_mod
     ## HCWB no binning
     acc_hcwb = {
       l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
-        learning_rate = 0.1, momentum = 0.03, df_autoselect = TRUE,
-        oob_fraction = 0.3)
+        learning_rate = 0.1, momentum = 0.03, df_autoselect = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     acc_hcwb2 = {
       l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
-        learning_rate = 0.1, momentum = 0.003, df_autoselect = TRUE,
-        oob_fraction = 0.3)
+        learning_rate = 0.1, momentum = 0.0034, df_autoselect = TRUE)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     }

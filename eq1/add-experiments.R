@@ -40,42 +40,14 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 
   ## Learner is constructed two times, one for logging and one for the
   ## actual training with time tracking:
-  if (grepl("-new", lid)) {
-    lid = gsub("-new", "", lid)
+  learner    = constructLearner2(lid, raw_learner = TRUE)
+  task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
+  task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
 
-    learner    = constructLearner2(lid, raw_learner = TRUE)
-    learner0   = constructLearner2(lid, raw_learner = TRUE)
+  learner$param_set$values$additional_auc_task = task_test
+  learner$train(task_train)
 
-    task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-    task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
-
-    learner$param_set$values$additional_auc_task = task_test
-    learner$param_set$values$use_stopper = FALSE
-    learner$param_set$values$use_stopper_auc = TRUE
-
-    learner0$param_set$values$use_stopper = FALSE
-    learner0$param_set$values$use_stopper_auc = TRUE
-
-    learner$train(task_train)
-    learner0$train(task_train)
-
-  } else {
-    learner    = constructLearner(lid, raw_learner = TRUE)
-    learner0   = constructLearner(lid, raw_learner = TRUE)
-
-    task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-    task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
-
-    learner$param_set$values$task_extra_log = task_test
-    learner$param_set$values$log_auc = TRUE
-
-    learner$train(task_train)
-    learner0$train(task_train)
-  }
-
-  log  = getCboostLog(learner)
-  log0 = getCboostLog(learner0)
-
+  log      = getCboostLog(learner)
   log$time = log0$time
 
   return(log)
