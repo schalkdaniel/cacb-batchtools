@@ -22,7 +22,9 @@ LearnerClassifCWB = R6Class("LearnerClassifCWB",
 
           ParamDbl$new(id = "oob_fraction", default = 0, lower = 0, upper = 0.9),
           ParamLgl$new(id = "use_stopper", default = FALSE),
+          ParamLgl$new(id = "just_log", default = TRUE),
           ParamLgl$new(id = "use_stopper_auc", default = FALSE),
+          ParamLgl$new(id = "just_log_auc", default = TRUE),
           ParamInt$new(id = "patience", default = 10, lower = 1),
           ParamDbl$new(id = "eps_for_break", default = 0.00001),
 
@@ -212,41 +214,9 @@ mlr_learners$add("classif.CWB", LearnerClassifCWB)
 #source("learner-src/learner-helper.R")
 
 #task = tsk("spam")
-#l = lrn("classif.CWB", predict_type = "prob", oob_fraction = 0.3, use_stopper = TRUE, mstop = 2000, use_stopper_auc = TRUE,
-  #additional_auc_task = task, learning_rate = 0.1, momentum = 0.1, eps_for_break = 0, patience = 2)
+#l = lrn("classif.CWB", predict_type = "prob", oob_fraction = 0.3, mstop = 2000, use_stopper = TRUE, use_stopper_auc = TRUE,
+  #just_log = TRUE, just_log_auc = TRUE, additional_auc_task = task, learning_rate = 0.1, momentum = 0.1, eps_for_break = 0, patience = 2)
 #l$train(task)
 #l$predict(task)$score(msrs(c("classif.auc", "time_train")))
 #tail(l$model$cboost$getLoggerData())
-
-#suppressMessages(library(mlr3tuning))
-#suppressMessages(library(mlrintermbo))
-#suppressMessages(library(mlr3learners))
-#suppressMessages(library(mlr3extralearners))
-#suppressMessages(library(mlr3pipelines))
-
-
-#lr1 = lrn("classif.compboost", optimizer = "nesterov", use_stopper = TRUE,
-  #eps_for_break = 0, patience = 2, oob_fraction = 0.3, predict_type = "prob",
-  #mstop = 5000L, restart = TRUE, stop_both = TRUE, df_autoselect = TRUE,
-  #oob_seed = 100)
-
-#lr1$train(tsk("sonar"))
-
-#length(lr1$model$cboost$getSelectedBaselearner())
-#length(lr1$model$cboost_restart$getSelectedBaselearner())
-#gridExtra::grid.arrange(
-  #lr1$model$cboost$plotInbagVsOobRisk() + ggplot2::ylim(0, 1),
-  #lr1$model$cboost_restart$plotInbagVsOobRisk() + ggplot2::ylim(0, 1),
-  #ncol = 2)
-
-#design = benchmark_grid(
-  #tasks = tsk("sonar"),
-  #learners = lr1,
-  #resamplings = rsmp("cv", folds = 3)
-#)
-
-#bmr = benchmark(design, store_models = TRUE)
-#bmr$aggregate(msrs(c("classif.auc", "classif.ce")))
-
-
 
