@@ -33,6 +33,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           ParamInt$new(id = "oob_seed", default = sample(seq_len(1e6), 1), lower = 1L),
           ParamLgl$new(id = "show_output", default = FALSE),
           ParamLgl$new(id = "log_auc", default = FALSE),
+          ParamLgl$new(id = "stop_auc", default = FALSE),
           ParamUty$new(id = "task_extra_log")
         )
       )
@@ -63,6 +64,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
   private = list(
     .train = function(task) {
 
+      ## Check number of cores:
       ncores = self$param_set$values$ncores
       if (ncores > length(task$feature_names)) {
         warning("Number of cores ", ncores, " exceeds number of features ",
@@ -70,14 +72,14 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
         ncores = length(task$feature_names)
       }
 
-      lg = lgr::get_logger("mlr3")
-
+      ## Merge default hyperparameter with the specified ones:
       pdefaults = self$param_set$default
       pars = self$param_set$values
       for (id in self$param_set$ids()) {
         if (is.null(pars[[id]])) pars[[id]] = pdefaults[[id]]
       }
       self$param_set$values = pars
+
       if (self$param_set$values$df_autoselect) {
         factor_cols = task$feature_types$id[task$feature_types$type == "factor"]
         if (length(factor_cols) > 0) {
@@ -105,7 +107,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
           return(0.5 * p / (1 - p))
         }
         my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
-        additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss))
+        additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss, stop = self$param_set$values$stop_auc))
       } else {
         additional_risk_log = list()
       }
@@ -227,7 +229,7 @@ LearnerClassifCompboost = R6Class("LearnerClassifCompboost",
               }
 
               my_auc_loss = LossCustom$new(aucLoss, aucGrad, aucInit)
-              additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss))
+              additional_risk_log = list(auc = list(data = self$param_set$values$task_extra_log$data(), loss = my_auc_loss, stop = self$param_set$values$stop_auc))
             } else {
               additional_risk_log = list()
             }

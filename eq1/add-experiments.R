@@ -40,17 +40,33 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 
   ## Learner is constructed two times, one for logging and one for the
   ## actual training with time tracking:
-  learner    = constructLearner(lid, raw_learner = TRUE)
-  learner0   = constructLearner(lid, raw_learner = TRUE)
+  if (grepl("-new", lid)) {
+    learner    = constructLearner2(lid, raw_learner = TRUE)
+    learner0   = constructLearner2(lid, raw_learner = TRUE)
 
-  task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-  task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
+    task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
+    task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
 
-  learner$param_set$values$task_extra_log = task_test
-  learner$param_set$values$log_auc = TRUE
+    learner$param_set$values$additional_auc_task = task_test
+    learner$param_set$values$use_stopper = FALSE
+    learner$param_set$values$use_stopper_auc = TRUE
 
-  learner$train(task_train)
-  learner0$train(task_train)
+    learner$train(task_train)
+    learner0$train(task_train)
+
+  } else {
+    learner    = constructLearner(lid, raw_learner = TRUE)
+    learner0   = constructLearner(lid, raw_learner = TRUE)
+
+    task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
+    task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
+
+    learner$param_set$values$task_extra_log = task_test
+    learner$param_set$values$log_auc = TRUE
+
+    learner$train(task_train)
+    learner0$train(task_train)
+  }
 
   #auc_trace = getCboostMsrsTrace(learner, list(train = task_train, test = task_test),
     #SCORE_MEASURES, iters = seq(4, 5000, by = 4))
@@ -64,5 +80,6 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 })
 
 addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
-addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
+#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
+#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
 

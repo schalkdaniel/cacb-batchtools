@@ -9,6 +9,9 @@ if (FALSE) {
   remotes::install_github("schalkdaniel/compboost", ref = "agbm_optim")
 }
 
+## Files to load:
+FILES = c(paste0("learner-src/", c("classifCWB.R", "classifHCWB.R", "classifCompboost.R", "learner-helper.R")), "helper.R", "setup.R")
+
 ## Rebuild tasks and resampling objects:
 REBUILD = FALSE
 

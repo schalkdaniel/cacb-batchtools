@@ -12,9 +12,13 @@ if (! dir.exists(BATCHTOOLS_DIR)) {
   suppressMessages(library(mlr3pipelines))
   suppressMessages(library(paradox))
 
-  source(paste0(BM_DIR, "classifCompboost.R"))
-  source(paste0(BM_DIR, "helper.R"))
+#  source(paste0(BM_DIR, "classifCompboost.R"))
+  #source(paste0(BM_DIR, "learner-src/classifCWB.R"))
+  #source(paste0(BM_DIR, "learner-src/classifHCWB.R"))
+  #source(paste0(BM_DIR, "learner-src/learner-helper.R"))
+  #source(paste0(BM_DIR, "helper.R"))
   source(paste0(BM_DIR, "setup.R"))
+  lapply(FILES, function(f) source(paste0(BM_DIR, f)))
 }
 
 
@@ -48,8 +52,9 @@ if (dir.exists(BATCHTOOLS_DIR)) {
     file.dir = BATCHTOOLS_DIR,
     packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
       "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
-    source = c("helper.R", "classifCompboost.R", "setup.R"),
-    seed       = 31415)
+    #source = c("helper.R", "classifCompboost.R", "setup.R"),
+    source   = FILES,
+    seed     = 31415)
 
   #reg = getDefaultRegistry()
 
