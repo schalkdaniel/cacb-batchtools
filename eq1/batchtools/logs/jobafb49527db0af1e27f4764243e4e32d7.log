@@ -1,0 +1,651 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-01 18:58:21] Loading new learner LearnerClassifCWB
+[2021-08-01 18:58:21] Loading new learner LearnerClassifHCWB
+[2021-08-01 18:58:21] Loading new learner
+[2021-08-01 18:58:21] Loading tasks
+[2021-08-01 18:58:25] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=165]
+### [bt]: Generating problem instance for problem '168335-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold5' for job 165 (seed = 31580) ...
+DEBUG [18:58:28.069] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [18:58:28.163] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104052 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.61  riskauc = 0.12   time = 3   val_auc = 0.13   
+ 125/5000   risk = 0.27  riskauc = 0.041   time = 10804749   val_auc = 0.041   
+ 250/5000   risk = 0.21  riskauc = 0.031   time = 21472131   val_auc = 0.03   
+ 375/5000   risk = 0.2  riskauc = 0.027   time = 32445795   val_auc = 0.027   
+ 500/5000   risk = 0.2  riskauc = 0.026   time = 42882025   val_auc = 0.026   
+ 625/5000   risk = 0.2  riskauc = 0.026   time = 53382980   val_auc = 0.026   
+ 750/5000   risk = 0.21  riskauc = 0.026   time = 63828092   val_auc = 0.025   
+
+
+Train 775 iterations in 67 Seconds.
+Final risk based on the train set: 0.21
+
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in x$.self$finalize() : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+Error in (function (x)  : attempt to apply non-function
+2: (function (e) 
+   traceback(2L))()
+1: (function (x) 
+   x$.self$finalize())(<environment>)
+   1/4236   risk = 0.21  riskauc = 0.026   time = 2   val_auc = 0.025   
+ 106/4236   risk = 0.21  riskauc = 0.026   time = 5626544   val_auc = 0.025   
+ 212/4236   risk = 0.22  riskauc = 0.025   time = 11019304   val_auc = 0.025   
+ 318/4236   risk = 0.22  riskauc = 0.025   time = 16419367   val_auc = 0.025   
+ 424/4236   risk = 0.22  riskauc = 0.025   time = 22052933   val_auc = 0.025   
+ 530/4236   risk = 0.22  riskauc = 0.025   time = 28100063   val_auc = 0.025   
+ 636/4236   risk = 0.22  riskauc = 0.025   time = 34125808   val_auc = 0.025   
+ 742/4236   risk = 0.22  riskauc = 0.025   time = 40215486   val_auc = 0.025   
+ 848/4236   risk = 0.22  riskauc = 0.025   time = 46320250   val_auc = 0.025   
+ 954/4236   risk = 0.22  riskauc = 0.025   time = 52496827   val_auc = 0.025   
+1060/4236   risk = 0.22  riskauc = 0.025   time = 58680527   val_auc = 0.025   
+1166/4236   risk = 0.22  riskauc = 0.025   time = 64628603   val_auc = 0.025   
+1272/4236   risk = 0.22  riskauc = 0.025   time = 70684679   val_auc = 0.025   
+1378/4236   risk = 0.22  riskauc = 0.025   time = 76901439   val_auc = 0.025   
+1484/4236   risk = 0.22  riskauc = 0.025   time = 82764736   val_auc = 0.025   
+1590/4236   risk = 0.22  riskauc = 0.025   time = 88700314   val_auc = 0.025   
+1696/4236   risk = 0.22  riskauc = 0.025   time = 94698111   val_auc = 0.025   
+1802/4236   risk = 0.22  riskauc = 0.025   time = 100696804   val_auc = 0.025   
+1908/4236   risk = 0.22  riskauc = 0.025   time = 106774443   val_auc = 0.025   
+2014/4236   risk = 0.22  riskauc = 0.025   time = 112946806   val_auc = 0.025   
+2120/4236   risk = 0.22  riskauc = 0.025   time = 119235269   val_auc = 0.025   
+2226/4236   risk = 0.22  riskauc = 0.025   time = 125725233   val_auc = 0.025   
+2332/4236   risk = 0.22  riskauc = 0.025   time = 132092380   val_auc = 0.025   
+2438/4236   risk = 0.22  riskauc = 0.025   time = 138410100   val_auc = 0.025   
+2544/4236   risk = 0.22  riskauc = 0.025   time = 144664151   val_auc = 0.025   
+2650/4236   risk = 0.22  riskauc = 0.025   time = 150766710   val_auc = 0.025   
+2756/4236   risk = 0.22  riskauc = 0.025   time = 156947140   val_auc = 0.025   
+2862/4236   risk = 0.22  riskauc = 0.025   time = 163283146   val_auc = 0.025   
+2968/4236   risk = 0.22  riskauc = 0.025   time = 169606468   val_auc = 0.025   
+3074/4236   risk = 0.22  riskauc = 0.025   time = 175909962   val_auc = 0.025   
+3180/4236   risk = 0.22  riskauc = 0.025   time = 182191627   val_auc = 0.025   
+3286/4236   risk = 0.22  riskauc = 0.025   time = 188434552   val_auc = 0.025   
+3392/4236   risk = 0.22  riskauc = 0.025   time = 194476200   val_auc = 0.025   
+3498/4236   risk = 0.22  riskauc = 0.025   time = 200563088   val_auc = 0.025   
+3604/4236   risk = 0.22  riskauc = 0.025   time = 206658769   val_auc = 0.025   
+3710/4236   risk = 0.22  riskauc = 0.025   time = 212910655   val_auc = 0.025   
+3816/4236   risk = 0.22  riskauc = 0.025   time = 218967215   val_auc = 0.025   
+3922/4236   risk = 0.22  riskauc = 0.025   time = 225100057   val_auc = 0.025   
+4028/4236   risk = 0.22  riskauc = 0.025   time = 231400135   val_auc = 0.025   
+4134/4236   risk = 0.22  riskauc = 0.025   time = 237660623   val_auc = 0.025   
+
+
+Train 4236 iterations in 243 Seconds.
+Final risk based on the train set: 0.22
+
+DEBUG [19:03:55.230] [mlr3]  Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [19:03:55.241] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [19:03:55.244] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104052 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.61  time = 2   val_auc = 0.13   
+ 125/5000   risk = 0.27  time = 9602749   val_auc = 0.041   
+ 250/5000   risk = 0.21  time = 19450605   val_auc = 0.03   
+ 375/5000   risk = 0.2  time = 29133765   val_auc = 0.027   
+ 500/5000   risk = 0.2  time = 38670081   val_auc = 0.026   
+ 625/5000   risk = 0.2  time = 48175277   val_auc = 0.026   
+ 750/5000   risk = 0.21  time = 57687262   val_auc = 0.025   
+
+
+Train 775 iterations in 59 Seconds.
+Final risk based on the train set: 0.21
+
+   1/4236   risk = 0.21  time = 3   val_auc = 0.025   
+ 106/4236   risk = 0.21  time = 5246902   val_auc = 0.025   
+ 212/4236   risk = 0.22  time = 10185694   val_auc = 0.025   
+ 318/4236   risk = 0.22  time = 15306153   val_auc = 0.025   
+ 424/4236   risk = 0.22  time = 20410106   val_auc = 0.025   
+ 530/4236   risk = 0.22  time = 25554058   val_auc = 0.025   
+ 636/4236   risk = 0.22  time = 30624708   val_auc = 0.025   
+ 742/4236   risk = 0.22  time = 35790684   val_auc = 0.025   
+ 848/4236   risk = 0.22  time = 40802463   val_auc = 0.025   
+ 954/4236   risk = 0.22  time = 45756805   val_auc = 0.025   
+1060/4236   risk = 0.22  time = 50680476   val_auc = 0.025   
+1166/4236   risk = 0.22  time = 55600853   val_auc = 0.025   
+1272/4236   risk = 0.22  time = 60833457   val_auc = 0.025   
+1378/4236   risk = 0.22  time = 65976839   val_auc = 0.025   
+1484/4236   risk = 0.22  time = 70953126   val_auc = 0.025   
+1590/4236   risk = 0.22  time = 75956286   val_auc = 0.025   
+1696/4236   risk = 0.22  time = 81030429   val_auc = 0.025   
+1802/4236   risk = 0.22  time = 86184978   val_auc = 0.025   
+1908/4236   risk = 0.22  time = 91231756   val_auc = 0.025   
+2014/4236   risk = 0.22  time = 96222073   val_auc = 0.025   
+2120/4236   risk = 0.22  time = 101304304   val_auc = 0.025   
+2226/4236   risk = 0.22  time = 106341720   val_auc = 0.025   
+2332/4236   risk = 0.22  time = 111329317   val_auc = 0.025   
+2438/4236   risk = 0.22  time = 116541576   val_auc = 0.025   
+2544/4236   risk = 0.22  time = 121665245   val_auc = 0.025   
+2650/4236   risk = 0.22  time = 126739155   val_auc = 0.025   
+2756/4236   risk = 0.22  time = 131838558   val_auc = 0.025   
+2862/4236   risk = 0.22  time = 137110209   val_auc = 0.025   
+2968/4236   risk = 0.22  time = 142282429   val_auc = 0.025   
+3074/4236   risk = 0.22  time = 147324107   val_auc = 0.025   
+3180/4236   risk = 0.22  time = 152696497   val_auc = 0.025   
+3286/4236   risk = 0.22  time = 157791702   val_auc = 0.025   
+3392/4236   risk = 0.22  time = 162830851   val_auc = 0.025   
+3498/4236   risk = 0.22  time = 167950719   val_auc = 0.025   
+3604/4236   risk = 0.22  time = 173475234   val_auc = 0.025   
+3710/4236   risk = 0.22  time = 178483807   val_auc = 0.025   
+3816/4236   risk = 0.22  time = 183505224   val_auc = 0.025   
+3922/4236   risk = 0.22  time = 188564993   val_auc = 0.025   
+4028/4236   risk = 0.22  time = 193656845   val_auc = 0.025   
+4134/4236   risk = 0.22  time = 198929540   val_auc = 0.025   
+
+
+Train 4236 iterations in 203 Seconds.
+Final risk based on the train set: 0.22
+
+DEBUG [19:08:33.146] [mlr3]  Learner 'acc_hcwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=165]
+### [bt]: Calculation finished!

@@ -1,0 +1,165 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-01 18:09:22] Loading new learner LearnerClassifCWB
+[2021-08-01 18:09:22] Loading new learner LearnerClassifHCWB
+[2021-08-01 18:09:22] Loading new learner
+[2021-08-01 18:09:22] Loading tasks
+[2021-08-01 18:09:26] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=158]
+### [bt]: Generating problem instance for problem '7592-fold3' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '7592-fold3' for job 158 (seed = 31573) ...
+DEBUG [18:09:27.299] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [18:09:27.381] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' with 39074 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+Warning in checkCores(task, self$param_set$values$ncores) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  riskauc = 0.22   time = 3   val_auc = 0.22   
+ 125/5000   risk = 0.36  riskauc = 0.1   time = 1935809   val_auc = 0.1   
+ 250/5000   risk = 0.33  riskauc = 0.091   time = 4026411   val_auc = 0.092   
+ 375/5000   risk = 0.33  riskauc = 0.088   time = 6285984   val_auc = 0.09   
+ 500/5000   risk = 0.34  riskauc = 0.087   time = 8494189   val_auc = 0.09   
+ 625/5000   risk = 0.34  riskauc = 0.086   time = 10755744   val_auc = 0.089   
+ 750/5000   risk = 0.35  riskauc = 0.085   time = 13067046   val_auc = 0.088   
+ 875/5000   risk = 0.35  riskauc = 0.084   time = 15384084   val_auc = 0.088   
+1000/5000   risk = 0.35  riskauc = 0.083   time = 17811215   val_auc = 0.087   
+1125/5000   risk = 0.36  riskauc = 0.083   time = 20347240   val_auc = 0.087   
+1250/5000   risk = 0.36  riskauc = 0.083   time = 22927225   val_auc = 0.087   
+
+
+Train 1359 iterations in 26 Seconds.
+Final risk based on the train set: 0.36
+
+   1/3652   risk = 0.36  riskauc = 0.083   time = 2   val_auc = 0.087   
+  91/3652   risk = 0.36  riskauc = 0.083   time = 991165   val_auc = 0.087   
+ 182/3652   risk = 0.36  riskauc = 0.083   time = 2065459   val_auc = 0.087   
+ 273/3652   risk = 0.36  riskauc = 0.083   time = 3171419   val_auc = 0.087   
+ 364/3652   risk = 0.36  riskauc = 0.083   time = 4187565   val_auc = 0.087   
+ 455/3652   risk = 0.36  riskauc = 0.082   time = 5104352   val_auc = 0.087   
+ 546/3652   risk = 0.36  riskauc = 0.082   time = 6040894   val_auc = 0.087   
+ 637/3652   risk = 0.36  riskauc = 0.082   time = 7067605   val_auc = 0.087   
+ 728/3652   risk = 0.36  riskauc = 0.082   time = 8205606   val_auc = 0.087   
+ 819/3652   risk = 0.36  riskauc = 0.082   time = 9278370   val_auc = 0.087   
+ 910/3652   risk = 0.36  riskauc = 0.082   time = 10352801   val_auc = 0.087   
+1001/3652   risk = 0.36  riskauc = 0.082   time = 11435411   val_auc = 0.087   
+1092/3652   risk = 0.36  riskauc = 0.082   time = 12617544   val_auc = 0.087   
+1183/3652   risk = 0.36  riskauc = 0.082   time = 13647646   val_auc = 0.087   
+1274/3652   risk = 0.36  riskauc = 0.082   time = 14731608   val_auc = 0.087   
+1365/3652   risk = 0.36  riskauc = 0.082   time = 15845199   val_auc = 0.087   
+1456/3652   risk = 0.36  riskauc = 0.082   time = 16896724   val_auc = 0.087   
+1547/3652   risk = 0.36  riskauc = 0.082   time = 18012747   val_auc = 0.087   
+1638/3652   risk = 0.36  riskauc = 0.082   time = 19187438   val_auc = 0.087   
+1729/3652   risk = 0.36  riskauc = 0.082   time = 20341573   val_auc = 0.087   
+1820/3652   risk = 0.36  riskauc = 0.082   time = 21466795   val_auc = 0.087   
+1911/3652   risk = 0.36  riskauc = 0.082   time = 22578810   val_auc = 0.087   
+2002/3652   risk = 0.36  riskauc = 0.082   time = 23800440   val_auc = 0.087   
+2093/3652   risk = 0.36  riskauc = 0.082   time = 25231986   val_auc = 0.087   
+2184/3652   risk = 0.36  riskauc = 0.082   time = 26621132   val_auc = 0.087   
+2275/3652   risk = 0.36  riskauc = 0.082   time = 27978945   val_auc = 0.087   
+2366/3652   risk = 0.36  riskauc = 0.082   time = 29259072   val_auc = 0.087   
+2457/3652   risk = 0.36  riskauc = 0.082   time = 30297988   val_auc = 0.087   
+2548/3652   risk = 0.36  riskauc = 0.082   time = 31282905   val_auc = 0.087   
+2639/3652   risk = 0.36  riskauc = 0.082   time = 32303364   val_auc = 0.087   
+2730/3652   risk = 0.36  riskauc = 0.082   time = 33353539   val_auc = 0.087   
+2821/3652   risk = 0.36  riskauc = 0.082   time = 34500908   val_auc = 0.087   
+2912/3652   risk = 0.36  riskauc = 0.082   time = 35552899   val_auc = 0.087   
+3003/3652   risk = 0.36  riskauc = 0.082   time = 36583678   val_auc = 0.087   
+3094/3652   risk = 0.36  riskauc = 0.082   time = 37605288   val_auc = 0.087   
+3185/3652   risk = 0.36  riskauc = 0.082   time = 38602570   val_auc = 0.087   
+3276/3652   risk = 0.36  riskauc = 0.082   time = 39638554   val_auc = 0.087   
+3367/3652   risk = 0.36  riskauc = 0.082   time = 40660328   val_auc = 0.087   
+3458/3652   risk = 0.36  riskauc = 0.082   time = 41682179   val_auc = 0.087   
+3549/3652   risk = 0.36  riskauc = 0.082   time = 42700706   val_auc = 0.087   
+3640/3652   risk = 0.36  riskauc = 0.082   time = 43978121   val_auc = 0.087   
+
+
+Train 3652 iterations in 44 Seconds.
+Final risk based on the train set: 0.36
+
+DEBUG [18:10:42.052] [mlr3]  Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [18:10:42.071] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [18:10:42.074] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' with 39074 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+Warning in checkCores(task, self$param_set$values$ncores) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  time = 2   val_auc = 0.22   
+ 125/5000   risk = 0.36  time = 1327442   val_auc = 0.1   
+ 250/5000   risk = 0.33  time = 2651145   val_auc = 0.092   
+ 375/5000   risk = 0.33  time = 3956589   val_auc = 0.09   
+ 500/5000   risk = 0.34  time = 5282186   val_auc = 0.09   
+ 625/5000   risk = 0.34  time = 6586271   val_auc = 0.089   
+ 750/5000   risk = 0.35  time = 7952637   val_auc = 0.088   
+ 875/5000   risk = 0.35  time = 9279305   val_auc = 0.088   
+1000/5000   risk = 0.35  time = 10611197   val_auc = 0.087   
+1125/5000   risk = 0.36  time = 11927564   val_auc = 0.087   
+1250/5000   risk = 0.36  time = 13293051   val_auc = 0.087   
+
+
+Train 1359 iterations in 14 Seconds.
+Final risk based on the train set: 0.36
+
+   1/3652   risk = 0.36  time = 2   val_auc = 0.087   
+  91/3652   risk = 0.36  time = 775279   val_auc = 0.087   
+ 182/3652   risk = 0.36  time = 1470944   val_auc = 0.087   
+ 273/3652   risk = 0.36  time = 2166324   val_auc = 0.087   
+ 364/3652   risk = 0.36  time = 2987633   val_auc = 0.087   
+ 455/3652   risk = 0.36  time = 3852594   val_auc = 0.087   
+ 546/3652   risk = 0.36  time = 4770809   val_auc = 0.087   
+ 637/3652   risk = 0.36  time = 5714126   val_auc = 0.087   
+ 728/3652   risk = 0.36  time = 6645551   val_auc = 0.087   
+ 819/3652   risk = 0.36  time = 7546609   val_auc = 0.087   
+ 910/3652   risk = 0.36  time = 8494483   val_auc = 0.087   
+1001/3652   risk = 0.36  time = 9391751   val_auc = 0.087   
+1092/3652   risk = 0.36  time = 10207960   val_auc = 0.087   
+1183/3652   risk = 0.36  time = 11055047   val_auc = 0.087   
+1274/3652   risk = 0.36  time = 11939039   val_auc = 0.087   
+1365/3652   risk = 0.36  time = 12693431   val_auc = 0.087   
+1456/3652   risk = 0.36  time = 13400360   val_auc = 0.087   
+1547/3652   risk = 0.36  time = 14076166   val_auc = 0.087   
+1638/3652   risk = 0.36  time = 14788433   val_auc = 0.087   
+1729/3652   risk = 0.36  time = 15475660   val_auc = 0.087   
+1820/3652   risk = 0.36  time = 16153106   val_auc = 0.087   
+1911/3652   risk = 0.36  time = 16871543   val_auc = 0.087   
+2002/3652   risk = 0.36  time = 17563372   val_auc = 0.087   
+2093/3652   risk = 0.36  time = 18247547   val_auc = 0.087   
+2184/3652   risk = 0.36  time = 19120909   val_auc = 0.087   
+2275/3652   risk = 0.36  time = 19852747   val_auc = 0.087   
+2366/3652   risk = 0.36  time = 20602241   val_auc = 0.087   
+2457/3652   risk = 0.36  time = 21325393   val_auc = 0.087   
+2548/3652   risk = 0.36  time = 22049219   val_auc = 0.087   
+2639/3652   risk = 0.36  time = 22807818   val_auc = 0.087   
+2730/3652   risk = 0.36  time = 23543251   val_auc = 0.087   
+2821/3652   risk = 0.36  time = 24271123   val_auc = 0.087   
+2912/3652   risk = 0.36  time = 25015537   val_auc = 0.087   
+3003/3652   risk = 0.36  time = 25731248   val_auc = 0.087   
+3094/3652   risk = 0.36  time = 26460547   val_auc = 0.087   
+3185/3652   risk = 0.36  time = 27214022   val_auc = 0.087   
+3276/3652   risk = 0.36  time = 27952052   val_auc = 0.087   
+3367/3652   risk = 0.36  time = 28706069   val_auc = 0.087   
+3458/3652   risk = 0.36  time = 29445394   val_auc = 0.087   
+3549/3652   risk = 0.36  time = 30168852   val_auc = 0.087   
+3640/3652   risk = 0.36  time = 30884173   val_auc = 0.087   
+
+
+Train 3652 iterations in 30 Seconds.
+Final risk based on the train set: 0.36
+
+DEBUG [18:11:30.774] [mlr3]  Learner 'acc_hcwb' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=158]
+### [bt]: Calculation finished!

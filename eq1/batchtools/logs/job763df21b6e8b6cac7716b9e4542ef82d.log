@@ -1,0 +1,75 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-01 21:54:35] Loading new learner LearnerClassifCWB
+[2021-08-01 21:54:35] Loading new learner LearnerClassifHCWB
+[2021-08-01 21:54:35] Loading new learner
+[2021-08-01 21:54:35] Loading tasks
+[2021-08-01 21:54:38] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=174]
+### [bt]: Generating problem instance for problem '168908-fold4' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168908-fold4' for job 174 (seed = 31589) ...
+DEBUG [21:54:40.442] [mlr3]  Skip subsetting of task 'Task 168908: christine (Supervised Classification)' 
+DEBUG [21:54:40.537] [mlr3]  Calling train method of Learner 'acc_hcwb' on task 'Task 168908: christine (Supervised Classification)' with 4334 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.68  riskauc = 0.28   time = 2   val_auc = 0.3   
+ 125/5000   risk = 0.51  riskauc = 0.21   time = 4605891   val_auc = 0.23   
+
+
+Train 224 iterations in 9 Seconds.
+Final risk based on the train set: 0.39
+
+   1/4787   risk = 0.4  riskauc = 0.19   time = 2   val_auc = 0.21   
+ 120/4787   risk = 0.41  riskauc = 0.19   time = 4258023   val_auc = 0.21   
+ 240/4787   risk = 0.4  riskauc = 0.19   time = 7273773   val_auc = 0.21   
+ 360/4787   risk = 0.39  riskauc = 0.19   time = 10349427   val_auc = 0.21   
+ 480/4787   risk = 0.38  riskauc = 0.19   time = 13159451   val_auc = 0.21   
+ 600/4787   risk = 0.38  riskauc = 0.19   time = 16037561   val_auc = 0.21   
+ 720/4787   risk = 0.37  riskauc = 0.19   time = 19094474   val_auc = 0.21   
+ 840/4787   risk = 0.36  riskauc = 0.2   time = 22142091   val_auc = 0.21   
+ 960/4787   risk = 0.35  riskauc = 0.2   time = 25210793   val_auc = 0.21   
+1080/4787   risk = 0.34  riskauc = 0.2   time = 28134662   val_auc = 0.21   
+1200/4787   risk = 0.34  riskauc = 0.2   time = 30885715   val_auc = 0.21   
+1320/4787   risk = 0.33  riskauc = 0.2   time = 33700386   val_auc = 0.21   
+1440/4787   risk = 0.32  riskauc = 0.2   time = 36533307   val_auc = 0.21   
+1560/4787   risk = 0.32  riskauc = 0.2   time = 39243056   val_auc = 0.21   
+1680/4787   risk = 0.31  riskauc = 0.2   time = 41924529   val_auc = 0.21   
+1800/4787   risk = 0.31  riskauc = 0.2   time = 44679938   val_auc = 0.21   
+1920/4787   risk = 0.3  riskauc = 0.2   time = 47538563   val_auc = 0.21   
+2040/4787   risk = 0.3  riskauc = 0.2   time = 50216116   val_auc = 0.21   
+2160/4787   risk = 0.29  riskauc = 0.2   time = 53071836   val_auc = 0.21   
+2280/4787   risk = 0.29  riskauc = 0.2   time = 55717516   val_auc = 0.21   
+2400/4787   risk = 0.28  riskauc = 0.2   time = 58456819   val_auc = 0.21   
+2520/4787   risk = 0.28  riskauc = 0.2   time = 61154499   val_auc = 0.22   
+2640/4787   risk = 0.27  riskauc = 0.2   time = 63950089   val_auc = 0.22   
+2760/4787   risk = 0.27  riskauc = 0.2   time = 66583832   val_auc = 0.22   
+2880/4787   risk = 0.26  riskauc = 0.2   time = 69329962   val_auc = 0.22   
+3000/4787   risk = 0.26  riskauc = 0.2   time = 71985668   val_auc = 0.22   
+3120/4787   risk = 0.25  riskauc = 0.2   time = 74835705   val_auc = 0.22   
+3240/4787   risk = 0.25  riskauc = 0.2   time = 77540596   val_auc = 0.22   
+3360/4787   risk = 0.25  riskauc = 0.2   time = 81325753   val_auc = 0.22   
+3480/4787   risk = 0.24  riskauc = 0.2   time = 84024653   val_auc = 0.22   
+3600/4787   risk = 0.24  riskauc = 0.2   time = 86793599   val_auc = 0.22   
+3720/4787   risk = 0.23  riskauc = 0.2   time = 89831541   val_auc = 0.22   
+3840/4787   risk = 0.23  riskauc = 0.2   time = 92572687   val_auc = 0.22   
+3960/4787   risk = 0.23  riskauc = 0.2   time = 95932203   val_auc = 0.22   
+4080/4787   risk = 0.22  riskauc = 0.2   time = 99382272   val_auc = 0.22   
+4200/4787   risk = 0.22  riskauc = 0.2   time = 102062320   val_auc = 0.22   
+4320/4787   risk = 0.22  riskauc = 0.2   time = 105246291   val_auc = 0.22   
+4440/4787   risk = 0.21  riskauc = 0.2   time = 108893145   val_auc = 0.22   
