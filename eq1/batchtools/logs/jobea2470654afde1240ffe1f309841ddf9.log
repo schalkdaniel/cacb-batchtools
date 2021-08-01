@@ -1,0 +1,115 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+[2021-08-01 17:33:03] Loading new learner LearnerClassifCWB
+[2021-08-01 17:33:03] Loading new learner LearnerClassifHCWB
+[2021-08-01 17:33:03] Loading new learner
+[2021-08-01 17:33:03] Loading tasks
+[2021-08-01 17:33:06] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=1]
+### [bt]: Generating problem instance for problem 'spam-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold1' for job 1 (seed = 31416) ...
+DEBUG [17:33:06.804] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [17:33:06.808] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'spam' with 3680 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.64  riskauc = 0.78   time = 2   
+ 125/5000   risk = 0.23  riskauc = 0.97   time = 1188920   
+ 250/5000   risk = 0.2  riskauc = 0.98   time = 2407314   
+ 375/5000   risk = 0.18  riskauc = 0.98   time = 3539790   
+ 500/5000   risk = 0.17  riskauc = 0.98   time = 5271069   
+ 625/5000   risk = 0.17  riskauc = 0.98   time = 6434855   
+ 750/5000   risk = 0.16  riskauc = 0.98   time = 7603991   
+ 875/5000   risk = 0.16  riskauc = 0.98   time = 8876137   
+1000/5000   risk = 0.16  riskauc = 0.98   time = 10046996   
+1125/5000   risk = 0.15  riskauc = 0.98   time = 11256934   
+1250/5000   risk = 0.15  riskauc = 0.98   time = 12408856   
+1375/5000   risk = 0.15  riskauc = 0.98   time = 13539579   
+1500/5000   risk = 0.15  riskauc = 0.98   time = 14778445   
+1625/5000   risk = 0.14  riskauc = 0.98   time = 15938670   
+1750/5000   risk = 0.14  riskauc = 0.98   time = 17076415   
+1875/5000   risk = 0.14  riskauc = 0.98   time = 18231800   
+2000/5000   risk = 0.14  riskauc = 0.98   time = 19442868   
+2125/5000   risk = 0.14  riskauc = 0.98   time = 20588493   
+2250/5000   risk = 0.14  riskauc = 0.98   time = 21745513   
+2375/5000   risk = 0.13  riskauc = 0.98   time = 22864583   
+2500/5000   risk = 0.13  riskauc = 0.98   time = 24039847   
+2625/5000   risk = 0.13  riskauc = 0.98   time = 25238752   
+2750/5000   risk = 0.13  riskauc = 0.98   time = 26432940   
+2875/5000   risk = 0.13  riskauc = 0.98   time = 27616096   
+3000/5000   risk = 0.13  riskauc = 0.98   time = 28720668   
+3125/5000   risk = 0.13  riskauc = 0.98   time = 29876589   
+3250/5000   risk = 0.13  riskauc = 0.98   time = 30987473   
+3375/5000   risk = 0.13  riskauc = 0.98   time = 32112799   
+3500/5000   risk = 0.13  riskauc = 0.98   time = 33241861   
+3625/5000   risk = 0.12  riskauc = 0.98   time = 34363443   
+3750/5000   risk = 0.12  riskauc = 0.98   time = 35522168   
+3875/5000   risk = 0.12  riskauc = 0.98   time = 36723315   
+4000/5000   risk = 0.12  riskauc = 0.98   time = 37948250   
+4125/5000   risk = 0.12  riskauc = 0.98   time = 39154724   
+4250/5000   risk = 0.12  riskauc = 0.98   time = 40307925   
+4375/5000   risk = 0.12  riskauc = 0.98   time = 41471078   
+4500/5000   risk = 0.12  riskauc = 0.98   time = 42604804   
+4625/5000   risk = 0.12  riskauc = 0.98   time = 43679234   
+4750/5000   risk = 0.12  riskauc = 0.98   time = 44876457   
+4875/5000   risk = 0.12  riskauc = 0.98   time = 46223892   
+5000/5000   risk = 0.12  riskauc = 0.98   time = 47535774   
+
+
+Train 5000 iterations in 47 Seconds.
+Final risk based on the train set: 0.12
+
+DEBUG [17:33:57.025] [mlr3]  Learner 'bin_cwb_nb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [17:33:57.039] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [17:33:57.043] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on task 'spam' with 3680 observations {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.64  time = 2   
+ 125/5000   risk = 0.23  time = 1066040   
+ 250/5000   risk = 0.2  time = 2201753   
+ 375/5000   risk = 0.18  time = 3256921   
+ 500/5000   risk = 0.17  time = 4299439   
+ 625/5000   risk = 0.17  time = 5402339   
+ 750/5000   risk = 0.16  time = 6430493   
+ 875/5000   risk = 0.16  time = 7569811   
+1000/5000   risk = 0.16  time = 8683998   
+1125/5000   risk = 0.15  time = 9814788   
+1250/5000   risk = 0.15  time = 10881867   
+1375/5000   risk = 0.15  time = 11947140   
+1500/5000   risk = 0.15  time = 13086784   
+1625/5000   risk = 0.14  time = 14221222   
+1750/5000   risk = 0.14  time = 15418585   
+1875/5000   risk = 0.14  time = 16500750   
+2000/5000   risk = 0.14  time = 17692360   
+2125/5000   risk = 0.14  time = 18921996   
+2250/5000   risk = 0.14  time = 20012167   
+2375/5000   risk = 0.13  time = 21140551   
+2500/5000   risk = 0.13  time = 22189812   
+2625/5000   risk = 0.13  time = 23394180   
+2750/5000   risk = 0.13  time = 24565970   
+2875/5000   risk = 0.13  time = 25637149   
+3000/5000   risk = 0.13  time = 26729307   
+3125/5000   risk = 0.13  time = 27864525   
+3250/5000   risk = 0.13  time = 28960468   
+3375/5000   risk = 0.13  time = 30062174   
+3500/5000   risk = 0.13  time = 31179406   
+3625/5000   risk = 0.12  time = 32318408   
+3750/5000   risk = 0.12  time = 33444055   
+3875/5000   risk = 0.12  time = 34622371   
+4000/5000   risk = 0.12  time = 35834372   
+4125/5000   risk = 0.12  time = 37073321   
+4250/5000   risk = 0.12  time = 38128638   
+4375/5000   risk = 0.12  time = 39246203   
+4500/5000   risk = 0.12  time = 40512106   
+4625/5000   risk = 0.12  time = 41619197   
+4750/5000   risk = 0.12  time = 42745265   
+4875/5000   risk = 0.12  time = 43912556   
+5000/5000   risk = 0.12  time = 45014289   
+
+
+Train 5000 iterations in 45 Seconds.
+Final risk based on the train set: 0.12
+
+DEBUG [17:34:44.500] [mlr3]  Learner 'bin_cwb_nb' on task 'spam' succeeded to fit a model {learner: <LearnerClassifCompboost/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=1]
+Warning in gzfile(file, mode) :
+  cannot open compressed file '/home/user/repos/cacb-batchtools/eq1/batchtools/updates/jobea2470654afde1240ffe1f309841ddf9-1.rds', probable reason 'No such file or directory'
+Error in gzfile(file, mode) : cannot open the connection

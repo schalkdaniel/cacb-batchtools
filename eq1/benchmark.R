@@ -37,7 +37,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
 
   #ids_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
   #ids_resubmit = intersect(ids_resubmit, jt$job.id[grepl("spam", jt$problem)])
-  #ids_resubmit = c(ids_resubmit, 61)
+q #ids_resubmit = c(ids_resubmit, 61)
 
   #hcwb_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
   #hcwb_resubmit = intersect(seq_len(75L), hcwb_resubmit)
@@ -45,6 +45,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   #not_done = setdiff(seq_len(100L), findDone()$job.id)
   #not_done = unique(c(not_done, ids_resubmit))
 
+  submitJobs(151, reg = reg)
   submitJobs(findNotDone())
 } else {
 
@@ -63,6 +64,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   #   #Worker$new("192.168.9.132", ncpus = 1L),
   #   Worker$new("192.168.9.133", ncpus = 1L)))
 
+  reg$cluster.functions = makeClusterFunctionsInteractive(external = FALSE)
   reg$default.resources = list(
     #walltime = 3600L * 2,
     #memory = 1024L * 16L,
@@ -71,6 +73,7 @@ if (dir.exists(BATCHTOOLS_DIR)) {
     ncpus = 1L,
     nodes = 1L
   )
+
 
   saveRegistry(reg)
 

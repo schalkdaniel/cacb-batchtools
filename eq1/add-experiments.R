@@ -41,6 +41,8 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   ## Learner is constructed two times, one for logging and one for the
   ## actual training with time tracking:
   if (grepl("-new", lid)) {
+    lid = gsub("-new", "", lid)
+
     learner    = constructLearner2(lid, raw_learner = TRUE)
     learner0   = constructLearner2(lid, raw_learner = TRUE)
 
@@ -50,6 +52,9 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
     learner$param_set$values$additional_auc_task = task_test
     learner$param_set$values$use_stopper = FALSE
     learner$param_set$values$use_stopper_auc = TRUE
+
+    learner0$param_set$values$use_stopper = FALSE
+    learner0$param_set$values$use_stopper_auc = TRUE
 
     learner$train(task_train)
     learner0$train(task_train)
@@ -68,9 +73,6 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
     learner0$train(task_train)
   }
 
-  #auc_trace = getCboostMsrsTrace(learner, list(train = task_train, test = task_test),
-    #SCORE_MEASURES, iters = seq(4, 5000, by = 4))
-
   log  = getCboostLog(learner)
   log0 = getCboostLog(learner0)
 
@@ -81,5 +83,5 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 
 addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
 #addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
-#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
+addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
 

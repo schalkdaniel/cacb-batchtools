@@ -75,6 +75,8 @@ LearnerClassifHCWB = R6Class("LearnerClassifHCWB",
       ## Split data into train and validation:
       if (self$param_set$values$oob_fraction > 0) {
         oobf = self$param_set$values$oob_fraction
+
+        set.seed(self$param_set$values$oob_seed)
         val_idx   = sample(seq_len(task$nrow), trunc(oobf * task$nrow))
         train_idx = setdiff(seq_len(task$nrow), val_idx)
 
