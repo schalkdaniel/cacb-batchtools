@@ -1,0 +1,30 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-02 16:45:58] Loading new learner LearnerClassifCWB
+[2021-08-02 16:45:58] Loading new learner LearnerClassifHCWB
+[2021-08-02 16:45:58] Loading new learner
+[2021-08-02 16:45:58] Loading tasks
+[2021-08-02 16:46:02] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=122]
+### [bt]: Generating problem instance for problem '168908-fold5' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168908-fold5' for job 122 (seed = 31537) ...
+DEBUG [16:46:03.702] [mlr3]  Skip subsetting of task 'Task 168908: christine (Supervised Classification)' 
+DEBUG [16:46:03.795] [mlr3]  Calling train method of Learner 'bin_cwb_b' on task 'Task 168908: christine (Supervised Classification)' with 4336 observations {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>}
