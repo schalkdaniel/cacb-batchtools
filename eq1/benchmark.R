@@ -12,11 +12,7 @@ if (! dir.exists(BATCHTOOLS_DIR)) {
   suppressMessages(library(mlr3pipelines))
   suppressMessages(library(paradox))
 
-#  source(paste0(BM_DIR, "classifCompboost.R"))
-  #source(paste0(BM_DIR, "learner-src/classifCWB.R"))
-  #source(paste0(BM_DIR, "learner-src/classifHCWB.R"))
-  #source(paste0(BM_DIR, "learner-src/learner-helper.R"))
-  #source(paste0(BM_DIR, "helper.R"))
+  source(paste0(BM_DIR, "helper.R"))
   source(paste0(BM_DIR, "setup.R"))
   lapply(FILES, function(f) source(paste0(BM_DIR, f)))
 }
@@ -64,7 +60,7 @@ q #ids_resubmit = c(ids_resubmit, 61)
   #   #Worker$new("192.168.9.132", ncpus = 1L),
   #   Worker$new("192.168.9.133", ncpus = 1L)))
 
-  reg$cluster.functions = makeClusterFunctionsInteractive(external = FALSE)
+  reg$cluster.functions = makeClusterFunctionsInteractive(external = TRUE)
   reg$default.resources = list(
     #walltime = 3600L * 2,
     #memory = 1024L * 16L,
@@ -73,7 +69,6 @@ q #ids_resubmit = c(ids_resubmit, 61)
     ncpus = 1L,
     nodes = 1L
   )
-
 
   saveRegistry(reg)
 

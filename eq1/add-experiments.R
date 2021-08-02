@@ -47,13 +47,10 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   learner$param_set$values$additional_auc_task = task_test
   learner$train(task_train)
 
-  log      = getCboostLog(learner)
-  log$time = log0$time
-
-  return(log)
+  return(getCboostLog(learner))
 })
 
 addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
 #addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
-addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
+#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
 

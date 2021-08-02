@@ -1,0 +1,80 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-02 02:09:46] Loading new learner LearnerClassifCWB
+[2021-08-02 02:09:46] Loading new learner LearnerClassifHCWB
+[2021-08-02 02:09:46] Loading new learner
+[2021-08-02 02:09:46] Loading tasks
+[2021-08-02 02:09:49] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=58]
+### [bt]: Generating problem instance for problem '168335-fold2' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '168335-fold2' for job 58 (seed = 31473) ...
+DEBUG [02:09:52.421] [mlr3]  Skip subsetting of task 'Task 168335: MiniBooNE (Supervised Classification)' 
+DEBUG [02:09:52.514] [mlr3]  Calling train method of Learner 'acc_acwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' with 104051 observations {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.61  oob_risk = 0.61   test_auc = 0.13   time = 3   val_auc = 0.13   
+ 125/5000   risk = 0.26  oob_risk = 0.26   test_auc = 0.041   time = 12185688   val_auc = 0.04   
+ 250/5000   risk = 0.21  oob_risk = 0.21   test_auc = 0.03   time = 24467751   val_auc = 0.03   
+ 375/5000   risk = 0.2  oob_risk = 0.21   test_auc = 0.028   time = 36063113   val_auc = 0.027   
+ 500/5000   risk = 0.2  oob_risk = 0.22   test_auc = 0.027   time = 47608956   val_auc = 0.026   
+ 625/5000   risk = 0.2  oob_risk = 0.23   test_auc = 0.027   time = 59031244   val_auc = 0.026   
+ 750/5000   risk = 0.21  oob_risk = 0.24   test_auc = 0.027   time = 70646181   val_auc = 0.026   
+ 875/5000   risk = 0.21  oob_risk = 0.25   test_auc = 0.027   time = 82266364   val_auc = 0.026   
+1000/5000   risk = 0.22  oob_risk = 0.25   test_auc = 0.026   time = 93699976   val_auc = 0.026   
+1125/5000   risk = 0.22  oob_risk = 0.26   test_auc = 0.027   time = 105170306   val_auc = 0.026   
+1250/5000   risk = 0.22  oob_risk = 0.26   test_auc = 0.027   time = 116707170   val_auc = 0.026   
+1375/5000   risk = 0.22  oob_risk = 0.27   test_auc = 0.027   time = 128274416   val_auc = 0.026   
+1500/5000   risk = 0.22  oob_risk = 0.27   test_auc = 0.027   time = 139846211   val_auc = 0.027   
+1625/5000   risk = 0.22  oob_risk = 0.28   test_auc = 0.027   time = 151432907   val_auc = 0.027   
+1750/5000   risk = 0.22  oob_risk = 0.28   test_auc = 0.027   time = 163061760   val_auc = 0.027   
+1875/5000   risk = 0.23  oob_risk = 0.29   test_auc = 0.027   time = 174663714   val_auc = 0.027   
+2000/5000   risk = 0.23  oob_risk = 0.29   test_auc = 0.027   time = 186103639   val_auc = 0.027   
+2125/5000   risk = 0.23  oob_risk = 0.29   test_auc = 0.027   time = 197818073   val_auc = 0.027   
+2250/5000   risk = 0.23  oob_risk = 0.29   test_auc = 0.027   time = 209350839   val_auc = 0.027   
+2375/5000   risk = 0.23  oob_risk = 0.3   test_auc = 0.027   time = 220785862   val_auc = 0.027   
+2500/5000   risk = 0.23  oob_risk = 0.3   test_auc = 0.027   time = 232413676   val_auc = 0.027   
+2625/5000   risk = 0.23  oob_risk = 0.3   test_auc = 0.028   time = 244138311   val_auc = 0.028   
+2750/5000   risk = 0.23  oob_risk = 0.3   test_auc = 0.028   time = 255680234   val_auc = 0.028   
+2875/5000   risk = 0.23  oob_risk = 0.31   test_auc = 0.028   time = 267399087   val_auc = 0.028   
+3000/5000   risk = 0.23  oob_risk = 0.31   test_auc = 0.028   time = 279053568   val_auc = 0.028   
+3125/5000   risk = 0.23  oob_risk = 0.31   test_auc = 0.028   time = 290740055   val_auc = 0.028   
+3250/5000   risk = 0.23  oob_risk = 0.3   test_auc = 0.028   time = 302468617   val_auc = 0.028   
+3375/5000   risk = 0.24  oob_risk = 0.31   test_auc = 0.029   time = 314231277   val_auc = 0.028   
+3500/5000   risk = 0.24  oob_risk = 0.31   test_auc = 0.029   time = 325784003   val_auc = 0.029   
+3625/5000   risk = 0.24  oob_risk = 0.31   test_auc = 0.029   time = 337461233   val_auc = 0.029   
+3750/5000   risk = 0.24  oob_risk = 0.32   test_auc = 0.029   time = 349127267   val_auc = 0.029   
+3875/5000   risk = 0.24  oob_risk = 0.32   test_auc = 0.029   time = 360753246   val_auc = 0.03   
+4000/5000   risk = 0.24  oob_risk = 0.33   test_auc = 0.029   time = 372552989   val_auc = 0.03   
+4125/5000   risk = 0.25  oob_risk = 0.33   test_auc = 0.03   time = 384462195   val_auc = 0.03   
+4250/5000   risk = 0.25  oob_risk = 0.34   test_auc = 0.03   time = 396043970   val_auc = 0.031   
+4375/5000   risk = 0.26  oob_risk = 0.35   test_auc = 0.031   time = 407949046   val_auc = 0.032   
+4500/5000   risk = 0.27  oob_risk = 0.36   test_auc = 0.032   time = 419761338   val_auc = 0.033   
+4625/5000   risk = 0.28  oob_risk = 0.37   test_auc = 0.033   time = 431465381   val_auc = 0.034   
+4750/5000   risk = 0.29  oob_risk = 0.38   test_auc = 0.034   time = 443518480   val_auc = 0.034   
+4875/5000   risk = 0.29  oob_risk = 0.38   test_auc = 0.034   time = 455293041   val_auc = 0.034   
+5000/5000   risk = 0.31  oob_risk = 0.39   test_auc = 0.034   time = 467354400   val_auc = 0.034   
+
+
+Train 5000 iterations in 468 Seconds.
+Final risk based on the train set: 0.31
+
+DEBUG [02:17:50.129] [mlr3]  Learner 'acc_acwb' on task 'Task 168335: MiniBooNE (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=58]
+### [bt]: Calculation finished!
