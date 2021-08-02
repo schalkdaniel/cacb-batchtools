@@ -34,3 +34,99 @@ DEBUG [10:56:36.604] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on tas
  375/5000   risk = 0.76  oob_risk = 0.77   test_auc = 0.3   time = 109236499   val_auc = 0.3   
  500/5000   risk = 1.2  oob_risk = 1.2   test_auc = 0.34   time = 145493180   val_auc = 0.33   
  625/5000   risk = 2.4  oob_risk = 2.4   test_auc = 0.39   time = 180474229   val_auc = 0.39   
+ 750/5000   risk = 4.6  oob_risk = 4.6   test_auc = 0.39   time = 217216167   val_auc = 0.39   
+ 875/5000   risk = 7.2  oob_risk = 7.3   test_auc = 0.38   time = 256621683   val_auc = 0.37   
+1000/5000   risk = 10  oob_risk = 10   test_auc = 0.38   time = 295068380   val_auc = 0.38   
+1125/5000   risk = 12  oob_risk = 12   test_auc = 0.39   time = 334639307   val_auc = 0.39   
+1250/5000   risk = 16  oob_risk = 17   test_auc = 0.4   time = 372196199   val_auc = 0.4   
+1375/5000   risk = 19  oob_risk = 19   test_auc = 0.39   time = 410947341   val_auc = 0.38   
+1500/5000   risk = 23  oob_risk = inf   test_auc = 0.38   time = 449111058   val_auc = 0.37   
+1625/5000   risk = 28  oob_risk = inf   test_auc = 0.38   time = 486545436   val_auc = 0.38   
+1750/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 524619229   val_auc = 0.38   
+1875/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 563020882   val_auc = 0.38   
+2000/5000   risk = inf  oob_risk = inf   test_auc = 0.39   time = 600206432   val_auc = 0.39   
+2125/5000   risk = inf  oob_risk = inf   test_auc = 0.4   time = 638861743   val_auc = 0.39   
+2250/5000   risk = inf  oob_risk = inf   test_auc = 0.39   time = 678761344   val_auc = 0.39   
+2375/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 716898827   val_auc = 0.38   
+2500/5000   risk = inf  oob_risk = inf   test_auc = 0.39   time = 755544521   val_auc = 0.39   
+2625/5000   risk = inf  oob_risk = inf   test_auc = 0.4   time = 793875789   val_auc = 0.4   
+2750/5000   risk = inf  oob_risk = inf   test_auc = 0.39   time = 830927682   val_auc = 0.39   
+2875/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 870400817   val_auc = 0.37   
+3000/5000   risk = inf  oob_risk = inf   test_auc = 0.37   time = 907196617   val_auc = 0.37   
+3125/5000   risk = inf  oob_risk = inf   test_auc = 0.37   time = 943372568   val_auc = 0.37   
+3250/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 981594899   val_auc = 0.38   
+3375/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 1020122909   val_auc = 0.38   
+3500/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 1060970243   val_auc = 0.38   
+3625/5000   risk = inf  oob_risk = inf   test_auc = 0.38   time = 1098913983   val_auc = 0.38   
+3750/5000   risk = inf  oob_risk = inf   test_auc = 0.39   time = 1137104361   val_auc = 0.39   
+
+29: (function (e) 
+    traceback(2L))()
+28: .External(list(name = "CppMethod__invoke_void", address = <pointer: 0x555ad4c90250>, 
+        dll = list(name = "Rcpp", path = "/home/user/R/x86_64-pc-linux-gnu-library/3.6/Rcpp/libs/Rcpp.so", 
+            dynamicLookup = TRUE, handle = <pointer: 0x555ad42cc5a0>, 
+            info = <pointer: 0x555ad3dc98c0>), numParameters = -1L), 
+        <pointer: 0x555ad75d2150>, <pointer: 0x555ad61089e0>, .pointer, 
+        ...)
+27: self$model$train(trace)
+26: model$train(self$param_set$values$mstop)
+25: get_private(learner)$.train(task)
+24: .f(learner = <environment>, task = <environment>)
+23: eval(expr, p)
+22: eval(expr, p)
+21: eval.parent(expr, n = 1L)
+20: invoke(.f, .args = .args, .opts = .opts, .seed = .seed, .timeout = .timeout)
+19: encapsulate(learner$encapsulate["train"], .f = train_wrapper, 
+        .args = list(learner = learner, task = task), .pkgs = learner$packages, 
+        .seed = NA_integer_, .timeout = learner$timeout["train"])
+18: learner_train(self, task, row_ids)
+17: .__Learner__train(self = self, private = private, super = super, 
+        task = task, row_ids = row_ids)
+16: learner$train(task_train) at #16
+15: job$algorithm$fun(job = job, data = job$problem$data, instance = instance, 
+        ...)
+14: (function (...) 
+    job$algorithm$fun(job = job, data = job$problem$data, instance = instance, 
+        ...))(lid = "bin_cwb_nb")
+13: do.call(wrapper, job$algo.pars, envir = .GlobalEnv)
+12: with_preserve_seed({
+        set.seed(seed)
+        code
+    })
+11: with_seed(job$seed, do.call(wrapper, job$algo.pars, envir = .GlobalEnv))
+10: execJob.Experiment(job)
+9: execJob(job)
+8: doTryCatch(return(expr), name, parentenv, handler)
+7: tryCatchOne(expr, names, parentenv, handlers[[1L]])
+6: tryCatchList(expr, classes, parentenv, handlers)
+5: tryCatch(expr, error = function(e) {
+       call <- conditionCall(e)
+       if (!is.null(call)) {
+           if (identical(call[[1L]], quote(doTryCatch))) 
+               call <- sys.call(-4L)
+           dcall <- deparse(call)[1L]
+           prefix <- paste("Error in", dcall, ": ")
+           LONG <- 75L
+           sm <- strsplit(conditionMessage(e), "\n")[[1L]]
+           w <- 14L + nchar(dcall, type = "w") + nchar(sm[1L], type = "w")
+           if (is.na(w)) 
+               w <- 14L + nchar(dcall, type = "b") + nchar(sm[1L], 
+                   type = "b")
+           if (w > LONG) 
+               prefix <- paste0(prefix, "\n  ")
+       }
+       else prefix <- "Error : "
+       msg <- paste0(prefix, conditionMessage(e), "\n")
+       .Internal(seterrmessage(msg[1L]))
+       if (!silent && isTRUE(getOption("show.error.messages"))) {
+           cat(msg, file = outFile)
+           .Internal(printDeferredWarnings())
+       }
+       invisible(structure(msg, class = "try-error", condition = e))
+   })
+4: try(execJob(job))
+3: doJobCollection.JobCollection(obj, output = output)
+2: doJobCollection.character("/home/user/repos/cacb-batchtools/eq1/batchtools/jobs/job6f52627aeb283a5e7d4c4f27dc56e57f.rds", 
+       output = "/home/user/repos/cacb-batchtools/eq1/batchtools/logs/job6f52627aeb283a5e7d4c4f27dc56e57f.log")
+1: batchtools::doJobCollection("/home/user/repos/cacb-batchtools/eq1/batchtools/jobs/job6f52627aeb283a5e7d4c4f27dc56e57f.rds", 
+       output = "/home/user/repos/cacb-batchtools/eq1/batchtools/logs/job6f52627aeb283a5e7d4c4f27dc56e57f.log")

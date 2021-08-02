@@ -28,7 +28,7 @@ LearnerClassifCWB = R6Class("LearnerClassifCWB",
           ParamInt$new(id = "patience", default = 10, lower = 1),
           ParamDbl$new(id = "eps_for_break", default = 0.00001),
 
-          ParamDbl$new(id = "momentum", default = 0.05, lower = 0),
+          ParamDbl$new(id = "momentum", default = 0, lower = 0),
 
           ParamFct$new(id = "bin_method", default = "linear", levels = c("linear", "quantile")),
           ParamDbl$new(id = "bin_root", default = 0, lower = 0, upper = 4),
