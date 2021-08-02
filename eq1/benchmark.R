@@ -35,12 +35,11 @@ if (dir.exists(BATCHTOOLS_DIR)) {
   #ids_resubmit = intersect(ids_resubmit, jt$job.id[grepl("spam", jt$problem)])
 q #ids_resubmit = c(ids_resubmit, 61)
 
-  #hcwb_resubmit = jt$job.id[unlist(jt$algo.pars) == "acc_hcwb"]
+  #cwb_resubmit = jt$job.id[grepl("bin", unlist(jt$algo.pars))]
   #hcwb_resubmit = intersect(seq_len(75L), hcwb_resubmit)
 
   #not_done = setdiff(seq_len(100L), findDone()$job.id)
   #not_done = unique(c(not_done, ids_resubmit))
-
   submitJobs(151, reg = reg)
   submitJobs(findNotDone())
 } else {

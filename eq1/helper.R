@@ -237,49 +237,63 @@ constructLearner2 = function(lid, ncores = parallel::detectCores() - 2, test_mod
   ## which are then merged with the defaults defined above:
   lout = switch(lid,
     ## CWB no binning
-    bin_cwb_nb = {
-      l = lrn("classif.CWB", id = "bin_cwb_nb", predict_type = "prob",
-        learning_rate = 0.1, df_autoselect = TRUE)
+    cwb = {
+      l = lrn("classif.CWB", id = "cwb", predict_type = "prob",
+        learning_rate = 0.1)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     ## CWB binning
-    bin_cwb_b = {
-      l = lrn("classif.CWB", id = "bin_cwb_b", predict_type = "prob",
-        learning_rate = 0.1, df_autoselect = TRUE, bin_root = 2L)
+    cwb_b = {
+      l = lrn("classif.CWB", id = "cwb_b", predict_type = "prob",
+        learning_rate = 0.1, bin_root = 2L)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     ## CWB v2 no binning
-    acc_cwb = {
-      l = lrn("classif.CWB", id = "acc_cwb", predict_type = "prob",
-        learning_rate = 0.1, df_autoselect = TRUE)
+    cwb2 = {
+      l = lrn("classif.CWB", id = "cwb2", predict_type = "prob",
+        learning_rate = 0.1)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     ## ACWB no binning
-    acc_acwb = {
-      l = lrn("classif.CWB", id = "acc_acwb", predict_type = "prob",
-        learning_rate = 0.1, momentum = 0.0034, df_autoselect = TRUE)
+    acwb = {
+      l = lrn("classif.CWB", id = "acwb", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.0034)
+      l$param_set$values = updatePars(l, cwb_pars)
+      l
+    },
+    ## ACWB binning
+    acwb_b = {
+      l = lrn("classif.CWB", id = "acwb_b", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.0034, bin_root = 2)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
     ## HCWB no binning
-    acc_hcwb = {
-      l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
-        learning_rate = 0.1, momentum = 0.03, df_autoselect = TRUE)
+    hcwb = {
+      l = lrn("classif.HCWB", id = "hcwb", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.03)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
-    acc_hcwb2 = {
-      l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
-        learning_rate = 0.1, momentum = 0.0034, df_autoselect = TRUE)
+    ## HCWB binning
+    hcwb_b = {
+      l = lrn("classif.HCWB", id = "hcwb_b", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.03, bin_root = 2L)
+      l$param_set$values = updatePars(l, cwb_pars)
+      l
+    },
+    hcwb2 = {
+      l = lrn("classif.HCWB", id = "hcwb2", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.0034)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     }
   )
   if (is.null(lout))
-    stop("'lid' is not valid, use one of 'bin_cwb_nb', 'bin_cwb_n', 'acc_cwb', 'acc_acwb', 'acc_hcwb', or 'acc_hcwb2'!")
+    stop("'lid' is not valid, use one of 'cwb', 'cwb_b', 'cwb2', 'acwb', 'acwb_b', 'hcwb', 'hcwb_b', or 'hcwb2'!")
   if (raw_learner) {
     return(lout)
   } else {

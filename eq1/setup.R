@@ -52,8 +52,7 @@ if (! file.exists(paste0(BM_DIR, "meta/tasks.Rda")) || REBUILD) {
 ## Learners
 ## ============================================
 
-LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_acwb", "acc_hcwb", "acc_hcwb2")
-#LEARNER_IDS = c("bin_cwb_nb", "bin_cwb_b", "acc_cwb", "acc_acwb", "acc_hcwb")
+LEARNER_IDS = c("cwb", "cwb_b", "acwb", "hcwb", "hcwb_b", "acwb_b")
 
 
 ## Measures

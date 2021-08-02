@@ -40,17 +40,24 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
 
   ## Learner is constructed two times, one for logging and one for the
   ## actual training with time tracking:
-  learner    = constructLearner2(lid, raw_learner = TRUE)
+  learner0   = constructLearner2(lid, raw_learner = TRUE)
+  learner1   = constructLearner2(lid, raw_learner = TRUE)
+
   task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
   task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
 
-  learner$param_set$values$additional_auc_task = task_test
-  learner$train(task_train)
+  learner0$param_set$values$additional_auc_task = task_test
+  learner0$train(task_train)
 
-  return(getCboostLog(learner))
+  learner1$param_set$values$use_stopper = FALSE
+  learner1$train(task_train)
+
+  log0 = getCboostLog(learner1)
+  log1 = getCboostLog(learner2)
+
+  log0$time = log1$time
+
+  return(log0)
 })
 
 addExperiments(algo.design = list('evaluate-learner' = data.table(lid = LEARNER_IDS)))
-#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2")))
-#addExperiments(algo.design = list('evaluate-learner' = data.table(lid = "acc_hcwb2-new")))
-
