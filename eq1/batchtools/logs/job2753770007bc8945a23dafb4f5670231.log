@@ -62,3 +62,19 @@ DEBUG [13:49:16.047] [mlr3]  Calling train method of Learner 'bin_cwb_nb' on tas
 3875/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 651532824   val_auc = 0.27   
 4000/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 672275969   val_auc = 0.27   
 4125/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 693533805   val_auc = 0.27   
+4250/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 715392979   val_auc = 0.27   
+4375/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 736244062   val_auc = 0.27   
+4500/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 756638606   val_auc = 0.27   
+4625/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 777677489   val_auc = 0.27   
+4750/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 798777182   val_auc = 0.27   
+4875/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 820101383   val_auc = 0.27   
+5000/5000   risk = 0.65  oob_risk = 0.65   test_auc = 0.26   time = 841538213   val_auc = 0.27   
+
+
+Train 5000 iterations in 843 Seconds.
+Final risk based on the train set: 0.65
+
+DEBUG [14:03:52.290] [mlr3]  Learner 'bin_cwb_nb' on task 'Task 189866: albert (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=91]
+### [bt]: Calculation finished!
