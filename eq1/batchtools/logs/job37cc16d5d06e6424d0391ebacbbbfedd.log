@@ -1,0 +1,133 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-02 22:39:54] Loading new learner LearnerClassifCWB
+[2021-08-02 22:39:54] Loading new learner LearnerClassifHCWB
+[2021-08-02 22:39:54] Loading new learner
+[2021-08-02 22:39:54] Loading tasks
+[2021-08-02 22:39:58] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=32]
+### [bt]: Generating problem instance for problem '7592-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem '7592-fold1' for job 32 (seed = 31447) ...
+DEBUG [22:39:59.274] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [22:39:59.355] [mlr3]  Calling train method of Learner 'cwb_b' on task 'Task 7592: adult (Supervised Classification)' with 39073 observations {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>}
+Warning in checkCores(task, self$param_set$values$ncores) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  oob_risk = 0.54   test_auc = 0.21   time = 3   val_auc = 0.22   
+ 125/5000   risk = 0.35  oob_risk = 0.36   test_auc = 0.098   time = 1224696   val_auc = 0.1   
+ 250/5000   risk = 0.34  oob_risk = 0.35   test_auc = 0.093   time = 2620102   val_auc = 0.1   
+ 375/5000   risk = 0.34  oob_risk = 0.36   test_auc = 0.092   time = 3861514   val_auc = 0.098   
+ 500/5000   risk = 0.34  oob_risk = 0.36   test_auc = 0.091   time = 5169817   val_auc = 0.097   
+ 625/5000   risk = 0.34  oob_risk = 0.36   test_auc = 0.09   time = 6567072   val_auc = 0.096   
+ 750/5000   risk = 0.34  oob_risk = 0.36   test_auc = 0.089   time = 8018514   val_auc = 0.095   
+ 875/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.089   time = 9359701   val_auc = 0.095   
+1000/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.089   time = 11003025   val_auc = 0.094   
+1125/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.089   time = 12524763   val_auc = 0.094   
+1250/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 14177137   val_auc = 0.094   
+1375/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 15620073   val_auc = 0.093   
+1500/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 17153644   val_auc = 0.093   
+1625/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 18743104   val_auc = 0.093   
+1750/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 20226225   val_auc = 0.093   
+1875/5000   risk = 0.35  oob_risk = 0.37   test_auc = 0.088   time = 21580883   val_auc = 0.093   
+2000/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.088   time = 22992946   val_auc = 0.093   
+2125/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.088   time = 24403061   val_auc = 0.093   
+2250/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.088   time = 25803072   val_auc = 0.093   
+2375/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 27202410   val_auc = 0.092   
+2500/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 28512642   val_auc = 0.092   
+2625/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 29814989   val_auc = 0.092   
+2750/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 31296466   val_auc = 0.092   
+2875/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 33018614   val_auc = 0.092   
+3000/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 34441086   val_auc = 0.092   
+3125/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 35769861   val_auc = 0.092   
+3250/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 37096405   val_auc = 0.092   
+3375/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 38406861   val_auc = 0.092   
+3500/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 39725624   val_auc = 0.092   
+3625/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 41092338   val_auc = 0.092   
+3750/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 42464252   val_auc = 0.092   
+3875/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 43954756   val_auc = 0.092   
+4000/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 45354905   val_auc = 0.092   
+4125/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 46724005   val_auc = 0.092   
+4250/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 48254985   val_auc = 0.092   
+4375/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 49984906   val_auc = 0.092   
+4500/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 51527484   val_auc = 0.092   
+4625/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 53041960   val_auc = 0.092   
+4750/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 54413211   val_auc = 0.092   
+4875/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 55861900   val_auc = 0.092   
+5000/5000   risk = 0.35  oob_risk = 0.38   test_auc = 0.087   time = 57361557   val_auc = 0.092   
+
+
+Train 5000 iterations in 59 Seconds.
+Final risk based on the train set: 0.35
+
+DEBUG [22:41:01.407] [mlr3]  Learner 'cwb_b' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [22:41:01.420] [mlr3]  Skip subsetting of task 'Task 7592: adult (Supervised Classification)' 
+DEBUG [22:41:01.423] [mlr3]  Calling train method of Learner 'cwb_b' on task 'Task 7592: adult (Supervised Classification)' with 39073 observations {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>}
+Warning in checkCores(task, self$param_set$values$ncores) :
+  Number of cores 30 exceeds number of features 14. The number of cores are set to 14!
+   1/5000   risk = 0.53  time = 1   val_auc = 0.22   
+ 125/5000   risk = 0.35  time = 673719   val_auc = 0.1   
+ 250/5000   risk = 0.34  time = 1360233   val_auc = 0.1   
+ 375/5000   risk = 0.34  time = 2154806   val_auc = 0.098   
+ 500/5000   risk = 0.34  time = 2927638   val_auc = 0.097   
+ 625/5000   risk = 0.34  time = 3705045   val_auc = 0.096   
+ 750/5000   risk = 0.34  time = 4367329   val_auc = 0.095   
+ 875/5000   risk = 0.35  time = 5009850   val_auc = 0.095   
+1000/5000   risk = 0.35  time = 5680838   val_auc = 0.094   
+1125/5000   risk = 0.35  time = 6319817   val_auc = 0.094   
+1250/5000   risk = 0.35  time = 6988880   val_auc = 0.094   
+1375/5000   risk = 0.35  time = 7632193   val_auc = 0.093   
+1500/5000   risk = 0.35  time = 8301700   val_auc = 0.093   
+1625/5000   risk = 0.35  time = 8948821   val_auc = 0.093   
+1750/5000   risk = 0.35  time = 9713469   val_auc = 0.093   
+1875/5000   risk = 0.35  time = 10597552   val_auc = 0.093   
+2000/5000   risk = 0.35  time = 11425791   val_auc = 0.093   
+2125/5000   risk = 0.35  time = 12312110   val_auc = 0.093   
+2250/5000   risk = 0.35  time = 13219940   val_auc = 0.093   
+2375/5000   risk = 0.35  time = 13898046   val_auc = 0.092   
+2500/5000   risk = 0.35  time = 14579274   val_auc = 0.092   
+2625/5000   risk = 0.35  time = 15232416   val_auc = 0.092   
+2750/5000   risk = 0.35  time = 15915037   val_auc = 0.092   
+2875/5000   risk = 0.35  time = 16570137   val_auc = 0.092   
+3000/5000   risk = 0.35  time = 17301377   val_auc = 0.092   
+3125/5000   risk = 0.35  time = 18043453   val_auc = 0.092   
+3250/5000   risk = 0.35  time = 18894392   val_auc = 0.092   
+3375/5000   risk = 0.35  time = 19635675   val_auc = 0.092   
+3500/5000   risk = 0.35  time = 20480676   val_auc = 0.092   
+3625/5000   risk = 0.35  time = 21221315   val_auc = 0.092   
+3750/5000   risk = 0.35  time = 21964066   val_auc = 0.092   
+3875/5000   risk = 0.35  time = 22721710   val_auc = 0.092   
+4000/5000   risk = 0.35  time = 23507118   val_auc = 0.092   
+4125/5000   risk = 0.35  time = 24222475   val_auc = 0.092   
+4250/5000   risk = 0.35  time = 24981493   val_auc = 0.092   
+4375/5000   risk = 0.35  time = 25865718   val_auc = 0.092   
+4500/5000   risk = 0.35  time = 26857960   val_auc = 0.092   
+4625/5000   risk = 0.35  time = 27635155   val_auc = 0.092   
+4750/5000   risk = 0.35  time = 28361899   val_auc = 0.092   
+4875/5000   risk = 0.35  time = 29128676   val_auc = 0.092   
+5000/5000   risk = 0.35  time = 29857371   val_auc = 0.092   
+
+
+Train 5000 iterations in 29 Seconds.
+Final risk based on the train set: 0.35
+
+DEBUG [22:41:34.262] [mlr3]  Learner 'cwb_b' on task 'Task 7592: adult (Supervised Classification)' succeeded to fit a model {learner: <LearnerClassifCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=32]
+### [bt]: Calculation finished!

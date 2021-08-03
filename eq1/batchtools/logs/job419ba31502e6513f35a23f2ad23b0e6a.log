@@ -1,0 +1,141 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq1'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+[2021-08-02 21:43:16] Loading new learner LearnerClassifCWB
+[2021-08-02 21:43:16] Loading new learner LearnerClassifHCWB
+[2021-08-02 21:43:16] Loading new learner
+[2021-08-02 21:43:16] Loading tasks
+[2021-08-02 21:43:19] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=5]
+### [bt]: Generating problem instance for problem 'spam-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold1' for job 5 (seed = 31420) ...
+DEBUG [21:43:20.566] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [21:43:20.648] [mlr3]  Calling train method of Learner 'hcwb_b' on task 'spam' with 3680 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.66  oob_risk = 0.66   test_auc = 0.15   time = 3   val_auc = 0.15   
+ 125/5000   risk = 0.15  oob_risk = 0.17   test_auc = 0.021   time = 1245298   val_auc = 0.018   
+
+
+Train 174 iterations in 3 Seconds.
+Final risk based on the train set: 0.14
+
+   1/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.022   time = 2   val_auc = 0.018   
+ 121/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.021   time = 1397561   val_auc = 0.017   
+ 242/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.021   time = 2592079   val_auc = 0.017   
+ 363/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.02   time = 3799993   val_auc = 0.017   
+ 484/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.02   time = 4943100   val_auc = 0.017   
+ 605/4837   risk = 0.14  oob_risk = 0.17   test_auc = 0.02   time = 6072307   val_auc = 0.017   
+ 726/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.02   time = 7184628   val_auc = 0.016   
+ 847/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 8299995   val_auc = 0.016   
+ 968/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 9435380   val_auc = 0.016   
+1089/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 10472568   val_auc = 0.016   
+1210/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 11490048   val_auc = 0.016   
+1331/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 12644602   val_auc = 0.016   
+1452/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.019   time = 13773001   val_auc = 0.016   
+1573/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 14884705   val_auc = 0.016   
+1694/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 16016318   val_auc = 0.016   
+1815/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 17183421   val_auc = 0.016   
+1936/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 18287927   val_auc = 0.016   
+2057/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 19483800   val_auc = 0.016   
+2178/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 20641278   val_auc = 0.016   
+2299/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 21768713   val_auc = 0.016   
+2420/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 22938648   val_auc = 0.016   
+2541/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 24032733   val_auc = 0.016   
+2662/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 25336388   val_auc = 0.016   
+2783/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 26429466   val_auc = 0.016   
+2904/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 27465739   val_auc = 0.016   
+3025/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 28623754   val_auc = 0.016   
+3146/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 29752933   val_auc = 0.016   
+3267/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 30904732   val_auc = 0.016   
+3388/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 32077246   val_auc = 0.016   
+3509/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 33244809   val_auc = 0.016   
+3630/4837   risk = 0.14  oob_risk = 0.18   test_auc = 0.018   time = 34393526   val_auc = 0.016   
+3751/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 35521590   val_auc = 0.016   
+3872/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 36774763   val_auc = 0.016   
+3993/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 38000344   val_auc = 0.016   
+4114/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 39153566   val_auc = 0.016   
+4235/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 40487100   val_auc = 0.016   
+4356/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 41687160   val_auc = 0.016   
+4477/4837   risk = 0.14  oob_risk = 0.19   test_auc = 0.018   time = 42860252   val_auc = 0.016   
+4598/4837   risk = 0.13  oob_risk = 0.19   test_auc = 0.018   time = 44023120   val_auc = 0.016   
+4719/4837   risk = 0.13  oob_risk = 0.19   test_auc = 0.018   time = 45212878   val_auc = 0.016   
+
+
+Train 4837 iterations in 46 Seconds.
+Final risk based on the train set: 0.13
+
+DEBUG [21:44:14.345] [mlr3]  Learner 'hcwb_b' on task 'spam' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+DEBUG [21:44:14.360] [mlr3]  Skip subsetting of task 'spam' 
+DEBUG [21:44:14.362] [mlr3]  Calling train method of Learner 'hcwb_b' on task 'spam' with 3680 observations {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>}
+   1/5000   risk = 0.66  time = 2   val_auc = 0.15   
+ 125/5000   risk = 0.15  time = 1313770   val_auc = 0.018   
+
+
+Train 174 iterations in 1 Seconds.
+Final risk based on the train set: 0.14
+
+   1/4837   risk = 0.14  time = 2   val_auc = 0.018   
+ 121/4837   risk = 0.14  time = 1117846   val_auc = 0.017   
+ 242/4837   risk = 0.14  time = 2192310   val_auc = 0.017   
+ 363/4837   risk = 0.14  time = 3262549   val_auc = 0.017   
+ 484/4837   risk = 0.14  time = 4305486   val_auc = 0.017   
+ 605/4837   risk = 0.14  time = 5377918   val_auc = 0.017   
+ 726/4837   risk = 0.14  time = 6422834   val_auc = 0.016   
+ 847/4837   risk = 0.14  time = 7448847   val_auc = 0.016   
+ 968/4837   risk = 0.14  time = 8493084   val_auc = 0.016   
+1089/4837   risk = 0.14  time = 9647034   val_auc = 0.016   
+1210/4837   risk = 0.14  time = 10716024   val_auc = 0.016   
+1331/4837   risk = 0.14  time = 11744762   val_auc = 0.016   
+1452/4837   risk = 0.14  time = 12778495   val_auc = 0.016   
+1573/4837   risk = 0.14  time = 13817169   val_auc = 0.016   
+1694/4837   risk = 0.14  time = 14890319   val_auc = 0.016   
+1815/4837   risk = 0.14  time = 15956852   val_auc = 0.016   
+1936/4837   risk = 0.14  time = 17052764   val_auc = 0.016   
+2057/4837   risk = 0.14  time = 18152754   val_auc = 0.016   
+2178/4837   risk = 0.14  time = 19247104   val_auc = 0.016   
+2299/4837   risk = 0.14  time = 20349724   val_auc = 0.016   
+2420/4837   risk = 0.14  time = 21439434   val_auc = 0.016   
+2541/4837   risk = 0.14  time = 22537142   val_auc = 0.016   
+2662/4837   risk = 0.14  time = 23594831   val_auc = 0.016   
+2783/4837   risk = 0.14  time = 24699106   val_auc = 0.016   
+2904/4837   risk = 0.14  time = 25770613   val_auc = 0.016   
+3025/4837   risk = 0.14  time = 26887380   val_auc = 0.016   
+3146/4837   risk = 0.14  time = 28013261   val_auc = 0.016   
+3267/4837   risk = 0.14  time = 29043265   val_auc = 0.016   
+3388/4837   risk = 0.14  time = 30140444   val_auc = 0.016   
+3509/4837   risk = 0.14  time = 31307595   val_auc = 0.016   
+3630/4837   risk = 0.14  time = 32422922   val_auc = 0.016   
+3751/4837   risk = 0.14  time = 33468094   val_auc = 0.016   
+3872/4837   risk = 0.14  time = 34606988   val_auc = 0.016   
+3993/4837   risk = 0.14  time = 35681810   val_auc = 0.016   
+4114/4837   risk = 0.14  time = 36731087   val_auc = 0.016   
+4235/4837   risk = 0.14  time = 37783085   val_auc = 0.016   
+4356/4837   risk = 0.14  time = 38823467   val_auc = 0.016   
+4477/4837   risk = 0.14  time = 39865445   val_auc = 0.016   
+4598/4837   risk = 0.13  time = 41037113   val_auc = 0.016   
+4719/4837   risk = 0.13  time = 42102996   val_auc = 0.016   
+
+
+Train 4837 iterations in 43 Seconds.
+Final risk based on the train set: 0.13
+
+DEBUG [21:45:02.263] [mlr3]  Learner 'hcwb_b' on task 'spam' succeeded to fit a model {learner: <LearnerClassifHCWB/LearnerClassif/Learner/R6>, result: <list>, messages: }
+
+### [bt]: Job terminated successfully [batchtools job.id=5]
+### [bt]: Calculation finished!

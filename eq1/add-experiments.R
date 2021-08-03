@@ -52,8 +52,8 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   learner1$param_set$values$use_stopper = FALSE
   learner1$train(task_train)
 
-  log0 = getCboostLog(learner1)
-  log1 = getCboostLog(learner2)
+  log0 = getCboostLog(learner0)
+  log1 = getCboostLog(learner1)
 
   log0$time = log1$time
 
