@@ -24,10 +24,10 @@ BM_DIR = paste0(here::here(), "/eq1/")
 
 TSKS_SETUP = rbind(
   data.frame(type = "mlr-task", id = "spam"),          # Spam
+  data.frame(type = "oml-task", id = "168908"),        # Christine (1637 feats, 5418 rows)
   data.frame(type = "oml-task", id = "7592"),          # Adult
   data.frame(type = "oml-task", id = "168335"),        # MiniBooNE
   data.frame(type = "oml-task", id = "189866"),        # Albert
-  data.frame(type = "oml-task", id = "168908"),        # Christine (1637 feats, 5418 rows)
   data.frame(type = "oml-task", id = "9977")           # namao (119 feats, 34465 rows)
 
   # Additional tasks:

@@ -116,7 +116,7 @@ LearnerClassifCWB = R6Class("LearnerClassifCWB",
             differences = 2,
             bin_root = self$param_set$values$bin_root,
             bin_method = "linear",
-            cache_type = "inverse")
+            cache_type = "cholesky")
         } else {
           checkmate::assertNumeric(self$param_set$values$df_cat, len = 1L, lower = 1)
           if (length(unique(feat)) > self$param_set$values$df_cat)

@@ -34,6 +34,12 @@ constructTasks = function(ids, types) {
           }
           ts = TaskClassif$new(id = ts$id, backend = dat, target = "signal")
         }
+        if (as.character(id) == "9977") {
+          ## Problematic columns without information and not cathed by
+          ## the pre-processing:
+          feats_remove = paste0("V", 81:86)
+          ts = ts$select(setdiff(ts$feature_names, feats_remove))
+        }
         ts
       }, silent = TRUE)
       if (! "try-error" %in% class(e)) {

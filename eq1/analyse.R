@@ -1,17 +1,56 @@
+## PACKAGES:
+## =============================================
+
 library(ggplot2)
 library(dplyr)
 library(tidyr)
 library(batchtools)
 library(mlr3)
 
+## HELPER:
+## =============================================
+
+getStopInfo = function(clog, patience = 10L, eps_for_break = 0.00001,
+  vname = "val_auc", tname = "test_auc", minimize = TRUE) {
+
+  dsign = 1
+  if (minimize) dsign = -1
+
+  rval     = 1 - clog[[vname]]
+  rvaldiff = diff(rval) / rval[-length(rval)] * dsign
+  p0 = 0
+  for (i in seq_along(rvaldiff)) {
+    if (rvaldiff[i] < eps_for_break)
+      p0 = p0 + 1
+    else
+      p0 = 0
+
+    if (p0 == patience) break
+  }
+  if (i < (nrow(clog) - 1))
+    istop = i - (patience + 1)
+  else
+    istop = nrow(clog)
+
+  return(data.frame(stop = istop, val_auc = clog[[vname]][istop], test_auc = clog[[tname]][istop],
+    seconds = clog$seconds[istop], learner = clog$learner[1], task = clog$task[1], fold = clog$fold[1],
+    val_acu_max = max(clog[[vname]]), test_auc_max = max(clog[[tname]]), transition = clog$transition[1]))
+}
+
+## GET RESULTS:
+## =============================================
+
 base_dir = here::here()
 bm_dir   = paste0(base_dir, "/eq1/batchtools/")
 
-loadRegistry(file.dir = bm_dir, work.dir = paste0(base_dir, "/eq1"), writeable = TRUE)
+loadRegistry(file.dir = bm_dir, work.dir = paste0(base_dir, "/eq1"))
 getStatus()
 
 jt  = getJobTable(findDone())
-res = reduceResultsList(jt$job.id)
+res = reduceResultsList(jt)
+
+## PROCESS RESULTS:
+## =============================================
 
 for (i in seq_along(res)) {
   res[[i]] = cbind(res[[i]],
@@ -19,52 +58,74 @@ for (i in seq_along(res)) {
     task = sub("\\-.*", "", jt$problem[i]),
     learner = jt$algo.pars[[i]]$lid)
   res[[i]][["_iterations"]] = seq_len(nrow(res[[i]]))
-  #iter = res[[i]][["_iterations"]]
-  #idx_one = which(iter == 1)
-  #if (length(idx_one) > 1) {
-    #idx_sec = seq(idx_one[2], length(iter))
-    #res[[i]][["_iterations"]][idx_sec] = iter[idx_sec] + iter[idx_one[2] - 1]
-  #}
+
+  # In compboost, the AUC is defined as 1 - AUC since
+  # stopping is done on minimization. Hence, transform
+  # the AUC back:
+  if ("riskauc" %in% names(res[[i]]))
+    res[[i]]$test_auc  = res[[i]]$riskauc
+
+  res[[i]]$test_auc = 1 - res[[i]]$test_auc
+  res[[i]]$val_auc  = 1 - res[[i]]$val_auc
+  res[[i]]$seconds  = res[[i]]$time / 1e6
 }
 df_res = do.call(rbind, lapply(res, function(r) {
-  lnames = c("_iterations", "riskauc", "time", "blearner", "risk", "model", "transition", "fold", "task", "learner")
+  lnames = c("_iterations", "test_auc", "seconds", "blearner", "risk", "model", "transition", "fold", "task", "learner")
   r[, lnames]
 }))
 df_res[["iteration"]]    = df_res[["_iterations"]]
 df_res[["_iterations"]]  = NULL
-df_res[["classif.auc"]]  = df_res[["riskauc"]]
-df_res[["riskauc"]]      = NULL
-df_res[["microseconds"]] = df_res[["time"]]
-df_res[["task"]] = factor(df_res[["task"]], levels = TSKS_SETUP$id)
+df_res[["test_auc"]]     = df_res[["test_auc"]]
+df_res[["task"]]         = factor(df_res[["task"]], levels = TSKS_SETUP$id)
+
+lids_old = c("cwb", "cwb_b", "acwb", "hcwb", "hcwb_b", "acwb_b")
+lids_new = c("CWB", "CWB (b)", "ACWB", "ACWB (b)", "hCWB", "hCWB (b)")
+
+lids = c(
+  "cwb"    = "CWB",
+  "cwb_b"  = "CWB (b)",
+  "acwb"   = "ACWB",
+  "acwb_b" = "ACWB (b)",
+  "hcwb"   = "hCWB",
+  "hcwb_b" = "hCWB (b)")
+
+df_res = df_res %>%
+  filter(learner != "acc_hcwb2") %>%
+  mutate(learner = factor(learner))# %>%
+  #filter(! learner %in% c("CWB (b)", "CWB (nb)"))
+
+levels(df_res$learner) = lids[levels(df_res$learner)]
+
 
 ## SUMMARY VALUES:
 ## =============================================
 
 df_smry = df_res %>%
   group_by(task, learner, iteration) %>%
-  summarize(classif.auc = mean(classif.auc),
-    microseconds = mean(microseconds),
-    transition   = transition[1]) %>%
+  summarize(test_auc = mean(test_auc),
+    seconds    = mean(seconds),
+    transition = transition[1]) %>%
   group_by(task, learner) %>%
   summarize(
-    auc_start  = min(classif.auc),
-    iter_best  = iteration[which.max(classif.auc)],
-    auc_best   = max(classif.auc),
-    ms_best    = microseconds[which.max(classif.auc)],
+    auc_start  = min(test_auc),
+    iter_best  = iteration[which.max(test_auc)],
+    auc_best   = max(test_auc),
+    sec_best    = seconds[which.max(test_auc)],
     transition = transition[1],
-    auc_expl   = (max(classif.auc) - min(classif.auc)) / min(classif.auc)
+    auc_expl   = (max(test_auc) - min(test_auc)) / min(test_auc)
   ) %>%
   group_by(task) %>%
   mutate(auc_start = min(auc_start)) %>%
   group_by(task) %>%
-  mutate(auc_diff_to_cwb = auc_best[learner == "bin_cwb_nb"] - auc_best)
+  mutate(auc_diff_to_cwb = ifelse("CWB" %in% learner, auc_best[learner == "CWB"] - auc_best, NA))
+
 
 ## FITTING TRACES:
 ## =============================================
 
 df_aggr = df_res %>%
   group_by(task, learner, iteration) %>%
-  summarize(classif.auc = mean(classif.auc), microseconds = mean(microseconds))
+  summarize(test_auc = mean(test_auc), seconds = mean(seconds))
 
 sf  = function(x, p = 10) 1 - (1 - (0.2 * x)^p)^(1/p)
 sfi = function(x, p = 10) 5 * (1 - (1 - x)^p)^(1/p)
@@ -76,29 +137,93 @@ sfb = function(x, p = 10) {
 stretch_trans = function() scales::trans_new("stretch", sf, sfi, sfb, )
 formatFun = function(x) sprintf("%.3f", x)
 
-ggplot(data = df_res, mapping = aes(x = microseconds / 1e6, y = classif.auc, color = learner)) +
-  geom_line(aes(group = paste0(learner, fold)), alpha = 0.2, size = 0.6) +
-  geom_line(data = df_aggr %>% filter(learner != "acc_cwb"), size = 1.2, alpha = 0.8) +
-  #tidyquant::geom_ma(data = df_aggr %>% filter(learner != "acc_cwb"), size = 1.2, n = 3) +
-  geom_point(data = df_smry %>% filter(learner != "acc_cwb"), mapping = aes(x = 0, y = auc_best)) +
-  geom_point(data = df_smry %>% filter(learner != "acc_cwb"), mapping = aes(x = ms_best / 1e6, y = auc_start)) +
-  #scale_y_continuous(trans = "stretch", labels = formatFun) +
+
+
+ggplot(data = df_res, mapping = aes(x = seconds, y = test_auc, color = learner)) +
+  #geom_line(aes(group = paste0(learner, fold)), alpha = 0.2, size = 0.6) +
+  geom_line(data = df_aggr, size = 1.2, alpha = 0.8) +
+  geom_point(data = df_smry, mapping = aes(x = 0, y = auc_best)) +
+  geom_point(data = df_smry, mapping = aes(x = sec_best, y = auc_start)) +
+  geom_hline(data = df_smry, aes(yintercept = auc_best, color = learner), linetype = "dashed", alpha = 0.5) +
+  geom_vline(data = df_smry, aes(xintercept = sec_best, color = learner), linetype = "dashed", alpha = 0.5) +
+  scale_y_continuous(trans = "stretch", labels = formatFun) +
   xlab("Seconds") +
   ylab("AUC") +
   ggsci::scale_color_uchicago() +
   facet_wrap(. ~ task, nrow = 2, scales = "free")
 
 
+df_res %>%
+  filter(iteration == 5000) %>%
+  ggplot(aes(x = learner, y = seconds, color = learner, fill = learner)) +
+    geom_boxplot(alpha = 0.2) +
+    facet_wrap(. ~ task, nrow = 2, scales = "free")
+
+
+#a = df_res %>%
+#  filter(grepl("359994", task), learner == "acc_hcwb")
+#
+##ggplot(a, aes(x = seconds, y = test_auc, color = as.character(fold))) +
+#ggplot(a, aes(x = iteration, y = test_auc, color = as.character(fold))) +
+#  geom_line() +
+#  geom_vline(xintercept = unique(a$transition))
 
 
 
-a = df_res %>%
-  filter(grepl("359994", task), learner == "acc_hcwb")
+## OPTIMAL STOPS:
+## =============================================
 
-#ggplot(a, aes(x = microseconds, y = classif.auc, color = as.character(fold))) +
-ggplot(a, aes(x = iteration, y = classif.auc, color = as.character(fold))) +
-  geom_line() +
-  geom_vline(xintercept = unique(a$transition))
+df_stop           = do.call(rbind, lapply(res, getStopInfo))
+df_stop[["task"]] = factor(df_stop[["task"]], levels = TSKS_SETUP$id)
+
+df_stop_smr = df_stop %>%
+  #filter(learner != "acc_hcwb2") %>%
+  group_by(learner, task) %>%
+  summarize(auc = median(test_auc), sec = median(seconds),
+    auc_min = min(test_auc), auc_max = max(test_auc), auc25 = quantile(test_auc, 0.25), auc75 = quantile(test_auc, 0.75),
+    sec_min = min(seconds), sec_max = max(seconds), sec25 = quantile(seconds, 0.25), sec75 = quantile(seconds, 0.75)) %>%
+  ungroup() %>%
+  mutate(learner = factor(learner))
+levels(df_stop_smr$learner) = lids[levels(df_stop_smr$learner)]
+df_stop_smr$learner = factor(df_stop_smr$learner, levels = lids)
+
+df_stop_smr = df_stop_smr %>%
+  mutate(
+    binning = ifelse(grepl("(b)", learner), "Binning", "No binning"),
+    learner = gsub(" (nb)", "", gsub(" (b)", "", learner, fixed = TRUE), fixed = TRUE))
+df_stop_smr$learner = factor(df_stop_smr$learner, levels = c("CWB", "ACWB", "hCWB"))
+df_stop_smr$binning = factor(df_stop_smr$binning, levels = c("No binning", "Binning"))
+
+mycolors = ggsci::pal_uchicago()(6)[4:6]
+ggplot(df_stop_smr) +
+  geom_rect(data = df_stop_smr %>% filter(learner == "CWB"),
+    aes(xmin = -Inf, xmax = Inf, ymin = auc25, ymax = auc75),
+    alpha = 0.1, size = 0, show.legend = FALSE, fill = mycolors[1]) +
+  geom_rect(data = df_stop_smr %>% filter(learner == "CWB"),
+    aes(xmin = sec25, xmax = sec75, ymin = -Inf, ymax = Inf),
+    alpha = 0.1, size = 0, show.legend = FALSE, fill = mycolors[1]) +
+  geom_segment(aes(y = auc_min, x = sec, yend = auc, xend = sec, color = learner), size = 0.2, alpha = 0.8) +
+  geom_segment(aes(y = auc, x = sec_min, yend = auc, xend = sec_max, color = learner), size = 0.2, alpha = 0.8) +
+  #geom_segment(aes(y = auc25, x = sec, yend = auc75, xend = sec, color = learner, linetype = binning), size = 1.) +
+  #geom_segment(aes(y = auc, x = sec25, yend = auc, xend = sec75, color = learner, linetype = binning), size = 1.) +
+  geom_segment(aes(y = auc25, x = sec, yend = auc75, xend = sec, color = learner), size = 1., alpha = 0.8) +
+  geom_segment(aes(y = auc, x = sec25, yend = auc, xend = sec75, color = learner), size = 1., alpha = 0.8) +
+  geom_point(aes(x = sec, y = auc), color = "white", size = 3.5) +
+  geom_point(aes(x = sec, y = auc, color = learner, shape = binning), size = 2) +
+  #ggsci::scale_color_uchicago() +
+  #ggsci::scale_fill_uchicago() +
+  scale_fill_manual(values = mycolors) +
+  scale_color_manual(values = mycolors) +
+  theme_bw() +
+  labs(shape = "") +
+  xlab("Seconds") +
+  ylab("Test AUC") +
+  labs(color = "Learner") +
+  facet_wrap(. ~ task, scales = "free")
+
+
+
+
 
 
 ## INDIVIDUAL INSPECTION
@@ -112,9 +237,7 @@ robustify = po("removeconstants", id = "removeconstants_before") %>>%
     po("collapsefactors", target_level_count = 10) %>>%
     po("removeconstants", id = "removeconstants_after")
 
-tname = "189866"
-
-#task = tsk("oml", task_id = 168908)
+tname = "9977"
 task = TASKS[[tname]]
 
 task_new = robustify$train(task)[[1]]
@@ -123,11 +246,29 @@ rr = RESAMPLE_SETS[[tname]]
 ttrain = task_new$clone(deep = TRUE)$filter(rr$train_set(3))
 ttest  = task_new$clone(deep = TRUE)$filter(rr$test_set(3))
 
-tl1 = constructLearner("acc_acwb", ncores = 4L, test_mode = FALSE, raw_learner = TRUE)
-tl1$param_set$values$task_extra_log = ttest
-tl1$param_set$values$log_auc = TRUE
-tl1$param_set$values$mstop = 3000
-tl1$train(ttrain)
+#source("learner-src/classifCWB.R")
+
+tl1 = constructLearner2("cwb", ncores = 4L, test_mode = TRUE, raw_learner = TRUE)
+tl1$param_set$values$additional_auc_task = ttest
+tl1$param_set$values$df_cat = 2
+tl1$param_set$values$df     = 20
+tl1$param_set$values$mstop  = 2
+tl1$param_set$values$df_autoselect = FALSE
+
+problem_feats = c()
+for (i in seq_along(ttrain$feature_names)) {
+  message("Use feature: ", ttrain$feature_names[i])
+  ttt = ttrain$clone(deep = TRUE)
+  nn = try(tl1$train(ttt$select(ttt$feature_names[i])), silent = TRUE)
+  if (inherits(nn, "try-error")) {
+    problem_feats = c(problem_feats, ttrain$feature_names[i])
+    message("Was not able to fit")
+  } else {
+    message("Was able to fit model")
+  }
+}
+
+problem_feats
 
 log_acwb = getCboostLog(tl1)
 log_acwb$oob_risk = NA
@@ -158,7 +299,7 @@ cumsum(dauc)
 library(ggplot2)
 
 ggplot() +
-  geom_line(data = log_acwb, aes(x = seq_along(riskauc), y = riskauc, color = "ACWB")) +
+  geom_line(data = log_acwb, aes(x = seq_along(test_auc), y = test_auc, color = "ACWB")) +
   geom_line(data = ldat, aes(x = seq_along(test_auc), y = 1 - test_auc, color = "hCWB"))
 plot(x = seq_along(auc), y = 1 - auc, type = "l")
 
@@ -177,14 +318,14 @@ log_hcwb_auc = rbind(tl2$model$cboost$getLoggerData(), tl2$model$cboost_restart$
 
 library(ggplot2)
 ggplot() +
-  geom_line(data = log_acwb, aes(x = seq_along(riskauc), y = riskauc, color = "ACWB")) +
-  geom_line(data = log_hcwb1, aes(x = seq_along(riskauc), y = riskauc, color = "hCWB eps>0")) +
-  #geom_line(data = log_hcwb2, aes(x = seq_along(riskauc), y = riskauc, color = "hCWB eps=0")) +
+  geom_line(data = log_acwb, aes(x = seq_along(test_auc), y = test_auc, color = "ACWB")) +
+  geom_line(data = log_hcwb1, aes(x = seq_along(test_auc), y = test_auc, color = "hCWB eps>0")) +
+  #geom_line(data = log_hcwb2, aes(x = seq_along(test_auc), y = test_auc, color = "hCWB eps=0")) +
   geom_vline(data = log_hcwb1, aes(xintercept = transition[1], color = "hCWB eps>0"))
   #geom_vline(data = log_hcwb2, aes(xintercept = transition[1], color = "hCWB eps=0"))
 
 
-r = log_hcwb1$riskauc
+r = log_hcwb1$test_auc
 plot(r, type = "l")
 
 which.min(r)
