@@ -27,7 +27,6 @@ if (FALSE) unlink(BATCHTOOLS_DIR, recursive = TRUE)
 if (dir.exists(BATCHTOOLS_DIR)) {
 
   loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
-  #loadRegistry(BATCHTOOLS_DIR, work.dir = BM_DIR)
 
   #jt = getJobTable()
 
@@ -40,7 +39,6 @@ q #ids_resubmit = c(ids_resubmit, 61)
 
   #not_done = setdiff(seq_len(100L), findDone()$job.id)
   #not_done = unique(c(not_done, ids_resubmit))
-  submitJobs(151, reg = reg)
   submitJobs(findNotDone())
 } else {
 
