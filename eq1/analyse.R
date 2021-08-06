@@ -173,6 +173,37 @@ df_res %>%
 ## OPTIMAL STOPS:
 ## =============================================
 
+font = "TeX Gyre Bonum"
+
+sysfonts::font_add(font,
+    #regular = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-regular.ttf"),
+    #bold = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-bold.ttf"))
+    regular = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-regular.otf",
+    bold = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-bold.otf")
+#showtext::showtext_auto()
+extrafont::font_import(paths = "~/repos/bm-CompAspCboost/paper-figures/gyre-bonum", prompt = FALSE)
+extrafont::loadfonts()
+
+theme_set(
+  theme_minimal(base_family = font) +
+  ggplot2::theme(
+    strip.background = element_rect(fill = rgb(47, 79, 79, maxColorValue = 255), color = "white"),
+    strip.text = element_text(color = "white", face = "bold", size = 8),
+    axis.text = element_text(size = 9),
+    axis.title = element_text(size = 11),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 7),
+    panel.border = element_rect(colour = "black", fill = NA, size = 0.5)
+  )
+)
+dinA4width = 162
+mycolors = ggsci::pal_uchicago()(6)[4:6]
+
+library(gridExtra)
+
+#dev.off()
+#grid.table(iris[1:5, 1:3], theme = t1)
+
 df_stop           = do.call(rbind, lapply(res, getStopInfo))
 df_stop[["task"]] = factor(df_stop[["task"]], levels = TSKS_SETUP$id)
 
@@ -194,24 +225,93 @@ df_stop_smr = df_stop_smr %>%
 df_stop_smr$learner = factor(df_stop_smr$learner, levels = c("CWB", "ACWB", "hCWB"))
 df_stop_smr$binning = factor(df_stop_smr$binning, levels = c("No binning", "Binning"))
 
-mycolors = ggsci::pal_uchicago()(6)[4:6]
-ggplot(df_stop_smr) +
-  geom_rect(data = df_stop_smr %>% filter(learner == "CWB"),
+tdims = sapply(levels(df_stop_smr$task), function(tn) {
+  ts = TASKS[[tn]]
+  return(paste0("n: ", ts$nrow, ", p: ", length(ts$feature_names)))
+})
+
+df_stop_smr$task = factor(paste0(df_stop_smr$task, "  ", tdims))
+df_stop_smr$task = factor(df_stop_smr$task, levels = levels(df_stop_smr$task)[c(6, 2, 5, 4, 1, 3)])
+
+library(gridExtra)
+library(ggpp)
+
+tnames = unique(df_stop_smr$task)
+tbls = lapply(tnames, function(tn) {
+  if ("CWB" %in% df_stop_smr[(df_stop_smr$task == tn) & (df_stop_smr$binning == "No binning"), ]$learner) {
+    out = df_stop_smr %>% filter(task == tn) %>%
+      select(learner, auc, sec, binning) %>%
+        mutate(auc = round(auc[(learner == "CWB") & (binning == "No binning")] - auc, 4),
+          sec = round(sec[(learner == "CWB") & (binning == "No binning")] / sec, 2)) %>%
+        filter(! ((learner == "CWB") & (binning == "No binning")))
+    lln = c("CWB", "ACWB", "hCWB")
+    idx = unlist(sapply(lln, function(ln) which(ln == out$learner)))
+    out = out[idx, ]
+
+    colnames(out) = latex2exp::TeX(c("", "$\\Delta$ AUC", "$\\Delta$ Sec.", ""), output = "character")
+    return(out)
+  } else {
+    return(NULL)
+  }
+})
+
+names(tbls) = tnames
+tt2 = lapply(tnames, function (tn) {
+  out = cbind(tbls[[tn]], task = tn)
+  colnames(out) = c("lrn", "auc", "sec", "binning", "task")
+  out
+})
+tt3 = do.call(rbind, tt2)
+tt3 %>%
+  group_by(lrn, binning) %>%
+  summarize(sec = mean(sec), auc = mean(auc)) %>%
+  arrange(desc(sec))
+
+
+
+xlbs = sapply(tnames, function(tn) {
+  return(Inf)
+  #xmax = max(df_stop_smr[df_stop_smr$task == tn, ]$sec_max)
+  #xmin = min(df_stop_smr[df_stop_smr$task == tn, ]$sec_min)
+  #xmin + (xmax - xmin) * 2.3 / 3
+})
+
+ylbs = sapply(tnames, function(tn) {
+  if (grepl("168335", tn)) return(Inf)
+  return(-Inf)
+  #low = 0.5
+  #if (tn %in% c("168335")) low = 2.2
+  #ymax = max(df_stop_smr[df_stop_smr$task == tn, ]$auc_max)
+  #ymin = min(df_stop_smr[df_stop_smr$task == tn, ]$auc_min)
+  #ymin + (ymax - ymin) * low / 3
+})
+
+
+#data_tb = tibble(task = tnames, x = c(12.5, 60, 17.5, 175, 200, 50), y = c(0.96, 0.77, 0.9105, 0.974, 0.7305, 0.964), tb = tbls)
+data_tb = tibble(task = tnames, x = xlbs, y = ylbs, tb = tbls)
+#data_tb = tibble(task = tnames, x = Inf, y = Inf, tb = tbls)
+
+
+library(ggpp)
+library(gridExtra)
+t1 = ttheme_default(base_size = 12, parse = TRUE, core = list(
+  #fg_params = list(fontface = c(rep("plain", 4), "bold.italic")),
+  bg_params = list(fill = c(mycolors[1], mycolors[c(2, 2)], mycolors[c(3, 3)]), alpha = c(0.35, 0.2))
+))
+
+gg_bb = ggplot(df_stop_smr) +
+  geom_rect(data = df_stop_smr %>% filter(learner == "CWB", binning == "No binning"),
     aes(xmin = -Inf, xmax = Inf, ymin = auc25, ymax = auc75),
     alpha = 0.1, size = 0, show.legend = FALSE, fill = mycolors[1]) +
-  geom_rect(data = df_stop_smr %>% filter(learner == "CWB"),
+  geom_rect(data = df_stop_smr %>% filter(learner == "CWB", binning == "No binning"),
     aes(xmin = sec25, xmax = sec75, ymin = -Inf, ymax = Inf),
     alpha = 0.1, size = 0, show.legend = FALSE, fill = mycolors[1]) +
   geom_segment(aes(y = auc_min, x = sec, yend = auc, xend = sec, color = learner), size = 0.2, alpha = 0.8) +
   geom_segment(aes(y = auc, x = sec_min, yend = auc, xend = sec_max, color = learner), size = 0.2, alpha = 0.8) +
-  #geom_segment(aes(y = auc25, x = sec, yend = auc75, xend = sec, color = learner, linetype = binning), size = 1.) +
-  #geom_segment(aes(y = auc, x = sec25, yend = auc, xend = sec75, color = learner, linetype = binning), size = 1.) +
   geom_segment(aes(y = auc25, x = sec, yend = auc75, xend = sec, color = learner), size = 1., alpha = 0.8) +
   geom_segment(aes(y = auc, x = sec25, yend = auc, xend = sec75, color = learner), size = 1., alpha = 0.8) +
   geom_point(aes(x = sec, y = auc), color = "white", size = 3.5) +
   geom_point(aes(x = sec, y = auc, color = learner, shape = binning), size = 2) +
-  #ggsci::scale_color_uchicago() +
-  #ggsci::scale_fill_uchicago() +
   scale_fill_manual(values = mycolors) +
   scale_color_manual(values = mycolors) +
   theme_bw() +
@@ -219,8 +319,13 @@ ggplot(df_stop_smr) +
   xlab("Seconds") +
   ylab("Test AUC") +
   labs(color = "Learner") +
+  geom_table(data = data_tb %>% filter(y < 0), aes(x, y, label = tb), vjust = "left", hjust = "top",
+    size = 0.4, parse = TRUE, table.theme = t1) +
+  geom_table(data = data_tb %>% filter(y > 0), aes(x = 131, y = 0.97306, label = tb), vjust = "left", hjust = "bottom",
+    size = 0.4, parse = TRUE, lineheight = 0, table.theme = t1) +
   facet_wrap(. ~ task, scales = "free")
 
+ggsave(gg_bb, filename = "best-mods.pdf", width = dinA4width * 1.5, height = dinA4width * 0.75, units = "mm")
 
 
 
