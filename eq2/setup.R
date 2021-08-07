@@ -18,6 +18,8 @@ REBUILD = FALSE
 ## Base directory of the benchmark:
 BM_DIR = paste0(here::here(), "/eq2/")
 
+## Create meta dir if not existing:
+if (!dir.exists(paste0(BM_DIR, "/meta"))) dir.create(paste0(BM_DIR, "/meta"))
 
 ## Tasks/Datasets
 ## ============================================

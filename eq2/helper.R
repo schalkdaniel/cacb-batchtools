@@ -259,10 +259,22 @@ constructLearner2 = function(lid, ncores = parallel::detectCores() - 2, test_mod
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
+    acc_acwb_b = {
+      l = lrn("classif.CWB", id = "acc_acwb", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.0034, bin_root = 2)
+      l$param_set$values = updatePars(l, cwb_pars)
+      l
+    },
     ## HCWB no binning
     acc_hcwb = {
       l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
         learning_rate = 0.1, momentum = 0.03, df_autoselect = TRUE)
+      l$param_set$values = updatePars(l, cwb_pars)
+      l
+    },
+    acc_hcwb_b = {
+      l = lrn("classif.HCWB", id = "acc_hcwb", predict_type = "prob",
+        learning_rate = 0.1, momentum = 0.03, bin_root = 2)
       l$param_set$values = updatePars(l, cwb_pars)
       l
     },
@@ -385,7 +397,7 @@ constructSearchSpace = function(lid, task) {
     },
     ebm = {
       ss = ps(
-        leanring_rate = p_dbl(lower = 0.001, upper = 0.5),
+        learning_rate = p_dbl(lower = 0.001, upper = 0.5),
         max_rounds    = p_int(lower = MSTOP_MIN, upper = MSTOP_MAX, tags = "budget"))
       ss
     }

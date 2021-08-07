@@ -1,0 +1,36 @@
+### [bt]: This is batchtools v0.9.15
+### [bt]: Starting calculation of 1 jobs
+### [bt]: Setting working directory to '/home/user/repos/cacb-batchtools/eq2'
+Loading required package: data.table
+Loading required package: R6
+Loading required package: mlr3
+Loading required package: mlr3learners
+Loading required package: mlr3extralearners
+
+Attaching package: ‘mlr3extralearners’
+
+The following objects are masked from ‘package:mlr3’:
+
+    lrn, lrns
+
+Loading required package: mlr3pipelines
+Loading required package: mlr3tuning
+Loading required package: paradox
+Loading required package: compboost
+Loading required package: mlr3hyperband
+Loading required package: reticulate
+[2021-08-07 23:06:31] Loading new learner LearnerClassifCWB
+[2021-08-07 23:06:31] Loading new learner LearnerClassifHCWB
+[2021-08-07 23:06:31] Loading tasks
+[2021-08-07 23:06:35] Loading resampling
+### [bt]: Memory measurement disabled
+### [bt]: Starting job [batchtools job.id=1]
+### [bt]: Generating problem instance for problem 'spam-fold1' ...
+### [bt]: Applying algorithm 'evaluate-learner' on problem 'spam-fold1' for job 1 (seed = 31416) ...
+INFO  [23:06:36.349] [bbotk] Starting to optimize 4 parameter(s) with '<TunerHyperband>' and '<TerminatorNone> [list()]' 
+INFO  [23:06:36.400] [bbotk] Amount of brackets to be evaluated = 8,  
+INFO  [23:06:36.409] [bbotk] Start evaluation of bracket 1 
+INFO  [23:06:36.416] [bbotk] Training 128 configs with budget of 39 for each 
+INFO  [23:06:36.417] [bbotk] Evaluating 128 configuration(s) 
+INFO  [23:06:38.880] [mlr3]  Running benchmark with 384 resampling iterations 
+DEBUG [23:06:38.881] [mlr3]  Running benchmark() via future with 384 iterations 

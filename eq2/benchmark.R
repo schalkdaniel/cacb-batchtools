@@ -1,6 +1,8 @@
 BM_DIR         = paste0(here::here(), "/eq2/")
 BATCHTOOLS_DIR = paste0(BM_DIR, "batchtools")
 
+if (FALSE) unlink(BATCHTOOLS_DIR, recursive = TRUE)
+
 if (! dir.exists(BATCHTOOLS_DIR)) {
   suppressMessages(library(data.table))
   suppressMessages(library(R6))
@@ -16,12 +18,8 @@ if (! dir.exists(BATCHTOOLS_DIR)) {
 
   source(paste0(BM_DIR, "helper.R"))
   source(paste0(BM_DIR, "setup.R"))
-  lapply(FILES, function(f) source(paste0(BM_DIR, f)))
+  temp = lapply(FILES, function(f) source(paste0(BM_DIR, f)))
 }
-
-
-l = constructLearner2("xgboost")
-ss = constructSearchSpace("xgboost")
 
 
 ## Batchtools
@@ -29,7 +27,6 @@ ss = constructSearchSpace("xgboost")
 
 library(batchtools)
 
-if (FALSE) unlink(BATCHTOOLS_DIR, recursive = TRUE)
 if (dir.exists(BATCHTOOLS_DIR)) {
 
   loadRegistry(BATCHTOOLS_DIR, writeable = TRUE, work.dir = BM_DIR)
@@ -54,7 +51,7 @@ q #ids_resubmit = c(ids_resubmit, 61)
   reg = makeExperimentRegistry(
     file.dir = BATCHTOOLS_DIR,
     packages = c("data.table", "R6", "mlr3", "mlr3learners", "mlr3extralearners",
-      "mlr3pipelines", "mlr3tuning", "compboost", "paradox"),
+      "mlr3pipelines", "mlr3tuning", "compboost", "paradox", "mlr3hyperband", "reticulate"),
     #source = c("helper.R", "classifCompboost.R", "setup.R"),
     source   = FILES,
     seed     = 31415)
@@ -93,6 +90,10 @@ if (FALSE) {
 
 ### Code for testing:
 if (FALSE) {
+
+l = constructLearner2("ebm", raw_learner = TRUE)
+l$param_set
+
 
 BM_DIR         = paste0(here::here(), "/eq1/")
 BATCHTOOLS_DIR = paste0(BM_DIR, "batchtools")

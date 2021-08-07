@@ -30,47 +30,22 @@ for (i in seq_along(TASKS)) {
   }
 }
 
-#addAlgorithm(name = "CWB", fun = function(job, data, instance) {
-
-  #lgr::get_logger("bbotk")$set_threshold("trace")
-  #lgr::get_logger("mlr3")$set_threshold("trace")
-
-  #task       = data$task$clone(deep = TRUE)
-  #resampling = data$resampling$clone(deep = TRUE)
-
-  # Split into train and test:
-  #learner    = constructLearner2("hCWB_b", raw_learner = TRUE)
-  #task_train = task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-  #task_test  = task$clone(deep = TRUE)$filter(resampling$test_set(1L))
-
-  # Search space:
-  #ss =
-
-  # Construct Tuner
-
-  #learner$train(task_train)
-
-  #return(getCboostLog(learner))
-#})
-
-addAlgorithm(name = "EBM", fun = function(job, data, instance, lid) {
+addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid) {
 
   lgr::get_logger("bbotk")$set_threshold("trace")
   lgr::get_logger("mlr3")$set_threshold("trace")
 
-  #task       = data$task$clone(deep = TRUE)
-  #resampling = data$resampling$clone(deep = TRUE)
-
   ## Split into train and test:
-  task_train = data$task$clone(deep = TRUE)$filter(resampling$train_set(1L))
-  task_test  = data$task$clone(deep = TRUE)$filter(resampling$test_set(1L))
+  task_train = data$task$clone(deep = TRUE)$filter(data$resampling$train_set(1L))
+  task_test  = data$task$clone(deep = TRUE)$filter(data$resampling$test_set(1L))
 
   ## Get base algorithm:
-  l  = constructLearner2(lid)
+  l  = constructLearner2(lid, raw_learner = TRUE)
   ss = constructSearchSpace(lid, task_train)
 
   ## Construct tuner and tune:
-  tuner = TunerHyperband$new(eta = HYPERBAND_ETA)
+  tuner = TunerHyperband$new()
+  tuner$param_set$values$eta = HYPERBAND_ETA
 
   inst = TuningInstanceSingleCrit$new(
     task = task_train,
@@ -100,4 +75,4 @@ addAlgorithm(name = "EBM", fun = function(job, data, instance, lid) {
   return(out)
 })
 
-addExperiments(algo.design = list('evaluate-learner' = data.table(lid = c("ACWB", "hCWB", "EBM", "XGBoost"))))
+addExperiments(algo.design = list('evaluate-learner' = data.table(lid = c("acc_acwb_b", "acc_hcwb_b", "ebm", "xgboost"))))
