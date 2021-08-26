@@ -1,2 +1,5 @@
 *.txt
 meta/*
+batchtools/logs/*
+batchtools/results/*
+batchtools/updates/*
