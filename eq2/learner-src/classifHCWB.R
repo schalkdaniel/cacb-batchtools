@@ -295,7 +295,7 @@ LearnerClassifHCWB = R6Class("LearnerClassifHCWB",
       newdata = task$data(cols = task$feature_names)
 
       if (is.null(self$model$cboost))
-        lin_pred = 0
+        lin_pred = rep(0, nrow(newdata))
       else
         lin_pred = self$model$cboost$predict(newdata)
 

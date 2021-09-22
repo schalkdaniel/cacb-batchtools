@@ -70,7 +70,7 @@ addAlgorithm(name = "evaluate-learner", fun = function(job, data, instance, lid)
   pred = lf$predict(task_test)
 
   ## Extract info:
-  out = list(archive = inst$archive, msrs_test = pred$score(msrs(SCORE_MEASURES)), test_pred = pred,
+  out = list(archive = inst$archive, test_pred = pred, #msrs_test = pred$score(msrs(SCORE_MEASURES)),
     tuning_results = inst$result)
   return(out)
 })

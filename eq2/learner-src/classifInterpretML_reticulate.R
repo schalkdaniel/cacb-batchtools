@@ -22,7 +22,7 @@ LearnerClassifInterpretML_reticulate = R6Class("LearnerClassifInterpretML_reticu
           ParamDbl$new(id = "validation_size", default = 0, lower = 0, upper = 1),
           #ParamInt$new(id = "early_stopping_rounds", default = 1L, lower = 1L, upper = parallel::detectCores()),
           #ParamDbl$new(id = "early_stopping_tolerance", default = 0.0005, lower = 0),
-          ParamInt$new(id = "max_rounds", default = 5000L, lower = 200L, upper = 10000L),
+          ParamInt$new(id = "max_rounds", default = 5000L, lower = 2L, upper = 10000L),
           ParamInt$new(id = "n_jobs", default = 1L),
           #ParamInt$new(id = "max_leaves"),
           #ParamInt$new(id = "min_samples_leaf"),
