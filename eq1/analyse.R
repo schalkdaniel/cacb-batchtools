@@ -6,6 +6,43 @@ library(dplyr)
 library(tidyr)
 library(batchtools)
 library(mlr3)
+library(gridExtra)
+
+## FIGURE SETTINGS:
+## =============================================
+
+font = "TeX Gyre Bonum"
+
+sysfonts::font_add(font,
+    #regular = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-regular.ttf"),
+    #bold = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-bold.ttf"))
+    regular = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-regular.otf",
+    bold = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-bold.otf")
+#showtext::showtext_auto()
+extrafont::font_import(paths = "~/repos/bm-CompAspCboost/paper-figures/gyre-bonum", prompt = FALSE)
+extrafont::loadfonts()
+
+theme_set(
+  theme_minimal(base_family = font) +
+  ggplot2::theme(
+    strip.background = element_rect(fill = rgb(47, 79, 79, maxColorValue = 255), color = "white"),
+    strip.text = element_text(color = "white", face = "bold", size = 6),
+    axis.text = element_text(size = 9),
+    axis.title = element_text(size = 11),
+    legend.title = element_text(size = 9),
+    legend.text = element_text(size = 7),
+    panel.border = element_rect(colour = "black", fill = NA, size = 0.5)
+  )
+)
+dinA4width = 162
+mycolors = ggsci::pal_uchicago()(6)[4:6]
+
+my4breaks = function(x) {
+  m = x[2] - x[1]
+  seq(x[1] + 0.05*m, x[2] - 0.05*m, length.out = 4)
+}
+my4ylabels = function(x) as.character(round(my4breaks(x), 4))
+my4xlabels = function(x) as.character(round(my4breaks(x), 0))
 
 ## HELPER:
 ## =============================================
@@ -117,7 +154,13 @@ df_smry = df_res %>%
   group_by(task) %>%
   mutate(auc_start = min(auc_start)) %>%
   group_by(task) %>%
-  mutate(auc_diff_to_cwb = ifelse("CWB" %in% learner, auc_best[learner == "CWB"] - auc_best, NA))
+  mutate(
+    auc_diff_to_cwb = ifelse("CWB" %in% learner, auc_best[learner == "CWB"] - auc_best, NA),
+    binning = ifelse(grepl("(b)", learner), "Binning", "No binning"),
+    learner = gsub(" (nb)", "", gsub(" (b)", "", learner, fixed = TRUE), fixed = TRUE))
+
+df_smry$learner = factor(df_smry$learner, levels = c("CWB", "ACWB", "hCWB"))
+df_smry$binning = factor(df_smry$binning, levels = c("No binning", "Binning"))
 
 
 ## FITTING TRACES:
@@ -137,69 +180,54 @@ sfb = function(x, p = 10) {
 stretch_trans = function() scales::trans_new("stretch", sf, sfi, sfb, )
 formatFun = function(x) sprintf("%.3f", x)
 
+df_aggr2 = df_aggr %>%
+  mutate(
+    binning = ifelse(grepl("(b)", learner), "Binning", "No binning"),
+    learner = gsub(" (nb)", "", gsub(" (b)", "", learner, fixed = TRUE), fixed = TRUE))
+df_aggr2$learner = factor(df_aggr2$learner, levels = c("CWB", "ACWB", "hCWB"))
+df_aggr2$binning = factor(df_aggr2$binning, levels = c("No binning", "Binning"))
+
+tdims = sapply(levels(df_aggr2$task), function(tn) {
+  ts = TASKS[[tn]]
+  if (tn == "spam") tnn = "Spam"
+  if (tn == "168908") tnn = "Christine"
+  if (tn == "9977") tnn = "Namao"
+  if (tn == "7592") tnn = "Adult"
+  if (tn == "168335") tnn = "MiniBooNE"
+  if (tn == "189866") tnn = "Albert"
+  return(paste0(tnn, "   n: ", ts$nrow, ", p: ", length(ts$feature_names)))
+})
+
+df_aggr2$taskn = factor(tdims[df_aggr2$task])
+df_aggr2$taskn = factor(df_aggr2$taskn, levels = levels(df_aggr2$taskn)[c(6, 3, 5, 1, 4, 2)])
+
+df_smry$taskn = factor(tdims[df_smry$task])
+df_smry$taskn = factor(df_smry$taskn, levels = levels(df_smry$taskn)[c(6, 3, 5, 1, 4, 2)])
 
 
-ggplot(data = df_res, mapping = aes(x = seconds, y = test_auc, color = learner)) +
-  #geom_line(aes(group = paste0(learner, fold)), alpha = 0.2, size = 0.6) +
-  geom_line(data = df_aggr, size = 1.2, alpha = 0.8) +
-  geom_point(data = df_smry, mapping = aes(x = 0, y = auc_best)) +
-  geom_point(data = df_smry, mapping = aes(x = sec_best, y = auc_start)) +
-  geom_hline(data = df_smry, aes(yintercept = auc_best, color = learner), linetype = "dashed", alpha = 0.5) +
-  geom_vline(data = df_smry, aes(xintercept = sec_best, color = learner), linetype = "dashed", alpha = 0.5) +
-  scale_y_continuous(trans = "stretch", labels = formatFun) +
-  xlab("Seconds") +
-  ylab("AUC") +
-  ggsci::scale_color_uchicago() +
-  facet_wrap(. ~ task, nrow = 2, scales = "free")
+gg_tr = ggplot() +
+  #geom_hline(data = df_smry, aes(yintercept = auc_best, color = learner), linetype = "dashed", alpha = 0.5, size = 0.2) +
+  #geom_vline(data = df_smry, aes(xintercept = sec_best, color = learner), linetype = "dashed", alpha = 0.5, size = 0.2) +
 
+  #geom_point(data = df_smry, mapping = aes(x = 0, y = auc_best, shape = binning, color = learner), size = 1.5) +
+  #geom_point(data = df_smry, mapping = aes(x = sec_best, y = auc_start, shape = binning, color = learner), size = 1.5) +
 
-df_res %>%
-  filter(iteration == 5000) %>%
-  ggplot(aes(x = learner, y = seconds, color = learner, fill = learner)) +
-    geom_boxplot(alpha = 0.2) +
-    facet_wrap(. ~ task, nrow = 2, scales = "free")
+  geom_line(data = df_aggr2, mapping = aes(x = seconds, y = test_auc, color = learner, linetype = binning), size = 0.5, alpha = 0.8) +
 
+  scale_fill_manual(values = mycolors) +
+  scale_color_manual(values = mycolors) +
+  xlab("Training time (seconds, log scale)") +
+  ylab("Test AUC") +
+  #scale_y_continuous(trans = "stretch") +
+  scale_y_continuous(breaks = my4breaks, labels = my4ylabels) +
+  labs(color = "Learner", linetype = "", shape = "") +
+  facet_wrap(. ~ taskn, nrow = 2, scales = "free")
 
-#a = df_res %>%
-#  filter(grepl("359994", task), learner == "acc_hcwb")
-#
-##ggplot(a, aes(x = seconds, y = test_auc, color = as.character(fold))) +
-#ggplot(a, aes(x = iteration, y = test_auc, color = as.character(fold))) +
-#  geom_line() +
-#  geom_vline(xintercept = unique(a$transition))
-
+ggsave(gg_tr, filename = "fig-eq1-1.pdf", width = dinA4width * 1.15, height = dinA4width * 0.5, units = "mm")
 
 
 ## OPTIMAL STOPS:
 ## =============================================
-
-font = "TeX Gyre Bonum"
-
-sysfonts::font_add(font,
-    #regular = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-regular.ttf"),
-    #bold = paste0(base_dir, "/paper-figures/gyre-bonum/texgyrebonum-bold.ttf"))
-    regular = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-regular.otf",
-    bold = "/usr/share/texmf-dist/fonts/opentype/public/tex-gyre/texgyrebonum-bold.otf")
-#showtext::showtext_auto()
-extrafont::font_import(paths = "~/repos/bm-CompAspCboost/paper-figures/gyre-bonum", prompt = FALSE)
-extrafont::loadfonts()
-
-theme_set(
-  theme_minimal(base_family = font) +
-  ggplot2::theme(
-    strip.background = element_rect(fill = rgb(47, 79, 79, maxColorValue = 255), color = "white"),
-    strip.text = element_text(color = "white", face = "bold", size = 8),
-    axis.text = element_text(size = 9),
-    axis.title = element_text(size = 11),
-    legend.title = element_text(size = 9),
-    legend.text = element_text(size = 7),
-    panel.border = element_rect(colour = "black", fill = NA, size = 0.5)
-  )
-)
-dinA4width = 162
-mycolors = ggsci::pal_uchicago()(6)[4:6]
-
-library(gridExtra)
 
 #dev.off()
 #grid.table(iris[1:5, 1:3], theme = t1)
@@ -227,11 +255,17 @@ df_stop_smr$binning = factor(df_stop_smr$binning, levels = c("No binning", "Binn
 
 tdims = sapply(levels(df_stop_smr$task), function(tn) {
   ts = TASKS[[tn]]
-  return(paste0("n: ", ts$nrow, ", p: ", length(ts$feature_names)))
+  if (tn == "spam") tnn = "Spam"
+  if (tn == "168908") tnn = "Christine"
+  if (tn == "9977") tnn = "Namao"
+  if (tn == "7592") tnn = "Adult"
+  if (tn == "168335") tnn = "MiniBooNE"
+  if (tn == "189866") tnn = "Albert"
+  return(paste0(tnn, "   n: ", ts$nrow, ", p: ", length(ts$feature_names)))
 })
 
-df_stop_smr$task = factor(paste0(df_stop_smr$task, "  ", tdims))
-df_stop_smr$task = factor(df_stop_smr$task, levels = levels(df_stop_smr$task)[c(6, 2, 5, 4, 1, 3)])
+df_stop_smr$task = factor(tdims[df_stop_smr$task])
+df_stop_smr$task = factor(df_stop_smr$task, levels = levels(df_stop_smr$task)[c(6, 3, 5, 1, 4, 2)])
 
 library(gridExtra)
 library(ggpp)
@@ -294,10 +328,11 @@ data_tb = tibble(task = tnames, x = xlbs, y = ylbs, tb = tbls)
 
 library(ggpp)
 library(gridExtra)
-t1 = ttheme_default(base_size = 12, parse = TRUE, core = list(
+t1 = ttheme_default(base_size = 2, parse = TRUE, core = list(
   #fg_params = list(fontface = c(rep("plain", 4), "bold.italic")),
   bg_params = list(fill = c(mycolors[1], mycolors[c(2, 2)], mycolors[c(3, 3)]), alpha = c(0.35, 0.2))
 ))
+
 
 gg_bb = ggplot(df_stop_smr) +
   geom_rect(data = df_stop_smr %>% filter(learner == "CWB", binning == "No binning"),
@@ -310,29 +345,108 @@ gg_bb = ggplot(df_stop_smr) +
   geom_segment(aes(y = auc, x = sec_min, yend = auc, xend = sec_max, color = learner), size = 0.2, alpha = 0.8) +
   geom_segment(aes(y = auc25, x = sec, yend = auc75, xend = sec, color = learner), size = 1., alpha = 0.8) +
   geom_segment(aes(y = auc, x = sec25, yend = auc, xend = sec75, color = learner), size = 1., alpha = 0.8) +
-  geom_point(aes(x = sec, y = auc), color = "white", size = 3.5) +
+  geom_point(aes(x = sec, y = auc, shape = binning), color = "white", size = 3) +
   geom_point(aes(x = sec, y = auc, color = learner, shape = binning), size = 2) +
   scale_fill_manual(values = mycolors) +
   scale_color_manual(values = mycolors) +
-  theme_bw() +
+  #theme_bw() +
   labs(shape = "") +
-  xlab("Seconds") +
+  xlab("Training time (seconds)") +
   ylab("Test AUC") +
   labs(color = "Learner") +
-  geom_table(data = data_tb %>% filter(y < 0), aes(x, y, label = tb), vjust = "left", hjust = "top",
-    size = 0.4, parse = TRUE, table.theme = t1) +
-  geom_table(data = data_tb %>% filter(y > 0), aes(x = 131, y = 0.97306, label = tb), vjust = "left", hjust = "bottom",
-    size = 0.4, parse = TRUE, lineheight = 0, table.theme = t1) +
+  scale_y_continuous(breaks = my4breaks, labels = my4ylabels) +
+  scale_x_continuous(breaks = my4breaks, labels = my4xlabels) +
+  #geom_table(data = data_tb %>% filter(y < 0), aes(x, y, label = tb), vjust = "left", hjust = "top",
+    #size = 0.01, parse = TRUE, table.theme = t1) +
+  #geom_table(data = data_tb %>% filter(y > 0), aes(x = 131, y = 0.97306, label = tb), vjust = "left", hjust = "bottom",
+    #size = 0.01, parse = TRUE, lineheight = 0, table.theme = t1) +
   facet_wrap(. ~ task, scales = "free")
 
-ggsave(gg_bb, filename = "best-mods.pdf", width = dinA4width * 1.5, height = dinA4width * 0.75, units = "mm")
+ggsave(gg_bb, filename = "fig-eq1-2.pdf", width = dinA4width * 1.15, height = dinA4width * 0.5, units = "mm")
 
 
+## MBOOST WITH OPTIMAL STOPS:
+## =============================================
 
+cwb_stops = df_stop %>% filter(learner == "cwb")
+substrRight = function(x, n = 1) substr(x, nchar(x) - n + 1, nchar(x))
+
+ll_tt = list()
+for (i in seq_len(nrow(cwb_stop))) {
+  message("[", Sys.time(), "] ", i, "/", nrow(cwb_stops))
+  l = lrn("classif.gamboost", mstop = cwb_stops$stop[i])
+  fold = as.integer(substrRight(cwb_stops$fold[i]))
+  tset = RESAMPLE_SETS[[cwb_stops$task[i]]]$train_set(fold)
+  t = TASKS[[cwb_stops$task[i]]]$filter(tset)
+  l$train(t)
+  ll_tt[[i]] = data.frame(learner = "mboost", train_time = l$state$train_time,
+    task = cwb_stops$task[i], fold = fold)
+}
+df_mboost = do.call(rbind, ll_tt)
+
+
+## AVERAGE RUNTIME IMPROVEMENT:
+## =============================================
+
+ntsks = c("spam" = "Spam", "168908" = "Christine", "7592" = "Adult",
+  "168335" = "MiniBooNE", "189866" = "Albert", "9977" = "Namao")
+
+df_smry2 = df_stop_smr %>%
+  group_by(task) %>%
+  mutate(
+    speedup = sec[(learner == "CWB") & (binning == "No binning")] / sec,
+    auc_imp = auc - auc[(learner == "CWB") & (binning == "No binning")])
+
+#df_smry2 %>%
+  #filter(! ((learner == "CWB") & (binning == "No binning"))) %>%
+  #group_by(task) %>%
+  #summarize(mspeedup = mean(speedup))
+
+df_smry2 %>%
+  filter(! ((learner == "CWB") & (binning == "No binning"))) %>%
+  group_by(learner, binning) %>%
+  summarize(mspeedup = mean(speedup))
+
+df_smry31 = df_smry2 %>%
+  filter(! ((learner == "CWB") & (binning == "No binning"))) %>%
+  mutate(taskn = ntsks[task]) %>%
+  group_by(taskn, learner, binning) %>%
+  summarize(mspeedup = mean(speedup)) %>%
+  pivot_wider(names_from = taskn, values_from = mspeedup, names_prefix = "sec-")
+
+df_smry32 = df_smry2 %>%
+  filter(! ((learner == "CWB") & (binning == "No binning"))) %>%
+  mutate(taskn = ntsks[task]) %>%
+  group_by(taskn, learner, binning) %>%
+  summarize(mauc_imp = mean(auc_imp)) %>%
+  pivot_wider(names_from = taskn, values_from = mauc_imp, names_prefix = "auc-")
+
+df_smry3 = cbind(df_smry31, df_smry32[,-c(1,2)])
+pres = c("sec-", "auc-")
+knitr::kable(df_smry3[, c("learner", "binning",
+  paste0(pres, "Spam"),
+  paste0(pres, "Christine"),
+  paste0(pres, "Namao"),
+  paste0(pres, "Adult"),
+  paste0(pres, "MiniBooNE"),
+  paste0(pres, "Albert"))], format = "latex")
+
+
+## TESTING PERFORMANCE:
+## =============================================
+
+library(mgcv)
+
+df_smry$learner = factor(df_smry$learner, levels = c("CWB", "ACWB", "hCWB"))
+df_smry$binning = factor(df_smry$binning, levels = c("No binning", "Binning"))
+#mod = gam(auc_best ~ task + binning + learner + task*binning + learner*task + binning*learner, data = df_smry, family = betar)
+mod = gam(auc_best ~ task + binning + learner + binning*learner, data = df_smry, family = betar)
+knitr::kable(summary(mod)$p.table, format = "latex")
+knitr::kable(summary(mod)$pTerms.table, format = "latex")
 
 
 ## INDIVIDUAL INSPECTION
-## ------------------------------------------
+## =============================================
 
 source("classifCompboost.R")
 
