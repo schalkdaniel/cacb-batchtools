@@ -74,6 +74,26 @@ getStopInfo = function(clog, patience = 10L, eps_for_break = 0.00001,
     val_acu_max = max(clog[[vname]]), test_auc_max = max(clog[[tname]]), transition = clog$transition[1]))
 }
 
+
+taskIDtoName = function(tid, ts = NULL) {
+  sapply(tid, function(tn) {
+
+    if (tn == "spam") tnn = "Spam"
+    if (tn == "168908") tnn = "Christine"
+    if (tn == "9977") tnn = "Namao"
+    if (tn == "7592") tnn = "Adult"
+    if (tn == "168335") tnn = "MiniBooNE"
+    if (tn == "189866") tnn = "Albert"
+
+    if (! is.null(ts)) {
+      ts = TASKS[[tn]]
+      return(paste0(tnn, "   n: ", ts$nrow, ", p: ", length(ts$feature_names)))
+    } else {
+      return(tnn)
+    }
+  })
+}
+
 ## GET RESULTS:
 ## =============================================
 
@@ -371,18 +391,90 @@ ggsave(gg_bb, filename = "fig-eq1-2.pdf", width = dinA4width * 1.15, height = di
 cwb_stops = df_stop %>% filter(learner == "cwb")
 substrRight = function(x, n = 1) substr(x, nchar(x) - n + 1, nchar(x))
 
-ll_tt = list()
-for (i in seq_len(nrow(cwb_stop))) {
+ll_tt   = list()
+idx_run = seq_len(nrow(cwb_stops))
+
+#load("cwb_stops.Rmd")
+
+if (file.exists("df_mboost.Rda")) {
+  load("df_mboost.Rda")
+  for (i in seq_len(nrow(df_mboost))) {
+    ll_tt[[i]] = df_mboost[i,]
+  }
+  idx_run = which(is.na(df_mboost$train_time))
+} 
+
+errs = c()
+for (i in idx_run) {
   message("[", Sys.time(), "] ", i, "/", nrow(cwb_stops))
   l = lrn("classif.gamboost", mstop = cwb_stops$stop[i])
   fold = as.integer(substrRight(cwb_stops$fold[i]))
   tset = RESAMPLE_SETS[[cwb_stops$task[i]]]$train_set(fold)
-  t = TASKS[[cwb_stops$task[i]]]$filter(tset)
-  l$train(t)
-  ll_tt[[i]] = data.frame(learner = "mboost", train_time = l$state$train_time,
-    task = cwb_stops$task[i], fold = fold)
+  
+  ts = TASKS[[cwb_stops$task[i]]]$clone(deep = TRUE)$filter(tset)
+  if (as.character(cwb_stops$task[i]) == "9977") {
+    feats_remove = paste0("V", c(17:18, 41:42, 73:74, 81:86))
+    ts = ts$select(setdiff(ts$feature_names, feats_remove))
+  }
+
+
+  ## DETECT FEATURES WHO CRASH THE TRAINING
+  #fnames = ts$feature_names
+  #for (j in seq_along(fnames)) {
+  #  tss = ts$clone(deep = TRUE)$select(fnames[j])
+
+  #  robustify = po("removeconstants", id = "removeconstants_before") %>>%
+  #    po("imputemedian", id = "imputemedian_num", affect_columns = selector_type(c("integer", "numeric"))) %>>%
+  #    po("imputemode", id = "imputemode_fct", affect_columns = selector_type(c("character", "factor", "ordered"))) %>>%
+  #    po("collapsefactors", target_level_count = 10) %>>%
+  #    po("removeconstants", id = "removeconstants_after")
+  #  tss = robustify$train(tss)
+  #
+  #  l = lrn("classif.gamboost", mstop = 1)
+  #  e = try(l$train(tss[[1]]), silent = TRUE)
+  #  if (inherits(e, "try-error")) message("ERRROR: ", fnames[j])
+  #}
+
+  robustify = po("removeconstants", id = "removeconstants_before") %>>%
+    po("imputemedian", id = "imputemedian_num", affect_columns = selector_type(c("integer", "numeric"))) %>>%
+    po("imputemode", id = "imputemode_fct", affect_columns = selector_type(c("character", "factor", "ordered"))) %>>%
+    po("collapsefactors", target_level_count = 10) %>>%
+    po("removeconstants", id = "removeconstants_after")
+  ts = robustify$train(ts)
+
+  e = NULL
+  e = try({ l$train(ts[[1]]); TRUE }, silent = TRUE)
+  if (inherits(e, "try-error")) {
+    ll_tt[[i]] = data.frame(learner = "mboost", train_time = NA,
+      task = cwb_stops$task[i], fold = fold, mstop = cwb_stops$stop[i])
+    errs = c(errs, paste0("ERROR: ", attr(e, "condition")$message))
+    msg  = last(errs)
+  } else {
+    ll_tt[[i]] = data.frame(learner = "mboost", train_time = l$state$train_time,
+      task = cwb_stops$task[i], fold = fold, mstop = cwb_stops$stop[i])
+    msg = paste0("FINISH training model in ", l$state$train_time, " seconds")
+  }
+  message("[", Sys.time(), "] ", i, "/", nrow(cwb_stops), ": ", msg)
 }
 df_mboost = do.call(rbind, ll_tt)
+save(df_mboost, file = "df_mboost.Rda")
+
+cwb_stops$fold = substrRight(cwb_stops$fold)
+
+df_mb = df_mboost %>%
+  group_by(task, fold) %>%
+  group_by(cwb_stops %>% 
+    select(task, fold, seconds) %>% 
+    mutate(time_cwb = seconds, seconds = NULL)) %>%
+  mutate(time_mboost = train_time, train_time = NULL, speedup = time_mboost / time_cwb, task = taskIDtoName(task))
+
+df_mb %>% 
+  group_by(task) %>%
+  summarize(speedup = mean(speedup, na.rm = TRUE), time_cwb = mean(time_cwb), time_mboost = mean(time_mboost, na.rm = TRUE))
+
+df_mb %>% as.data.frame()
+
+
 
 
 ## AVERAGE RUNTIME IMPROVEMENT:
